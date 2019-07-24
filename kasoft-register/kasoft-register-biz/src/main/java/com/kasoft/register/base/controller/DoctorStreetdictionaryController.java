@@ -56,7 +56,7 @@ public class DoctorStreetdictionaryController {
      */
     @GetMapping("/page" )
     public R getDoctorStreetdictionaryPage(Page page, DoctorStreetdictionary doctorStreetdictionary) {
-        return new R<>(doctorStreetdictionaryService.page(page, Wrappers.query(doctorStreetdictionary)));
+        return R.ok(doctorStreetdictionaryService.page(page, Wrappers.query(doctorStreetdictionary)));
     }
 
 	/**
@@ -71,7 +71,7 @@ public class DoctorStreetdictionaryController {
 		DoctorStreetdictionary doctorStreetdictionary = new DoctorStreetdictionary();
 		doctorStreetdictionary.setStreetType(EdConstants.StreetType.STREET);
 		doctorStreetdictionary.setParentId(pAreaId);
-		return new R<>(doctorStreetdictionaryService.list(Wrappers.query(doctorStreetdictionary)));
+		return R.ok(doctorStreetdictionaryService.list(Wrappers.query(doctorStreetdictionary)));
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class DoctorStreetdictionaryController {
 		DoctorStreetdictionary doctorStreetdictionary = new DoctorStreetdictionary();
 		doctorStreetdictionary.setStreetType(EdConstants.StreetType.NEIGHBORHOOD);
 		doctorStreetdictionary.setParentId(pAreaId);
-		return new R<>(doctorStreetdictionaryService.list(Wrappers.query(doctorStreetdictionary)));
+		return R.ok(doctorStreetdictionaryService.list(Wrappers.query(doctorStreetdictionary)));
 	}
 
 
@@ -97,7 +97,7 @@ public class DoctorStreetdictionaryController {
      */
     @GetMapping("/{id}" )
     public R getById(@PathVariable("id" ) String id) {
-        return new R<>(doctorStreetdictionaryService.getById(id));
+        return R.ok(doctorStreetdictionaryService.getById(id));
     }
 
     /**
@@ -112,7 +112,7 @@ public class DoctorStreetdictionaryController {
 			EdConstants.ED_STREET_DETAILS_NEIGHBORHOOD}, allEntries = true)
 	public R save(@Valid @RequestBody DoctorStreetdictionary doctorStreetdictionary) {
 		doctorStreetdictionary.clearNoUseDTO();
-    	return new R<>(doctorStreetdictionaryService.save(doctorStreetdictionary));
+    	return R.ok(doctorStreetdictionaryService.save(doctorStreetdictionary));
     }
 
     /**
@@ -127,7 +127,7 @@ public class DoctorStreetdictionaryController {
 			EdConstants.ED_STREET_DETAILS_NEIGHBORHOOD}, allEntries = true)
 	public R updateById(@Valid @RequestBody DoctorStreetdictionary doctorStreetdictionary) {
 		doctorStreetdictionary.clearNoUseDTO();
-    	return new R<>(doctorStreetdictionaryService.updateById(doctorStreetdictionary));
+    	return R.ok(doctorStreetdictionaryService.updateById(doctorStreetdictionary));
     }
 
     /**
@@ -141,7 +141,7 @@ public class DoctorStreetdictionaryController {
 	@CacheEvict(value = {EdConstants.ED_STREET_DETAILS, EdConstants.ED_STREET_DETAILS_STREET,
 			EdConstants.ED_STREET_DETAILS_NEIGHBORHOOD}, allEntries = true)
 	public R removeById(@PathVariable String id) {
-        return new R<>(doctorStreetdictionaryService.removeById(id));
+        return R.ok(doctorStreetdictionaryService.removeById(id));
     }
 
 }

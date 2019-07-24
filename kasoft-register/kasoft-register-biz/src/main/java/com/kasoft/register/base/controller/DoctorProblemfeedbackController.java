@@ -52,7 +52,7 @@ public class DoctorProblemfeedbackController {
      */
     @GetMapping("/page" )
     public R getDoctorProblemfeedbackPage(Page page, DoctorProblemfeedback doctorProblemfeedback) {
-        return new R<>(doctorProblemfeedbackService.page(page, Wrappers.query(doctorProblemfeedback)));
+        return R.ok(doctorProblemfeedbackService.page(page, Wrappers.query(doctorProblemfeedback)));
     }
 
 
@@ -63,7 +63,7 @@ public class DoctorProblemfeedbackController {
      */
     @GetMapping("/{id}" )
     public R getById(@PathVariable("id" ) String id) {
-        return new R<>(doctorProblemfeedbackService.getById(id));
+        return R.ok(doctorProblemfeedbackService.getById(id));
     }
 
     /**
@@ -75,7 +75,7 @@ public class DoctorProblemfeedbackController {
     @PostMapping
     public R save(@Valid @RequestBody DoctorProblemfeedback doctorProblemfeedback) {
 		doctorProblemfeedback.clearNoUseDTO();
-    	return new R<>(doctorProblemfeedbackService.save(doctorProblemfeedback));
+    	return R.ok(doctorProblemfeedbackService.save(doctorProblemfeedback));
     }
 
     /**
@@ -88,7 +88,7 @@ public class DoctorProblemfeedbackController {
     @PreAuthorize("@pms.hasPermission('base_doctorproblemfeedback_edit')" )
     public R updateById(@Valid @RequestBody DoctorProblemfeedback doctorProblemfeedback) {
 		doctorProblemfeedback.clearNoUseDTO();
-        return new R<>(doctorProblemfeedbackService.updateById(doctorProblemfeedback));
+        return R.ok(doctorProblemfeedbackService.updateById(doctorProblemfeedback));
     }
 
     /**
@@ -100,7 +100,7 @@ public class DoctorProblemfeedbackController {
     @DeleteMapping("/{id}" )
     @PreAuthorize("@pms.hasPermission('base_doctorproblemfeedback_del')" )
     public R removeById(@PathVariable String id) {
-        return new R<>(doctorProblemfeedbackService.removeById(id));
+        return R.ok(doctorProblemfeedbackService.removeById(id));
     }
 
 }

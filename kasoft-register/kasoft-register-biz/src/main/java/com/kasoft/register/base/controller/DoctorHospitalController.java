@@ -56,7 +56,7 @@ public class DoctorHospitalController {
      */
     @GetMapping("/page" )
     public R getDoctorHospitalPage(Page page, DoctorHospital doctorHospital) {
-        return new R<>(doctorHospitalService.page(page, Wrappers.query(doctorHospital)));
+        return R.ok(doctorHospitalService.page(page, Wrappers.query(doctorHospital)));
     }
 
 	/**
@@ -67,7 +67,7 @@ public class DoctorHospitalController {
 	@GetMapping("/dict" )
 	@Cacheable(value = EdConstants.ED_HOSPITAL_DETAILS_DICT, unless = "#result == null ")
 	public R getHospitalDict() {
-		return new R<>(doctorHospitalService.getHospitalByName(null));
+		return R.ok(doctorHospitalService.getHospitalByName(null));
 	}
 
 
@@ -78,7 +78,7 @@ public class DoctorHospitalController {
      */
     @GetMapping("/{id}" )
     public R getById(@PathVariable("id" ) String id) {
-        return new R<>(doctorHospitalService.getById(id));
+        return R.ok(doctorHospitalService.getById(id));
     }
 
     /**
@@ -92,7 +92,7 @@ public class DoctorHospitalController {
 	@CacheEvict(value = {EdConstants.ED_HOSPITAL_DETAILS, EdConstants.ED_HOSPITAL_DETAILS_DICT}, allEntries = true)
 	public R save(@Valid @RequestBody DoctorHospital doctorHospital) {
 		doctorHospital.clearNoUseDTO();
-		return new R<>(doctorHospitalService.save(doctorHospital));
+		return R.ok(doctorHospitalService.save(doctorHospital));
     }
 
     /**
@@ -106,7 +106,7 @@ public class DoctorHospitalController {
 	@CacheEvict(value = {EdConstants.ED_HOSPITAL_DETAILS, EdConstants.ED_HOSPITAL_DETAILS_DICT}, allEntries = true)
 	public R updateById(@Valid @RequestBody DoctorHospital doctorHospital) {
 		doctorHospital.clearNoUseDTO();
-        return new R<>(doctorHospitalService.updateById(doctorHospital));
+        return R.ok(doctorHospitalService.updateById(doctorHospital));
     }
 
     /**
@@ -119,7 +119,7 @@ public class DoctorHospitalController {
     @PreAuthorize("@pms.hasPermission('base_doctorhospital_del')" )
 	@CacheEvict(value = {EdConstants.ED_HOSPITAL_DETAILS, EdConstants.ED_HOSPITAL_DETAILS_DICT}, allEntries = true)
 	public R removeById(@PathVariable String id) {
-        return new R<>(doctorHospitalService.removeById(id));
+        return R.ok(doctorHospitalService.removeById(id));
     }
 
 }

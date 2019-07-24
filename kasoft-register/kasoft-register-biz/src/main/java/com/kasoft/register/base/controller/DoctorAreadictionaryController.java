@@ -56,7 +56,7 @@ public class DoctorAreadictionaryController {
      */
     @GetMapping("/page" )
     public R getDoctorAreadictionaryPage(Page page, DoctorAreadictionary doctorAreadictionary) {
-        return new R<>(doctorAreadictionaryService.page(page, Wrappers.query(doctorAreadictionary)));
+        return R.ok(doctorAreadictionaryService.page(page, Wrappers.query(doctorAreadictionary)));
     }
 
 	/**
@@ -66,7 +66,7 @@ public class DoctorAreadictionaryController {
 	@ApiOperation(value = "获取全部地区树", notes = "获取全部地区树")
 	@GetMapping("/allTree" )
 	public R getAllTree() {
-		return new R<>(doctorAreadictionaryService.allTree());
+		return R.ok(doctorAreadictionaryService.allTree());
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class DoctorAreadictionaryController {
 	public R getProvince() {
 		DoctorAreadictionary doctorAreadictionary = new DoctorAreadictionary();
 		doctorAreadictionary.setAreaType(EdConstants.AreaType.PROVINCE);
-		return new R<>(doctorAreadictionaryService.list(Wrappers.query(doctorAreadictionary)));
+		return R.ok(doctorAreadictionaryService.list(Wrappers.query(doctorAreadictionary)));
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class DoctorAreadictionaryController {
 		DoctorAreadictionary doctorAreadictionary = new DoctorAreadictionary();
 		doctorAreadictionary.setAreaType(EdConstants.AreaType.CITY);
 		doctorAreadictionary.setParentAreaId(pAreaId);
-		return new R<>(doctorAreadictionaryService.list(Wrappers.query(doctorAreadictionary)));
+		return R.ok(doctorAreadictionaryService.list(Wrappers.query(doctorAreadictionary)));
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class DoctorAreadictionaryController {
 		DoctorAreadictionary doctorAreadictionary = new DoctorAreadictionary();
 		doctorAreadictionary.setAreaType(EdConstants.AreaType.AREA);
 		doctorAreadictionary.setParentAreaId(pAreaId);
-		return new R<>(doctorAreadictionaryService.list(Wrappers.query(doctorAreadictionary)));
+		return R.ok(doctorAreadictionaryService.list(Wrappers.query(doctorAreadictionary)));
 	}
 
     /**
@@ -119,7 +119,7 @@ public class DoctorAreadictionaryController {
      */
     @GetMapping("/{id}" )
     public R getById(@PathVariable("id" ) String id) {
-        return new R<>(doctorAreadictionaryService.getById(id));
+        return R.ok(doctorAreadictionaryService.getById(id));
     }
 
     /**
@@ -134,7 +134,7 @@ public class DoctorAreadictionaryController {
 			EdConstants.ED_AREA_DETAILS_AREA, EdConstants.ED_AREA_DETAILS_ALL}, allEntries = true)
 	public R save(@Valid @RequestBody DoctorAreadictionary doctorAreadictionary) {
 		doctorAreadictionary.clearNoUseDTO();
-    	return new R<>(doctorAreadictionaryService.save(doctorAreadictionary));
+    	return R.ok(doctorAreadictionaryService.save(doctorAreadictionary));
     }
 
     /**
@@ -149,7 +149,7 @@ public class DoctorAreadictionaryController {
 			EdConstants.ED_AREA_DETAILS_AREA, EdConstants.ED_AREA_DETAILS_ALL}, allEntries = true)
 	public R updateById(@Valid @RequestBody DoctorAreadictionary doctorAreadictionary) {
 		doctorAreadictionary.clearNoUseDTO();
-    	return new R<>(doctorAreadictionaryService.updateById(doctorAreadictionary));
+    	return R.ok(doctorAreadictionaryService.updateById(doctorAreadictionary));
     }
 
     /**
@@ -163,7 +163,7 @@ public class DoctorAreadictionaryController {
 	@CacheEvict(value = {EdConstants.ED_AREA_DETAILS, EdConstants.ED_AREA_DETAILS_PROVINCE,  EdConstants.ED_AREA_DETAILS_CITY,
 			EdConstants.ED_AREA_DETAILS_AREA, EdConstants.ED_AREA_DETAILS_ALL}, allEntries = true)
 	public R removeById(@PathVariable String id) {
-        return new R<>(doctorAreadictionaryService.removeById(id));
+        return R.ok(doctorAreadictionaryService.removeById(id));
     }
 
 }

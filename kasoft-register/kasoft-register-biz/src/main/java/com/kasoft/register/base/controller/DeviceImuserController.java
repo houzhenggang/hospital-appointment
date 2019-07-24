@@ -73,7 +73,7 @@ public class DeviceImuserController {
      */
     @GetMapping("/page" )
     public R getDeviceImuserPage(Page page, DeviceImuser deviceImuser) {
-        return new R<>(deviceImuserService.page(page, Wrappers.query(deviceImuser)));
+        return R.ok(deviceImuserService.page(page, Wrappers.query(deviceImuser)));
     }
 
 
@@ -89,9 +89,9 @@ public class DeviceImuserController {
 			DeviceImuserDTO deviceImuserDTO = new DeviceImuserDTO();
 			BeanUtils.copyProperties(deviceImuser, deviceImuserDTO);
 			deviceImuserDTO.setUserSigInfo(TimRunner.getQcloudClient().getUserSigInfo(deviceImuser.getImuserId()));
-			return new R<>(deviceImuserDTO);
+			return R.ok(deviceImuserDTO);
 		}
-		return new R<>(deviceImuser);
+		return R.ok(deviceImuser);
     }
 
     /**
@@ -108,7 +108,7 @@ public class DeviceImuserController {
 			deviceImuser.setImuserId(IdUtil.simpleUUID());
 		}
 		createTencentAccount(deviceImuser.getImuserId(), deviceImuser.getNick(), deviceImuser.getHeadImg());
-		return new R<>(deviceImuserService.save(deviceImuser));
+		return R.ok(deviceImuserService.save(deviceImuser));
     }
 
     /**
@@ -122,7 +122,7 @@ public class DeviceImuserController {
     public R updateById(@RequestBody DeviceImuser deviceImuser) {
 		deviceImuser.clearNoUseDTO();
 		createTencentAccount(deviceImuser.getImuserId(), deviceImuser.getNick(), deviceImuser.getHeadImg());
-		return new R<>(deviceImuserService.updateById(deviceImuser));
+		return R.ok(deviceImuserService.updateById(deviceImuser));
     }
 
     /**
@@ -134,7 +134,7 @@ public class DeviceImuserController {
     @DeleteMapping("/{userId}" )
     @PreAuthorize("@pms.hasPermission('base_deviceimuser_del')" )
     public R removeById(@PathVariable String userId) {
-        return new R<>(deviceImuserService.removeById(userId));
+        return R.ok(deviceImuserService.removeById(userId));
     }
 
 	/**
@@ -190,7 +190,7 @@ public class DeviceImuserController {
 			if(!snsFriendResponse.isSuccess()) {
 				throw new QCloudException(snsFriendResponse.getErrorCode() + snsFriendResponse.getErrorInfo());
 			} else {
-				return new R<>(true);
+				return R.ok(true);
 			}
 		} catch (QCloudException e) {
 			log.error("腾讯云通信添加好友失败", e);
@@ -220,7 +220,7 @@ public class DeviceImuserController {
 			if(!snsFriendResponse.isSuccess()) {
 				throw new QCloudException(snsFriendResponse.getErrorCode() + snsFriendResponse.getErrorInfo());
 			} else {
-				return new R<>(true);
+				return R.ok(true);
 			}
 		} catch (QCloudException e) {
 			log.error("腾讯云通信删除好友失败", e);
@@ -243,7 +243,7 @@ public class DeviceImuserController {
 		request.setFromAccount(imuserId);
 		SnsFriendGetAllResponse response = TimRunner.getQcloudClient().execute(request);
 		log.debug(JSON.toJSONString(response));
-		return new R<>(response);
+		return R.ok(response);
 	}
 
 	/**
@@ -259,6 +259,6 @@ public class DeviceImuserController {
 	public R getUserSign(@PathVariable("imuserId") String imuserId) throws Exception{
 		Map<String, String> userSigInfo = TimRunner.getQcloudClient().getUserSigInfo(imuserId);
 		log.debug(JSON.toJSONString(userSigInfo));
-		return new R<>(userSigInfo);
+		return R.ok(userSigInfo);
 	}
 }

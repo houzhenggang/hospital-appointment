@@ -19,11 +19,11 @@ package com.kasoft.register.base.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.dto.DoctorPeopleinfoDTO;
+import com.kasoft.register.base.entity.DoctorPeopleinfo;
+import com.kasoft.register.base.service.DoctorPeopleinfoService;
 import com.pig4cloud.pigx.admin.api.dto.UserDTO;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
-import com.kasoft.register.base.entity.DoctorPeopleinfo;
-import com.kasoft.register.base.service.DoctorPeopleinfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -59,7 +59,7 @@ public class DoctorPeopleinfoController {
      */
     @GetMapping("/page" )
     public R getDoctorPeopleinfoPage(Page page, DoctorPeopleinfo doctorPeopleinfo) {
-        return new R<>(doctorPeopleinfoService.page(page, doctorPeopleinfo, false));
+        return R.ok(doctorPeopleinfoService.page(page, doctorPeopleinfo, false));
     }
 
 	/**
@@ -71,7 +71,7 @@ public class DoctorPeopleinfoController {
 	@ApiOperation(value = "分页查询待随访居民", notes = "分页查询待随访居民")
 	@GetMapping("/pageform" )
 	public R getDoctorPeopleinfoPageForm(Page page, DoctorPeopleinfo doctorPeopleinfo) {
-		return new R<>(doctorPeopleinfoService.page(page, doctorPeopleinfo, true));
+		return R.ok(doctorPeopleinfoService.page(page, doctorPeopleinfo, true));
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class DoctorPeopleinfoController {
 	@SysLog("注册居民账号" )
 	@GetMapping("/hasUserName/{userName}")
 	public R hasUserName(@PathVariable("userName" ) String userName) {
-		return new R<>(doctorPeopleinfoService.hasUserName(userName));
+		return R.ok(doctorPeopleinfoService.hasUserName(userName));
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class DoctorPeopleinfoController {
 	@SysLog("注册居民账号" )
 	@PostMapping("/register")
 	public R register(@Valid @RequestBody UserDTO userDTO) {
-		return new R<>(doctorPeopleinfoService.register(userDTO));
+		return R.ok(doctorPeopleinfoService.register(userDTO));
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class DoctorPeopleinfoController {
 			@ApiImplicitParam(name = "idCard", value = "身份证")})
 	@GetMapping("/idcard/{idCard}" )
 	public R getByIdcard(@PathVariable("idCard" ) String idCard) {
-		return new R<>(doctorPeopleinfoService.getDetailByIdcard(idCard));
+		return R.ok(doctorPeopleinfoService.getDetailByIdcard(idCard));
 	}
 
     /**
@@ -123,7 +123,7 @@ public class DoctorPeopleinfoController {
 			@ApiImplicitParam(name = "userId", value = "用户ID")})
     @GetMapping("/user/{userId}" )
     public R getByUserId(@PathVariable("userId" ) Integer userId) {
-        return new R<>(doctorPeopleinfoService.getDetailByUserId(userId));
+        return R.ok(doctorPeopleinfoService.getDetailByUserId(userId));
     }
 
 	/**
@@ -133,7 +133,7 @@ public class DoctorPeopleinfoController {
 	 */
 	@GetMapping("/{id}" )
 	public R getById(@PathVariable("id" ) String id) {
-		return new R<>(doctorPeopleinfoService.getDetailById(id));
+		return R.ok(doctorPeopleinfoService.getDetailById(id));
 	}
 
     /**
@@ -146,7 +146,7 @@ public class DoctorPeopleinfoController {
     @PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_add')" )
     public R save(@Valid @RequestBody DoctorPeopleinfoDTO doctorPeopleinfo) {
 		doctorPeopleinfo.clearNoUseDTO();
-        return new R<>(doctorPeopleinfoService.save(doctorPeopleinfo));
+        return R.ok(doctorPeopleinfoService.save(doctorPeopleinfo));
     }
 
     /**
@@ -159,7 +159,7 @@ public class DoctorPeopleinfoController {
     @PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_edit')" )
     public R updateById(@Valid @RequestBody DoctorPeopleinfoDTO doctorPeopleinfo) {
 		doctorPeopleinfo.clearNoUseDTO();
-        return new R<>(doctorPeopleinfoService.updateById(doctorPeopleinfo));
+        return R.ok(doctorPeopleinfoService.updateById(doctorPeopleinfo));
     }
 
     /**
@@ -171,85 +171,8 @@ public class DoctorPeopleinfoController {
     @DeleteMapping("/{id}" )
     @PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_del')" )
     public R removeById(@PathVariable String id) {
-        return new R<>(doctorPeopleinfoService.removeById(id));
+        return R.ok(doctorPeopleinfoService.removeById(id));
     }
 
 
-	/**
-	 * 通过id查询居民高血压专案
-	 * @param id 居民编号
-	 * @return R
-	 */
-	@ApiOperation(value = "查询居民高血压专案", notes = "查询居民高血压专案", response = MongoProjectHypertension.class)
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "id", value = "居民编号")})
-	@GetMapping("/hypertension/{id}" )
-	public R getHypertensionById(@PathVariable("id" ) String id) {
-		return new R<>(doctorPeopleinfoService.getHypertensionById(id));
-	}
-
-	/**
-	 * 修改居民高血压专案
-	 * @param projectHypertension 居民高血压专案
-	 * @return R
-	 */
-	@ApiOperation(value = "修改居民高血压专案", notes = "修改居民高血压专案")
-	@SysLog("修改居民基本信息表" )
-	@PutMapping("/hypertension")
-	@PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_edit')" )
-	public R updateHypertensionById(@Valid @RequestBody MongoProjectHypertension projectHypertension) {
-		return new R<>(doctorPeopleinfoService.updateHypertensionById(projectHypertension));
-	}
-
-	/**
-	 * 通过id查询居民糖尿病专案
-	 * @param id 居民编号
-	 * @return R
-	 */
-	@ApiOperation(value = "查询居民糖尿病专案", notes = "查询居民糖尿病专案", response = MongoProjectHypertension.class)
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "id", value = "居民编号")})
-	@GetMapping("/diabetes/{id}" )
-	public R getDiabetesById(@PathVariable("id" ) String id) {
-		return new R<>(doctorPeopleinfoService.getDiabetesById(id));
-	}
-
-	/**
-	 * 修改居民糖尿病专案
-	 * @param projectDiabetes 居民糖尿病专案
-	 * @return R
-	 */
-	@ApiOperation(value = "修改居民糖尿病专案", notes = "修改居民糖尿病专案")
-	@SysLog("修改居民基本信息表" )
-	@PutMapping("/diabetes")
-	@PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_edit')" )
-	public R updateDiabetesById(@Valid @RequestBody MongoProjectDiabetes projectDiabetes) {
-		return new R<>(doctorPeopleinfoService.updateDiabetesById(projectDiabetes));
-	}
-
-	/**
-	 * 通过id查询居民老年人专案
-	 * @param id 居民编号
-	 * @return R
-	 */
-	@ApiOperation(value = "查询居民老年人专案", notes = "查询居民老年人专案", response = MongoProjectHypertension.class)
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "id", value = "居民编号")})
-	@GetMapping("/OldPeople/{id}" )
-	public R getOldPeopleById(@PathVariable("id" ) String id) {
-		return new R<>(doctorPeopleinfoService.getOldPeopleById(id));
-	}
-
-	/**
-	 * 修改居民老年人专案
-	 * @param projectOldPeople 居民老年人专案
-	 * @return R
-	 */
-	@ApiOperation(value = "修改居民老年人专案", notes = "修改居民老年人专案")
-	@SysLog("修改居民基本信息表" )
-	@PutMapping("/OldPeople")
-	@PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_edit')" )
-	public R updateOldPeopleById(@Valid @RequestBody MongoProjectOldPeople projectOldPeople) {
-		return new R<>(doctorPeopleinfoService.updateOldPeopleById(projectOldPeople));
-	}
 }

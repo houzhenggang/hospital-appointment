@@ -55,7 +55,7 @@ public class DoctorDepartmentdictionaryController {
      */
     @GetMapping("/page" )
     public R getDoctorDepartmentdictionaryPage(Page page, DoctorDepartmentdictionary doctorDepartmentdictionary) {
-        return new R<>(doctorDepartmentdictionaryService.page(page, Wrappers.query(doctorDepartmentdictionary)));
+        return R.ok(doctorDepartmentdictionaryService.page(page, Wrappers.query(doctorDepartmentdictionary)));
     }
 
 	/**
@@ -69,7 +69,7 @@ public class DoctorDepartmentdictionaryController {
 		if(EdConstants.ALL_KEY.equals(hospitalId)) {
 			hospitalId = null;
 		}
-		return new R<>(doctorDepartmentdictionaryService.getDepartmentDictByHospital(hospitalId));
+		return R.ok(doctorDepartmentdictionaryService.getDepartmentDictByHospital(hospitalId));
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class DoctorDepartmentdictionaryController {
 	@ApiOperation(value = "查询全部科室字典", notes = "查询全部科室字典")
 	@GetMapping("/dict-all" )
 	public R getDepartmentDictAll() {
-		return new R<>(doctorDepartmentdictionaryService.getDepartmentDictByHospital(null));
+		return R.ok(doctorDepartmentdictionaryService.getDepartmentDictByHospital(null));
 	}
 
 
@@ -91,7 +91,7 @@ public class DoctorDepartmentdictionaryController {
      */
     @GetMapping("/{id}" )
     public R getById(@PathVariable("id" ) String id) {
-        return new R<>(doctorDepartmentdictionaryService.getById(id));
+        return R.ok(doctorDepartmentdictionaryService.getById(id));
     }
 
     /**
@@ -105,7 +105,7 @@ public class DoctorDepartmentdictionaryController {
 	@CacheEvict(value = EdConstants.ED_DEPARTMENT_DETAILS, allEntries = true)
 	public R save(@Valid @RequestBody DoctorDepartmentdictionary doctorDepartmentdictionary) {
 		doctorDepartmentdictionary.clearNoUseDTO();
-        return new R<>(doctorDepartmentdictionaryService.save(doctorDepartmentdictionary));
+        return R.ok(doctorDepartmentdictionaryService.save(doctorDepartmentdictionary));
     }
 
     /**
@@ -119,7 +119,7 @@ public class DoctorDepartmentdictionaryController {
 	@CacheEvict(value = EdConstants.ED_DEPARTMENT_DETAILS, allEntries = true)
 	public R updateById(@Valid @RequestBody DoctorDepartmentdictionary doctorDepartmentdictionary) {
 		doctorDepartmentdictionary.clearNoUseDTO();
-    	return new R<>(doctorDepartmentdictionaryService.updateById(doctorDepartmentdictionary));
+    	return R.ok(doctorDepartmentdictionaryService.updateById(doctorDepartmentdictionary));
     }
 
     /**
@@ -132,7 +132,7 @@ public class DoctorDepartmentdictionaryController {
     @PreAuthorize("@pms.hasPermission('base_doctordepartment_del')" )
 	@CacheEvict(value = EdConstants.ED_DEPARTMENT_DETAILS, allEntries = true)
 	public R removeById(@PathVariable String id) {
-        return new R<>(doctorDepartmentdictionaryService.removeById(id));
+        return R.ok(doctorDepartmentdictionaryService.removeById(id));
     }
 
 }

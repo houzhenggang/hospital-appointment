@@ -53,7 +53,7 @@ public class DoctorDoctorinfoController {
      */
     @GetMapping("/page" )
     public R getDoctorDoctorinfoPage(Page page, DoctorDoctorinfo doctorDoctorinfo) {
-        return new R<>(doctorDoctorinfoService.page(page, doctorDoctorinfo));
+        return R.ok(doctorDoctorinfoService.page(page, doctorDoctorinfo));
     }
 
 	/**
@@ -67,7 +67,7 @@ public class DoctorDoctorinfoController {
 		if(EdConstants.ALL_KEY.equals(hospitalId)) {
 			hospitalId = null;
 		}
-		return new R<>(doctorDoctorinfoService.getDoctorDictByHospital(hospitalId));
+		return R.ok(doctorDoctorinfoService.getDoctorDictByHospital(hospitalId));
 	}
 	/**
 	 * 查询全部医生字典
@@ -76,7 +76,7 @@ public class DoctorDoctorinfoController {
 	@ApiOperation(value = "查询全部医生字典", notes = "查询全部医生字典")
 	@GetMapping("/dict-all" )
 	public R getDoctorDictAll() {
-		return new R<>(doctorDoctorinfoService.getDoctorDictByHospital(null));
+		return R.ok(doctorDoctorinfoService.getDoctorDictByHospital(null));
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class DoctorDoctorinfoController {
 		if(EdConstants.ALL_KEY.equals(teamId)) {
 			teamId = null;
 		}
-		return new R<>(doctorDoctorinfoService.getDoctorDictByTeam(teamId));
+		return R.ok(doctorDoctorinfoService.getDoctorDictByTeam(teamId));
 	}
 
 
@@ -101,7 +101,7 @@ public class DoctorDoctorinfoController {
      */
     @GetMapping("/{id}" )
     public R getById(@PathVariable("id" ) String id) {
-        return new R<>(doctorDoctorinfoService.getById(id));
+        return R.ok(doctorDoctorinfoService.getById(id));
     }
 
 	/**
@@ -112,7 +112,7 @@ public class DoctorDoctorinfoController {
 	@GetMapping("/user/{userId}" )
 	@ApiOperation(value = "通过用户id查询医生信息表", notes = "医生关联用户后可以通过用户编号查询医生信息")
 	public R getByUserId(@PathVariable("userId" ) Integer userId) {
-		return new R<>(doctorDoctorinfoService.getByUserId(userId));
+		return R.ok(doctorDoctorinfoService.getByUserId(userId));
 	}
 
     /**
@@ -125,7 +125,7 @@ public class DoctorDoctorinfoController {
     @PreAuthorize("@pms.hasPermission('base_doctordoctorinfo_add')" )
     public R save(@Valid @RequestBody DoctorDoctorinfo doctorDoctorinfo) {
 		doctorDoctorinfo.clearNoUseDTO();
-        return new R<>(doctorDoctorinfoService.save(doctorDoctorinfo));
+        return R.ok(doctorDoctorinfoService.save(doctorDoctorinfo));
     }
 
     /**
@@ -138,7 +138,7 @@ public class DoctorDoctorinfoController {
     @PreAuthorize("@pms.hasPermission('base_doctordoctorinfo_edit')" )
     public R updateById(@Valid @RequestBody DoctorDoctorinfo doctorDoctorinfo) {
 		doctorDoctorinfo.clearNoUseDTO();
-        return new R<>(doctorDoctorinfoService.updateById(doctorDoctorinfo));
+        return R.ok(doctorDoctorinfoService.updateById(doctorDoctorinfo));
     }
 
     /**
@@ -150,7 +150,7 @@ public class DoctorDoctorinfoController {
     @DeleteMapping("/{id}" )
     @PreAuthorize("@pms.hasPermission('base_doctordoctorinfo_del')" )
     public R removeById(@PathVariable String id) {
-        return new R<>(doctorDoctorinfoService.removeById(id));
+        return R.ok(doctorDoctorinfoService.removeById(id));
     }
 
 }

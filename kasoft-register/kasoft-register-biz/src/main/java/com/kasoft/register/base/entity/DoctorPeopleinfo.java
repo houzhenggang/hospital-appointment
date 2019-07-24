@@ -50,11 +50,6 @@ private static final long serialVersionUID = 1L;
 	@ApiModelProperty(value = "主键")
 	private String id;
     /**
-   * 档案编号
-   */
-	@ApiModelProperty(value = "档案编号")
-    private String archiveId;
-    /**
    * 医保卡号
    */
 	@ApiModelProperty(value = "医保卡号")

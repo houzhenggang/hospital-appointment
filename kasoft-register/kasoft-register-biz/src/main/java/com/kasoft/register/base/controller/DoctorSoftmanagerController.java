@@ -52,7 +52,7 @@ public class DoctorSoftmanagerController {
      */
     @GetMapping("/page" )
     public R getDoctorSoftmanagerPage(Page page, DoctorSoftmanager doctorSoftmanager) {
-        return new R<>(doctorSoftmanagerService.page(page, Wrappers.query(doctorSoftmanager)));
+        return R.ok(doctorSoftmanagerService.page(page, Wrappers.query(doctorSoftmanager)));
     }
 
 
@@ -63,7 +63,7 @@ public class DoctorSoftmanagerController {
      */
     @GetMapping("/{id}" )
     public R getById(@PathVariable("id" ) String id) {
-        return new R<>(doctorSoftmanagerService.getById(id));
+        return R.ok(doctorSoftmanagerService.getById(id));
     }
 
     /**
@@ -76,7 +76,7 @@ public class DoctorSoftmanagerController {
     @PreAuthorize("@pms.hasPermission('base_doctorsoftmanager_add')" )
     public R save(@Valid @RequestBody DoctorSoftmanager doctorSoftmanager) {
 		doctorSoftmanager.clearNoUseDTO();
-        return new R<>(doctorSoftmanagerService.save(doctorSoftmanager));
+        return R.ok(doctorSoftmanagerService.save(doctorSoftmanager));
     }
 
     /**
@@ -89,7 +89,7 @@ public class DoctorSoftmanagerController {
     @PreAuthorize("@pms.hasPermission('base_doctorsoftmanager_edit')" )
     public R updateById(@Valid @RequestBody DoctorSoftmanager doctorSoftmanager) {
 		doctorSoftmanager.clearNoUseDTO();
-        return new R<>(doctorSoftmanagerService.updateById(doctorSoftmanager));
+        return R.ok(doctorSoftmanagerService.updateById(doctorSoftmanager));
     }
 
     /**
@@ -101,7 +101,7 @@ public class DoctorSoftmanagerController {
     @DeleteMapping("/{id}" )
     @PreAuthorize("@pms.hasPermission('base_doctorsoftmanager_del')" )
     public R removeById(@PathVariable String id) {
-        return new R<>(doctorSoftmanagerService.removeById(id));
+        return R.ok(doctorSoftmanagerService.removeById(id));
     }
 
 }

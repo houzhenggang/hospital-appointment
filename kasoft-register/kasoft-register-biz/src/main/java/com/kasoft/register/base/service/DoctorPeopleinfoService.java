@@ -20,7 +20,6 @@ package com.kasoft.register.base.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kasoft.register.base.dto.DoctorPeopleinfoDTO;
 import com.pig4cloud.pigx.admin.api.dto.UserDTO;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.kasoft.register.base.entity.DoctorPeopleinfo;
@@ -47,14 +46,14 @@ public interface DoctorPeopleinfoService extends IService<DoctorPeopleinfo> {
 	 * @param peopleinfoDTO 档案dto
 	 * @return
 	 */
-	String save(DoctorPeopleinfoDTO peopleinfoDTO);
+	String save(DoctorPeopleinfo peopleinfoDTO);
 
 	/**
 	 * 根据编号更新数据
 	 * @param peopleinfoDTO 档案dto
 	 * @return
 	 */
-	boolean updateById(DoctorPeopleinfoDTO peopleinfoDTO);
+	boolean updateById(DoctorPeopleinfo peopleinfoDTO);
 
 	/**
 	 * 根据服务时间
@@ -70,21 +69,21 @@ public interface DoctorPeopleinfoService extends IService<DoctorPeopleinfo> {
 	 * @param id 档案编号
 	 * @return
 	 */
-	DoctorPeopleinfoDTO getDetailById(String id);
+	DoctorPeopleinfo getDetailById(String id);
 
 	/**
 	 * 根据用户编号查询档案
 	 * @param userId 用户编号
 	 * @return 用户详情
 	 */
-	DoctorPeopleinfoDTO getDetailByUserId(Integer userId);
+	DoctorPeopleinfo getDetailByUserId(Integer userId);
 
 	/**
 	 * 根据身份证号查询档案
 	 * @param idCard 身份证号
 	 * @return
 	 */
-	DoctorPeopleinfoDTO getDetailByIdcard(String idCard);
+	DoctorPeopleinfo getDetailByIdcard(String idCard);
 
 
 	/**
