@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, lengleng All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: lengleng (wangiegie@gmail.com)
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kasoft.register.base.mapper.DoctorDoctorinfoMapper">
+
+  <resultMap id="doctorDoctorinfoMap" type="com.kasoft.register.base.entity.DoctorDoctorinfo">
+                  <id property="id" column="id"/>
+                        <result property="code" column="code"/>
+                        <result property="headImg" column="head_img"/>
+                        <result property="name" column="name"/>
+                        <result property="sex" column="sex"/>
+                        <result property="phone" column="phone"/>
+                        <result property="birthday" column="birthday"/>
+                        <result property="idCard" column="id_card"/>
+                        <result property="doctorType" column="doctor_type"/>
+                        <result property="doctorJobTitle" column="doctor_job_title"/>
+                        <result property="nurseJobTitle" column="nurse_job_title"/>
+                        <result property="receiveCounseling" column="receive_counseling"/>
+                        <result property="address" column="address"/>
+                        <result property="goodAt" column="good_at"/>
+                        <result property="areaId" column="area_id"/>
+                        <result property="hospitalId" column="hospital_id"/>
+                        <result property="departmentId" column="department_id"/>
+                        <result property="doctorSign" column="doctor_sign"/>
+					    <result property="userId" column="user_id"/>
+					    <result property="deptId" column="dept_id"/>
+                        <result property="createTime" column="create_time"/>
+                        <result property="updateTime" column="update_time"/>
+                        <result property="delFlag" column="del_flag"/>
+                        <result property="tenantId" column="tenant_id"/>
+            </resultMap>
+
+	<resultMap id="doctorDoctorinfoVOMap" type="com.kasoft.register.base.vo.DoctorDoctorinfoVO" extends="doctorDoctorinfoMap">
+		<result property="areaIdName" column="area_id_name"/>
+		<result property="hospitalIdName" column="hospital_id_name"/>
+		<result property="departmentIdName" column="department_id_name"/>
+	</resultMap>
+
+	<sql id="columns">
+		t.id,
+		t.`name`
+	</sql>
+
+	<select id="getDoctorDictByHospital" parameterType="String" resultType="com.kasoft.register.base.entity.DoctorDepartmentdictionary">
+		SELECT
+		<include refid="columns"/>
+		FROM
+		twtsoft_doctor_doctorinfo t
+		WHERE
+			t.del_flag = '0'
+		<if test="hospitalId != null and hospitalId != ''">
+			AND t.`hospital_id` =  #{hospitalId}
+		</if>
+	</select>
+	<select id="getDoctorDictByTeam" parameterType="String" resultType="com.kasoft.register.base.entity.DoctorDepartmentdictionary">
+		SELECT
+		t.*
+		FROM
+		twtsoft_doctor_doctorinfo t, twtsoft_doctor_doctorinfoteam t2
+		WHERE
+			t.del_flag = '0' AND t2.del_flag = '0' AND
+		t.id = t2.doctor_id
+		<if test="teamId != null and teamId != ''">
+			AND t2.`team_id` =  #{teamId}
+		</if>
+	</select>
+
+	<select id="getDoctorinfoPage" resultMap="doctorDoctorinfoVOMap">
+		SELECT
+		`t`.*,
+		`t1`.name AS department_id_name
+		FROM
+		twtsoft_doctor_doctorinfo AS t
+		LEFT JOIN twtsoft_doctor_departmentdictionary AS t1 ON t.department_id = `t1`.id
+		<where>
+				t.del_flag = '0'
+			<if test="query.name != null and query.name != ''">
+				and `t`.name LIKE CONCAT('%',#{query.name},'%')
+			</if>
+			<if test="query.hospitalId != null and query.hospitalId != ''">
+				and `t`.hospital_id = #{query.hospitalId}
+			</if>
+			<if test="query.hospitalId != null and query.hospitalId != ''">
+				and `t`.hospital_id = #{query.hospitalId}
+			</if>
+			<if test="query.doctorType != null and query.doctorType != ''">
+				and `t`.doctor_type = #{query.doctorType}
+			</if>
+			<if test="query.tenantId != null and query.tenantId != ''">
+				and `t`.tenant_id = #{query.tenantId}
+			</if>
+		</where>
+
+	</select>
+</mapper>

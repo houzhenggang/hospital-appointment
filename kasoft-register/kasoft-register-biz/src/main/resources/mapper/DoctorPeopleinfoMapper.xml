@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, lengleng All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: lengleng (wangiegie@gmail.com)
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kasoft.register.base.mapper.DoctorPeopleinfoMapper">
+
+  <resultMap id="doctorPeopleinfoMap" type="com.kasoft.register.base.entity.DoctorPeopleinfo">
+                  <id property="id" column="id"/>
+                        <result property="archiveId" column="archive_id"/>
+                        <result property="cardNumber" column="card_number"/>
+                        <result property="idCard" column="id_card"/>
+                        <result property="idCardFront" column="id_card_front"/>
+                        <result property="idCardBack" column="id_card_back"/>
+                        <result property="headImg" column="head_img"/>
+                        <result property="name" column="name"/>
+                        <result property="nickname" column="nickname"/>
+                        <result property="phone" column="phone"/>
+                        <result property="tel" column="tel"/>
+                        <result property="sex" column="sex"/>
+                        <result property="birthDate" column="birth_date"/>
+                        <result property="createArchiveUnits" column="create_archive_units"/>
+                        <result property="createArchivePeople" column="create_archive_people"/>
+                        <result property="createArchiveTime" column="create_archive_time"/>
+                        <result property="hospitalId" column="hospital_id"/>
+                        <result property="teamId" column="team_id"/>
+                        <result property="doctorId" column="doctor_id"/>
+                        <result property="linkName" column="link_name"/>
+                        <result property="linkPhone" column="link_phone"/>
+                        <result property="hospitaltag" column="hospitaltag"/>
+                        <result property="peopleTypeList" column="people_type_list"/>
+                        <result property="note" column="note"/>
+                        <result property="intentionPackage" column="intention_package"/>
+                        <result property="servicePackage" column="service_package"/>
+                        <result property="agreementCode" column="agreement_code"/>
+                        <result property="basisName" column="basis_name"/>
+                        <result property="personalityName" column="personality_name"/>
+                        <result property="startServiceTime" column="start_service_time"/>
+                        <result property="endServiceTime" column="end_service_time"/>
+                        <result property="lastServiceTime" column="last_service_time"/>
+                        <result property="nextServiceTime" column="next_service_time"/>
+                        <result property="serviceNum" column="service_num"/>
+                        <result property="serviceType" column="service_type"/>
+                        <result property="areaId" column="area_id"/>
+                        <result property="peopleState" column="people_state"/>
+                        <result property="abnormalState" column="abnormal_state"/>
+                        <result property="abnormalTime" column="abnormal_time"/>
+                        <result property="applyState" column="apply_state"/>
+                        <result property="applyTime" column="apply_time"/>
+                        <result property="familyId" column="family_id"/>
+                        <result property="syncId" column="sync_id"/>
+                        <result property="userId" column="user_id"/>
+						<result property="applicationId" column="application_id"/>
+	                    <result property="createTime" column="create_time"/>
+	                    <result property="updateTime" column="update_time"/>
+                        <result property="delFlag" column="del_flag"/>
+                        <result property="tenantId" column="tenant_id"/>
+            </resultMap>
+</mapper>

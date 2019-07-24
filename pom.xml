@@ -121,6 +121,7 @@
 		<module>pigx-upms</module>
 		<module>pigx-common</module>
 		<module>pigx-visual</module>
+		<module>kasoft-register</module>
 	</modules>
 
 	<dependencyManagement>

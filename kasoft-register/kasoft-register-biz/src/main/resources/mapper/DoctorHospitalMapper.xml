@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, lengleng All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: lengleng (wangiegie@gmail.com)
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kasoft.register.base.mapper.DoctorHospitalMapper">
+
+  <resultMap id="doctorHospitalMap" type="com.kasoft.register.base.entity.DoctorHospital">
+                  <id property="id" column="id"/>
+                        <result property="name" column="name"/>
+                        <result property="hospitalImage" column="hospital_image"/>
+                        <result property="hospitalLevel" column="hospital_level"/>
+                        <result property="introduced" column="introduced"/>
+                        <result property="address" column="address"/>
+                        <result property="phone" column="phone"/>
+                        <result property="contactName" column="contact_name"/>
+                        <result property="contactPhone" column="contact_phone"/>
+                        <result property="areaId" column="area_id"/>
+                        <result property="cooperation" column="cooperation"/>
+                        <result property="archives" column="archives"/>
+                        <result property="lon" column="lon"/>
+                        <result property="lat" column="lat"/>
+                        <result property="msg" column="msg"/>
+                        <result property="project" column="project"/>
+                        <result property="hospitalTel" column="hospital_tel"/>
+                        <result property="associated" column="associated"/>
+	                    <result property="parentId" column="parent_id"/>
+	 					<result property="deptId" column="dept_id"/>
+                        <result property="createTime" column="create_time"/>
+                        <result property="updateTime" column="update_time"/>
+                        <result property="delFlag" column="del_flag"/>
+                        <result property="tenantId" column="tenant_id"/>
+            </resultMap>
+
+	<select id="getHospitalByName" parameterType="String" resultType="com.kasoft.register.base.entity.DoctorHospital">
+		SELECT
+			t.id,
+			t.`name`
+		FROM
+			twtsoft_doctor_hospital t
+		WHERE
+		 	t.del_flag = '0'
+		<if test="name != null and name != ''">
+			AND t.`name` LIKE CONCAT('%',#{name},'%' )
+		</if>
+	</select>
+</mapper>
