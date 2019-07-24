@@ -11,9 +11,9 @@ nacos:
 db:
   num: 1
   user: root
-  password: root
+  password: register123456
   url:
-    0: jdbc:mysql://${MYSQL-HOST:pigx-mysql}:${MYSQL-PORT:3306}/${MYSQL-DB:pigxx_config}?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+    0: jdbc:mysql://${MYSQL-HOST:47.92.88.35}:${MYSQL-PORT:3323}/${MYSQL-DB:pigxx_config}?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
 
 spring:
   datasource:
