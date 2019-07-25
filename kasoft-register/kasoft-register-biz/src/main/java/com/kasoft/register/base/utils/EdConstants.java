@@ -116,92 +116,7 @@ public class EdConstants {
 				new TypeReference<ArrayList<DictionariesBean>>() {});
 	}
 
-	/**
-	 * 协议上传状态
-	 */
-	public interface ProtocolUpStatus {
-		/**
-		 * 未上传
-		 */
-		String NO = "0";
-		/**
-		 * 已上传
-		 */
-		String YES = "1";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'未上传','value':'0'},{'label':'已上传','value':'1'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
-	}
 
-	/**
-	 * 协议使用状态
-	 */
-	public interface ProtocolUseStatus {
-		/**
-		 * 正常
-		 */
-		String NORMAL = "1";
-		/**
-		 * 已续约
-		 */
-		String RENEWALS = "2";
-		/**
-		 * 已解约
-		 */
-		String CANCELLED = "3";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'正常','value':'1'},{'label':'已续约','value':'2'},{'label':'已解约','value':'3'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
-	}
-
-	/**
-	 * 协议当前状态
-	 */
-	public interface ProtocolWorkStatus {
-		/**
-		 * 生效中
-		 */
-		String IN_FORCE = "1";
-		/**
-		 * 未生效
-		 */
-		String NO_FORCE = "2";
-		/**
-		 * 已失效
-		 */
-		String OUT_FORCE = "3";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'生效中','value':'1'},{'label':'未生效','value':'2'},{'label':'已失效','value':'3'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
-	}
-	/**
-	 * 签约类型
-	 */
-	public interface AgreementType {
-		/**
-		 * 基础
-		 */
-		String BASE = "1";
-		/**
-		 * 个性化
-		 */
-		String PERSONALIZATION = "2";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'基础','value':'1'},{'label':'个性化','value':'2'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
-	}
 	/**
 	 * 性别类型
 	 */
@@ -290,37 +205,7 @@ public class EdConstants {
 				new TypeReference<ArrayList<DictionariesBean>>() {});
 	}
 
-	/**
-	 * 人员状态
-	 */
-	public interface PeopleState {
-		/**
-		 * 在管
-		 */
-		String MANAGEMENT = "1";
-		/**
-		 * 死亡
-		 */
-		String DEATH = "2";
-		/**
-		 * 迁出
-		 */
-		String MOVE_OUT = "3";
-		/**
-		 * 失访
-		 */
-		String LOSS_FOLLOW = "4";
-		/**
-		 * 拒绝
-		 */
-		String REFUSE = "5";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'在管','value':'1'},{'label':'死亡','value':'2'},{'label':'迁出','value':'3'},{'label':'失访','value':'4'},{'label':'拒绝','value':'5'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
-	}
+
 	/**
 	 * 异常状态
 	 */
@@ -338,26 +223,6 @@ public class EdConstants {
 		 */
 		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
 				"[{'label':'正常','value':'1'},{'label':'异常','value':'2'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
-	}
-
-	/**
-	 * 签约类型
-	 */
-	public interface SigningType {
-		/**
-		 * 项目
-		 */
-		String PROJECT = "1";
-		/**
-		 * 套餐
-		 */
-		String PACKAGER = "2";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'项目','value':'1'},{'label':'套餐','value':'2'}]",
 				new TypeReference<ArrayList<DictionariesBean>>() {});
 	}
 
@@ -401,66 +266,7 @@ public class EdConstants {
 				new TypeReference<ArrayList<DictionariesBean>>() {});
 	}
 
-	/**
-	 * 项目类型
-	 */
-	public interface ProjectType {
-		/**
-		 * 公卫服务
-		 */
-		String PUBLIC_HEALTH = "1";
-		/**
-		 * 医疗服务
-		 */
-		String MEDICAL_TREATMENT = "2";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'公卫服务','value':'1'},{'label':'医疗服务','value':'2'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
-	}
 
-
-	/**
-	 * 项目状态
-	 */
-	public interface ProjectState {
-		/**
-		 * 停用
-		 */
-		String stop = "0";
-		/**
-		 * 启用
-		 */
-		String start = "1";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'停用','value':'0'},{'label':'启用','value':'1'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
-	}
-
-	/**
-	 * 审核状态（0未复核 1复核）
-	 */
-	public interface ReviewState {
-		/**
-		 * 未审核
-		 */
-		String NO = "0";
-		/**
-		 * 已审核
-		 */
-		String YES = "1";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'未审核','value':'0'},{'label':'已审核','value':'1'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
-	}
 
 	/**
 	 * 体检指标状态
@@ -557,12 +363,12 @@ public class EdConstants {
 	 */
 	public interface UserType {
 		/**
-		 * 随机
+		 * 居民
 		 */
 		String PEOPLE = "0";
 
 		/**
-		 * 餐前
+		 * 医生
 		 */
 		String DOCKER = "1";
 	}
