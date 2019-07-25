@@ -43,7 +43,7 @@ import javax.validation.Valid;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/doctorareadictionary" )
-@Api(value = "doctorareadictionary", tags = "基础业务-地区")
+@Api(value = "doctorareadictionary", tags = "基础-地区")
 public class DoctorAreadictionaryController {
 
     private final  DoctorAreadictionaryService doctorAreadictionaryService;

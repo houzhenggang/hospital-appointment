@@ -39,7 +39,7 @@ import javax.validation.Valid;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/doctorproblemfeedback" )
-@Api(value = "doctorproblemfeedback", tags = "基础业务-问题反馈")
+@Api(value = "doctorproblemfeedback", tags = "基础-问题反馈")
 public class DoctorProblemfeedbackController {
 
     private final  DoctorProblemfeedbackService doctorProblemfeedbackService;

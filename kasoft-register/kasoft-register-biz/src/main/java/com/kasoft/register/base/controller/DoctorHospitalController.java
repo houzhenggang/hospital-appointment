@@ -43,7 +43,7 @@ import javax.validation.Valid;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/doctorhospital" )
-@Api(value = "doctordoctorinfoteam", tags = "组织-医院")
+@Api(value = "doctordoctorinfoteam", tags = "基础-医院")
 public class DoctorHospitalController {
 
     private final  DoctorHospitalService doctorHospitalService;
