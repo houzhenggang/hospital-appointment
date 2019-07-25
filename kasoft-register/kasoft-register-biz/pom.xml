@@ -60,14 +60,18 @@
 		</dependency>
 		<dependency>
 			<groupId>com.pig4cloud</groupId>
+			<artifactId>pigx-common-data</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.pig4cloud</groupId>
 			<artifactId>pigx-common-log</artifactId>
 		</dependency>
 		<!--代码生成模板引擎-->
-		<dependency>
+		<!--<dependency>
 			<artifactId>velocity</artifactId>
 			<groupId>org.apache.velocity</groupId>
 			<version>${velocity.version}</version>
-		</dependency>
+		</dependency>-->
 		<!--web 模块-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
