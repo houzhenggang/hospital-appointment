@@ -1,12 +1,7 @@
 package com.kasoft.register.base.utils;
 
-import cn.hutool.core.lang.TypeReference;
-import com.alibaba.fastjson.JSONArray;
-import com.kasoft.register.base.entity.DictionariesBean;
-import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  * 常量对象
@@ -88,12 +83,6 @@ public class EdConstants {
 		 * 区
 		 */
 		String AREA = "3";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'省','value':'1'},{'label':'市','value':'2'},{'label':'区','value':'3'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
 	}
 
 	/**
@@ -108,17 +97,11 @@ public class EdConstants {
 		 * 居委会
 		 */
 		String NEIGHBORHOOD = "2";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'街道','value':'1'},{'label':'居委会','value':'2'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
 	}
 
 
 	/**
-	 * 性别类型
+	 * 性别类型 微信性别共用
 	 */
 	public  interface SexType {
 		/**
@@ -132,38 +115,9 @@ public class EdConstants {
 		/**
 		 * 未说明
 		 */
-		String UNKNOWN = "3";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'男','value':'1'},{'label':'女','value':'2'},{'label':'未说明','value':'3'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
+		String UNKNOWN = "0";
 	}
 
-	/**
-	 * 医生人员类别
-	 */
-	public interface  DoctorType {
-		/**
-		 * 医生
-		 */
-		String DOCTOR = "1";
-		/**
-		 * 护士
-		 */
-		String nurse = "2";
-		/**
-		 * 健康专员
-		 */
-		String HEALTH_COMMISSIONER = "3";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'医生','value':'1'},{'label':'护士','value':'2'},{'label':'健康专员','value':'3'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
-	}
 
 	/**
 	 * 是否
@@ -177,12 +131,6 @@ public class EdConstants {
 		 * 否
 		 */
 		String NO = "1";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'是','value':'0'},{'label':'否','value':'1'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
 	}
 
 	/**
@@ -197,12 +145,6 @@ public class EdConstants {
 		 * 有
 		 */
 		String HAVE = "1";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'无','value':'0'},{'label':'有','value':'1'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
 	}
 
 
@@ -218,12 +160,6 @@ public class EdConstants {
 		 * 异常
 		 */
 		String ERROR = "2";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'正常','value':'1'},{'label':'异常','value':'2'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
 	}
 
 	/**
@@ -238,12 +174,6 @@ public class EdConstants {
 		 * 投诉
 		 */
 		String PACKAGER = "2";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'软件问题','value':'1'},{'label':'投诉','value':'2'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
 	}
 
 	/**
@@ -258,12 +188,6 @@ public class EdConstants {
 		 * 已处理
 		 */
 		String YES = "1";
-		/**
-		 * 字典列表
-		 */
-		List<DictionariesBean> dictionariesList= JSONArray.parseObject(
-				"[{'label':'未处理','value':'0'},{'label':'已处理','value':'1'}]",
-				new TypeReference<ArrayList<DictionariesBean>>() {});
 	}
 
 

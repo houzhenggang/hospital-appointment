@@ -35,7 +35,7 @@ import java.time.LocalDateTime;
  * @date 2019-04-30 17:10:28
  */
 @Data
-@TableName("twtsoft_doctor_areadictionary")
+@TableName("kasoft_doctor_areadictionary")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(description = "地区")
 public class DoctorAreadictionary extends Model<DoctorAreadictionary> {
@@ -44,9 +44,9 @@ public class DoctorAreadictionary extends Model<DoctorAreadictionary> {
 	/**
 	 * 主键
 	 */
-	@TableId(value = "id", type = IdType.INPUT)
+	@TableId(value = "area_id", type = IdType.INPUT)
 	@ApiModelProperty(value = "主键")
-	private String id;
+	private String areaId;
 	/**
 	 * 省市区名称
 	 */

@@ -24,7 +24,7 @@
 <mapper namespace="com.kasoft.register.base.mapper.DoctorProblemfeedbackMapper">
 
   <resultMap id="doctorProblemfeedbackMap" type="com.kasoft.register.base.entity.DoctorProblemfeedback">
-                  <id property="id" column="id"/>
+                  <id property="feedbackId" column="feedback_id"/>
                         <result property="feedbackType" column="feedback_type"/>
                         <result property="feedbackContent" column="feedback_content"/>
                         <result property="feedbackTime" column="feedback_time"/>

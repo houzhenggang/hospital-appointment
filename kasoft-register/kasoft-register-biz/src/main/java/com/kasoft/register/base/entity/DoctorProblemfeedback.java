@@ -36,7 +36,7 @@ import java.time.LocalDateTime;
  * @date 2019-04-30 17:10:08
  */
 @Data
-@TableName("twtsoft_doctor_problemfeedback")
+@TableName("kasoft_doctor_problemfeedback")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(description = "问题反馈")
 public class DoctorProblemfeedback extends Model<DoctorProblemfeedback> {
@@ -45,9 +45,9 @@ private static final long serialVersionUID = 1L;
     /**
    * 主键
    */
-	@TableId(value = "id", type = IdType.UUID)
+	@TableId(value = "feedback_id", type = IdType.UUID)
 	@ApiModelProperty(value = "主键")
-	private String id;
+	private String feedbackId;
     /**
    * 反馈类别  1：软件问题  2：投诉
    */

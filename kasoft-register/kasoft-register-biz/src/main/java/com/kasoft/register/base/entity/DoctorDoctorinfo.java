@@ -36,7 +36,7 @@ import java.time.LocalDateTime;
  * @date 2019-04-30 17:10:49
  */
 @Data
-@TableName("twtsoft_doctor_doctorinfo")
+@TableName("kasoft_doctor_doctorinfo")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(description = "医生")
 public class DoctorDoctorinfo extends Model<DoctorDoctorinfo> {
@@ -45,9 +45,9 @@ private static final long serialVersionUID = 1L;
     /**
    * 主键
    */
-	@TableId(value = "id", type = IdType.UUID)
+	@TableId(value = "doctor_id", type = IdType.UUID)
 	@ApiModelProperty(value = "主键")
-	private String id;
+	private String doctorId;
     /**
    * 工号
    */

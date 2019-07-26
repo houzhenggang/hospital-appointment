@@ -24,7 +24,7 @@
 <mapper namespace="com.kasoft.register.base.mapper.DoctorAreadictionaryMapper">
 
   <resultMap id="doctorAreadictionaryMap" type="com.kasoft.register.base.entity.DoctorAreadictionary">
-                  <id property="id" column="id"/>
+                  <id property="areaId" column="area_id"/>
                         <result property="name" column="name"/>
                         <result property="parentAreaId" column="parent_area_id"/>
                         <result property="areaType" column="area_type"/>

@@ -24,7 +24,7 @@
 <mapper namespace="com.kasoft.register.base.mapper.DoctorDoctorinfoMapper">
 
   <resultMap id="doctorDoctorinfoMap" type="com.kasoft.register.base.entity.DoctorDoctorinfo">
-                  <id property="id" column="id"/>
+                  <id property="doctorId" column="doctor_id"/>
                         <result property="code" column="code"/>
                         <result property="headImg" column="head_img"/>
                         <result property="name" column="name"/>
@@ -65,7 +65,7 @@
 		SELECT
 		<include refid="columns"/>
 		FROM
-		twtsoft_doctor_doctorinfo t
+		kasoft_doctor_doctorinfo t
 		WHERE
 			t.del_flag = '0'
 		<if test="hospitalId != null and hospitalId != ''">
@@ -76,7 +76,7 @@
 		SELECT
 		t.*
 		FROM
-		twtsoft_doctor_doctorinfo t, twtsoft_doctor_doctorinfoteam t2
+		kasoft_doctor_doctorinfo t, kasoft_doctor_doctorinfoteam t2
 		WHERE
 			t.del_flag = '0' AND t2.del_flag = '0' AND
 		t.id = t2.doctor_id
@@ -90,8 +90,8 @@
 		`t`.*,
 		`t1`.name AS department_id_name
 		FROM
-		twtsoft_doctor_doctorinfo AS t
-		LEFT JOIN twtsoft_doctor_departmentdictionary AS t1 ON t.department_id = `t1`.id
+		kasoft_doctor_doctorinfo AS t
+		LEFT JOIN kasoft_doctor_departmentdictionary AS t1 ON t.department_id = `t1`.id
 		<where>
 				t.del_flag = '0'
 			<if test="query.name != null and query.name != ''">

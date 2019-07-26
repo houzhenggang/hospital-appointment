@@ -35,7 +35,7 @@ import java.time.LocalDateTime;
  * @date 2019-04-30 17:10:33
  */
 @Data
-@TableName("twtsoft_doctor_streetdictionary")
+@TableName("kasoft_doctor_streetdictionary")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(description = "街道居委会")
 public class DoctorStreetdictionary extends Model<DoctorStreetdictionary> {
@@ -44,9 +44,9 @@ private static final long serialVersionUID = 1L;
     /**
    * 主键
    */
-	@TableId(value = "id", type = IdType.INPUT)
+	@TableId(value = "street_id", type = IdType.INPUT)
 	@ApiModelProperty(value = "主键")
-	private String id;
+	private String streetId;
     /**
    * 街道/乡镇名称
    */
