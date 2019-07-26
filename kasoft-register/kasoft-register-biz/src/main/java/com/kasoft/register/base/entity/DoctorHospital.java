@@ -49,8 +49,8 @@ private static final long serialVersionUID = 1L;
 	@ApiModelProperty(value = "主键")
 	private String hospitalId;
     /**
-   * 医疗机构名称
-   */
+   	 * 医疗机构名称
+   	*/
 	@ApiModelProperty(value = "医疗机构名称")
 	@NotBlank(message = "医院名称不能为空")
     private String name;
