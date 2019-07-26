@@ -25,7 +25,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 居民基本信息表
  *
  * @author charlie
- * @date 2019-07-25 18:52:46
+ * @date 2019-07-26 09:58:13
  */
 @Mapper
 public interface DoctorPeopleinfoMapper extends BaseMapper<DoctorPeopleinfo> {

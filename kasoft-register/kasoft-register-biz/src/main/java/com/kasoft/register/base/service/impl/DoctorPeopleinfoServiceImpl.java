@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
  * 居民基本信息表
  *
  * @author charlie
- * @date 2019-07-25 18:52:46
+ * @date 2019-07-26 09:58:13
  */
 @Service
 public class DoctorPeopleinfoServiceImpl extends ServiceImpl<DoctorPeopleinfoMapper, DoctorPeopleinfo> implements DoctorPeopleinfoService {

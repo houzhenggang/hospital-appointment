@@ -24,8 +24,11 @@
 <mapper namespace="com.kasoft.register.base.mapper.DoctorPeopleinfoMapper">
 
   <resultMap id="doctorPeopleinfoMap" type="com.kasoft.register.base.entity.DoctorPeopleinfo">
-                  <id property="id" column="id"/>
+                  <id property="peopleId" column="people_id"/>
                         <result property="cardNumber" column="card_number"/>
+                        <result property="cardNumberImg" column="card_number_img"/>
+                        <result property="hasChronicDisease" column="has_chronic_disease"/>
+                        <result property="chronicDisease" column="chronic_disease"/>
                         <result property="idCard" column="id_card"/>
                         <result property="idCardFront" column="id_card_front"/>
                         <result property="idCardBack" column="id_card_back"/>

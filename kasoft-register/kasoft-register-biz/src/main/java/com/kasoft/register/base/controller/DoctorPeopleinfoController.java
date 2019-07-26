@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.*;
  * 居民基本信息表
  *
  * @author charlie
- * @date 2019-07-25 18:52:46
+ * @date 2019-07-26 09:58:13
  */
 @RestController
 @AllArgsConstructor
@@ -79,7 +79,7 @@ public class DoctorPeopleinfoController {
     @PostMapping
     @PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_add')" )
     public R save(@RequestBody DoctorPeopleinfo doctorPeopleinfo) {
-		doctorPeopleinfo.clearNoUseDTO();
+    	doctorPeopleinfo.clearNoUseDTO();
         return R.ok(doctorPeopleinfoService.save(doctorPeopleinfo));
     }
 
@@ -94,7 +94,7 @@ public class DoctorPeopleinfoController {
     @PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_edit')" )
     public R updateById(@RequestBody DoctorPeopleinfo doctorPeopleinfo) {
 		doctorPeopleinfo.clearNoUseDTO();
-		return R.ok(doctorPeopleinfoService.updateById(doctorPeopleinfo));
+        return R.ok(doctorPeopleinfoService.updateById(doctorPeopleinfo));
     }
 
     /**

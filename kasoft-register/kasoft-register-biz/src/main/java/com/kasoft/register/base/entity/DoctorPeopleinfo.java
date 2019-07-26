@@ -33,7 +33,7 @@ import java.time.LocalDateTime;
  * 居民基本信息表
  *
  * @author charlie
- * @date 2019-07-25 18:52:46
+ * @date 2019-07-26 09:58:13
  */
 @Data
 @TableName("kasoft_doctor_peopleinfo")
@@ -45,14 +45,29 @@ private static final long serialVersionUID = 1L;
     /**
      * 主键
      */
-	@TableId(value = "id", type = IdType.UUID)
-	@ApiModelProperty(value = "主键")
-	private String id;
+	@TableId(value = "people_id", type = IdType.UUID)
+    @ApiModelProperty(value="主键")
+    private String peopleId;
     /**
      * 医保卡号
      */
     @ApiModelProperty(value="医保卡号")
     private String cardNumber;
+    /**
+     * 医保卡照片
+     */
+    @ApiModelProperty(value="医保卡照片")
+    private String cardNumberImg;
+    /**
+     * 慢性病 有无字段 0：无；1：有
+     */
+    @ApiModelProperty(value="慢性病 有无字段 0：无；1：有")
+    private String hasChronicDisease;
+    /**
+     * 慢性病内容
+     */
+    @ApiModelProperty(value="慢性病内容")
+    private String chronicDisease;
     /**
      * 身份证
      */

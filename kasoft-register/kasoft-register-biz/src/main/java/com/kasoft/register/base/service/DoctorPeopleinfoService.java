@@ -24,7 +24,7 @@ import com.kasoft.register.base.entity.DoctorPeopleinfo;
  * 居民基本信息表
  *
  * @author charlie
- * @date 2019-07-25 18:52:46
+ * @date 2019-07-26 09:58:13
  */
 public interface DoctorPeopleinfoService extends IService<DoctorPeopleinfo> {
 
