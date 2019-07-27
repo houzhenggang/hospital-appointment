@@ -49,7 +49,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 	 * @return
 	 */
 	@Override
-	@CacheEvict(value = CacheConstants.DICT_DETAILS, allEntries = true)
+	@CacheEvict(value = {CacheConstants.DICT_DETAILS, CacheConstants.DICT_ALL_DETAILS}, allEntries = true)
 	@Transactional(rollbackFor = Exception.class)
 	public R removeDict(Integer id) {
 		SysDict dict = this.getById(id);
