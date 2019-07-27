@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/doctorinspectresource")
-@Api(value = "doctorinspectresource", tags = "检查资源管理")
+@Api(value = "doctorinspectresource", tags = "基础-检查资源")
 public class DoctorInspectresourceController {
 
     private final DoctorInspectresourceService doctorInspectresourceService;

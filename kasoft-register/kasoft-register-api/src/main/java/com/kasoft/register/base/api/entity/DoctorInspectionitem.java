@@ -1,5 +1,6 @@
 package com.kasoft.register.base.api.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -26,8 +27,8 @@ public class DoctorInspectionitem extends Model<DoctorInspectionitem> {
     /**
      * 主键
      */
-    @TableId
-    @ApiModelProperty(value="主键")
+	@TableId(value = "insp_item_id", type = IdType.UUID)
+	@ApiModelProperty(value="主键")
     private Long inspItemId;
     /**
      * 检查类别（体格检查，功能检查，化验检查）
