@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * @date 2019-07-27 10:32:30
  */
 @Data
-@TableName("doctor_inspectresource")
+@TableName("kasoft_doctor_inspectresource")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "检查资源")
 public class DoctorInspectresource extends Model<DoctorInspectresource> {

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  * @date 2019-07-27 10:32:12
  */
 @Data
-@TableName("doctor_applyorder")
+@TableName("kasoft_doctor_applyorder")
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "预约订单")
 public class DoctorApplyorder extends Model<DoctorApplyorder> {
