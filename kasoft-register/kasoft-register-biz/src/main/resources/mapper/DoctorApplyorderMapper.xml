@@ -4,7 +4,7 @@
 
 <mapper namespace="com.kasoft.register.base.mapper.DoctorApplyorderMapper">
 
-  <resultMap id="doctorApplyorderMap" type="com.kasoft.register.base.entity.DoctorApplyorder">
+  <resultMap id="doctorApplyorderMap" type="com.kasoft.register.base.api.entity.DoctorApplyorder">
                   <id property="applyOrderId" column="apply_order_id"/>
                         <result property="hospitalId" column="hospital_id"/>
                         <result property="hospitalName" column="hospital_name"/>

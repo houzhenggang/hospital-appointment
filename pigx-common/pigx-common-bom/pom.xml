@@ -86,6 +86,11 @@
 				<artifactId>pigx-upms-api</artifactId>
 				<version>${pigx.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.pig4cloud</groupId>
+				<artifactId>kasoft-register-api</artifactId>
+				<version>${pigx.version}</version>
+			</dependency>
 			<!--mybatis plus extension,包含了mybatis plus core-->
 			<dependency>
 				<groupId>com.baomidou</groupId>

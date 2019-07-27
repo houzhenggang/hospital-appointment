@@ -23,7 +23,7 @@
 
 <mapper namespace="com.kasoft.register.base.mapper.DoctorAreadictionaryMapper">
 
-  <resultMap id="doctorAreadictionaryMap" type="com.kasoft.register.base.entity.DoctorAreadictionary">
+  <resultMap id="doctorAreadictionaryMap" type="com.kasoft.register.base.api.entity.DoctorAreadictionary">
                   <id property="areaId" column="area_id"/>
                         <result property="name" column="name"/>
                         <result property="parentAreaId" column="parent_area_id"/>

@@ -1,6 +1,6 @@
 package com.kasoft.register.base.utils;
 
-import com.kasoft.register.base.dto.EdTreeNode;
+import com.kasoft.register.base.api.dto.EdTreeNode;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;

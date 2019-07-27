@@ -1,11 +1,11 @@
 package com.kasoft.register.base.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.kasoft.register.base.dto.AreaTree;
+import com.kasoft.register.base.api.dto.AreaTree;
 import com.kasoft.register.base.service.DoctorAreadictionaryService;
 import com.kasoft.register.base.utils.KrbConstants;
 import com.kasoft.register.base.utils.EdTreeUtils;
-import com.kasoft.register.base.entity.DoctorAreadictionary;
+import com.kasoft.register.base.api.entity.DoctorAreadictionary;
 import com.kasoft.register.base.mapper.DoctorAreadictionaryMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.Cacheable;

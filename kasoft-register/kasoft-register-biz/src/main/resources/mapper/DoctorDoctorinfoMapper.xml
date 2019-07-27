@@ -23,7 +23,7 @@
 
 <mapper namespace="com.kasoft.register.base.mapper.DoctorDoctorinfoMapper">
 
-  <resultMap id="doctorDoctorinfoMap" type="com.kasoft.register.base.entity.DoctorDoctorinfo">
+  <resultMap id="doctorDoctorinfoMap" type="com.kasoft.register.base.api.entity.DoctorDoctorinfo">
                   <id property="doctorId" column="doctor_id"/>
                         <result property="code" column="code"/>
                         <result property="headImg" column="head_img"/>
@@ -50,7 +50,7 @@
                         <result property="tenantId" column="tenant_id"/>
             </resultMap>
 
-	<resultMap id="doctorDoctorinfoVOMap" type="com.kasoft.register.base.vo.DoctorDoctorinfoVO" extends="doctorDoctorinfoMap">
+	<resultMap id="doctorDoctorinfoVOMap" type="com.kasoft.register.base.api.vo.DoctorDoctorinfoVO" extends="doctorDoctorinfoMap">
 		<result property="areaIdName" column="area_id_name"/>
 		<result property="hospitalIdName" column="hospital_id_name"/>
 		<result property="departmentIdName" column="department_id_name"/>
@@ -61,7 +61,7 @@
 		t.`name`
 	</sql>
 
-	<select id="getDoctorDictByHospital" parameterType="String" resultType="com.kasoft.register.base.entity.DoctorDepartmentdictionary">
+	<select id="getDoctorDictByHospital" parameterType="java.lang.String" resultType="com.kasoft.register.base.api.entity.DoctorDepartmentdictionary">
 		SELECT
 		<include refid="columns"/>
 		FROM
@@ -72,7 +72,7 @@
 			AND t.`hospital_id` =  #{hospitalId}
 		</if>
 	</select>
-	<select id="getDoctorDictByTeam" parameterType="String" resultType="com.kasoft.register.base.entity.DoctorDepartmentdictionary">
+	<select id="getDoctorDictByTeam" parameterType="java.lang.String" resultType="com.kasoft.register.base.api.entity.DoctorDepartmentdictionary">
 		SELECT
 		t.*
 		FROM

@@ -23,7 +23,7 @@
 
 <mapper namespace="com.kasoft.register.base.mapper.DoctorStreetdictionaryMapper">
 
-  <resultMap id="doctorStreetdictionaryMap" type="com.kasoft.register.base.entity.DoctorStreetdictionary">
+  <resultMap id="doctorStreetdictionaryMap" type="com.kasoft.register.base.api.entity.DoctorStreetdictionary">
                   <id property="streetId" column="street_id"/>
                         <result property="name" column="name"/>
                         <result property="parentId" column="parent_id"/>

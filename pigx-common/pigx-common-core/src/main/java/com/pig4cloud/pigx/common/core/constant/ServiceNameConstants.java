@@ -39,4 +39,9 @@ public interface ServiceNameConstants {
 	 * 分布式事务协调服务
 	 */
 	String TX_MANAGER = "pigx-tx-manager";
+
+	/**
+	 * 预约挂号服务
+	 */
+	String REGISTER_MANAGER = "kasoft-register-biz";
 }

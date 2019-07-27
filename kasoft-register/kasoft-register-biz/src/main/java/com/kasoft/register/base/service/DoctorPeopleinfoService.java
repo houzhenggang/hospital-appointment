@@ -1,7 +1,7 @@
 package com.kasoft.register.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kasoft.register.base.entity.DoctorPeopleinfo;
+import com.kasoft.register.base.api.entity.DoctorPeopleinfo;
 import com.pig4cloud.pigx.admin.api.dto.UserDTO;
 import com.pig4cloud.pigx.common.core.util.R;
 

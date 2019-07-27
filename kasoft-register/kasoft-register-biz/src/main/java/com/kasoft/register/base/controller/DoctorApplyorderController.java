@@ -2,7 +2,7 @@ package com.kasoft.register.base.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.kasoft.register.base.entity.DoctorApplyorder;
+import com.kasoft.register.base.api.entity.DoctorApplyorder;
 import com.kasoft.register.base.service.DoctorApplyorderService;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;

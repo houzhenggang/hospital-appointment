@@ -1,6 +1,6 @@
-package com.kasoft.register.base.vo;
+package com.kasoft.register.base.api.vo;
 
-import com.kasoft.register.base.entity.DoctorDoctorinfo;
+import com.kasoft.register.base.api.entity.DoctorDoctorinfo;
 import lombok.Data;
 
 /**

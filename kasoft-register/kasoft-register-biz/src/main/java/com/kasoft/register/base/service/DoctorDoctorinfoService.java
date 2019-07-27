@@ -3,7 +3,7 @@ package com.kasoft.register.base.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kasoft.register.base.entity.DoctorDoctorinfo;
+import com.kasoft.register.base.api.entity.DoctorDoctorinfo;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package com.kasoft.register.base.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.kasoft.register.base.entity.DoctorPeopleinfo;
+import com.kasoft.register.base.api.entity.DoctorPeopleinfo;
 import com.kasoft.register.base.mapper.DoctorPeopleinfoMapper;
 import com.kasoft.register.base.service.DoctorPeopleinfoService;
 import com.kasoft.register.base.utils.KrbConstants;

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pig4cloud.pigx.admin.api.dto.UserDTO;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
-import com.kasoft.register.base.entity.DoctorPeopleinfo;
+import com.kasoft.register.base.api.entity.DoctorPeopleinfo;
 import com.kasoft.register.base.service.DoctorPeopleinfoService;
 import io.swagger.annotations.*;
 import org.springframework.security.access.prepost.PreAuthorize;

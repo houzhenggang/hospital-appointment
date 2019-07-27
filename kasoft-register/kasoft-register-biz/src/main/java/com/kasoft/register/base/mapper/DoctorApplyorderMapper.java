@@ -1,7 +1,7 @@
 package com.kasoft.register.base.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.kasoft.register.base.entity.DoctorApplyorder;
+import com.kasoft.register.base.api.entity.DoctorApplyorder;
 
 /**
  * 预约订单

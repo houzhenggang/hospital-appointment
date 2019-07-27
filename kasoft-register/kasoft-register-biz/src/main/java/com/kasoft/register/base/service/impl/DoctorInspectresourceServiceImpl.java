@@ -1,7 +1,7 @@
 package com.kasoft.register.base.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.kasoft.register.base.entity.DoctorInspectresource;
+import com.kasoft.register.base.api.entity.DoctorInspectresource;
 import com.kasoft.register.base.mapper.DoctorInspectresourceMapper;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
 import org.springframework.stereotype.Service;

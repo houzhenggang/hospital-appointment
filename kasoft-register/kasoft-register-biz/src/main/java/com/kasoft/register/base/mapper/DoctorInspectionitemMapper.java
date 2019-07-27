@@ -1,7 +1,7 @@
 package com.kasoft.register.base.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.kasoft.register.base.entity.DoctorInspectionitem;
+import com.kasoft.register.base.api.entity.DoctorInspectionitem;
 
 /**
  * 检查项目

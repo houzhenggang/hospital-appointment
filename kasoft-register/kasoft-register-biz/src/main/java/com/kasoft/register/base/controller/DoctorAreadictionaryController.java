@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
-import com.kasoft.register.base.entity.DoctorAreadictionary;
+import com.kasoft.register.base.api.entity.DoctorAreadictionary;
 import com.kasoft.register.base.service.DoctorAreadictionaryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

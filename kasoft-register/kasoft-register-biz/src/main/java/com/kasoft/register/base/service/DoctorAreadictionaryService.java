@@ -1,8 +1,8 @@
 package com.kasoft.register.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kasoft.register.base.dto.AreaTree;
-import com.kasoft.register.base.entity.DoctorAreadictionary;
+import com.kasoft.register.base.api.dto.AreaTree;
+import com.kasoft.register.base.api.entity.DoctorAreadictionary;
 
 import java.util.List;
 

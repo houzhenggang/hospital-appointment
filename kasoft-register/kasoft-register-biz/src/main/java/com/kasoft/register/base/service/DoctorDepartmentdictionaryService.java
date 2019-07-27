@@ -1,7 +1,7 @@
 package com.kasoft.register.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kasoft.register.base.entity.DoctorDepartmentdictionary;
+import com.kasoft.register.base.api.entity.DoctorDepartmentdictionary;
 
 import java.util.List;
 

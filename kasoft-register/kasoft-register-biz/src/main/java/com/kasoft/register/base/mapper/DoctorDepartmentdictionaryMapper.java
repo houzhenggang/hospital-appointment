@@ -1,7 +1,7 @@
 package com.kasoft.register.base.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.kasoft.register.base.entity.DoctorDepartmentdictionary;
+import com.kasoft.register.base.api.entity.DoctorDepartmentdictionary;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

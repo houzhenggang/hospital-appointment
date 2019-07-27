@@ -1,7 +1,7 @@
 package com.kasoft.register.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kasoft.register.base.entity.DoctorStreetdictionary;
+import com.kasoft.register.base.api.entity.DoctorStreetdictionary;
 
 /**
  * 街道居委会

@@ -23,7 +23,7 @@
 
 <mapper namespace="com.kasoft.register.base.mapper.DoctorDepartmentdictionaryMapper">
 
-  <resultMap id="doctorDepartmentdictionaryMap" type="com.kasoft.register.base.entity.DoctorDepartmentdictionary">
+  <resultMap id="doctorDepartmentdictionaryMap" type="com.kasoft.register.base.api.entity.DoctorDepartmentdictionary">
                   <id property="departmentId" column="department_id"/>
                         <result property="departmentCode" column="department_code"/>
                         <result property="name" column="name"/>
@@ -39,7 +39,7 @@
                         <result property="tenantId" column="tenant_id"/>
             </resultMap>
 
-	<select id="getDepartmentDictByHospital" parameterType="String" resultType="com.kasoft.register.base.entity.DoctorDepartmentdictionary">
+	<select id="getDepartmentDictByHospital" parameterType="String" resultType="com.kasoft.register.base.api.entity.DoctorDepartmentdictionary">
 		SELECT
 		t.id,
 		t.`name`

@@ -23,7 +23,7 @@
 
 <mapper namespace="com.kasoft.register.base.mapper.DoctorPeopleinfoMapper">
 
-  <resultMap id="doctorPeopleinfoMap" type="com.kasoft.register.base.entity.DoctorPeopleinfo">
+  <resultMap id="doctorPeopleinfoMap" type="com.kasoft.register.base.api.entity.DoctorPeopleinfo">
                   <id property="peopleId" column="people_id"/>
                         <result property="cardNumber" column="card_number"/>
                         <result property="cardNumberImg" column="card_number_img"/>

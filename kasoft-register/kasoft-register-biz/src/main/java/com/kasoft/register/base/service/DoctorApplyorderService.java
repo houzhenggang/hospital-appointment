@@ -1,7 +1,7 @@
 package com.kasoft.register.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kasoft.register.base.entity.DoctorApplyorder;
+import com.kasoft.register.base.api.entity.DoctorApplyorder;
 
 /**
  * 预约订单

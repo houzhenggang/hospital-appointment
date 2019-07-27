@@ -1,4 +1,4 @@
-package com.kasoft.register.base.dto;
+package com.kasoft.register.base.api.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

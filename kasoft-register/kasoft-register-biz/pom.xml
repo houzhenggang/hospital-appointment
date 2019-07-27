@@ -14,6 +14,11 @@
 
 
 	<dependencies>
+		<!--register api、model 模块-->
+		<dependency>
+			<groupId>com.pig4cloud</groupId>
+			<artifactId>kasoft-register-api</artifactId>
+		</dependency>
 		<!--注册中心客户端-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

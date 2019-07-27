@@ -4,7 +4,7 @@
 
 <mapper namespace="com.kasoft.register.base.mapper.DoctorInspectresourceMapper">
 
-  <resultMap id="doctorInspectresourceMap" type="com.kasoft.register.base.entity.DoctorInspectresource">
+  <resultMap id="doctorInspectresourceMap" type="com.kasoft.register.base.api.entity.DoctorInspectresource">
                   <id property="inspResourceId" column="insp_resource_id"/>
                         <result property="hospitalName" column="hospital_name"/>
                         <result property="inspItemName" column="insp_item_name"/>

@@ -3,7 +3,7 @@ package com.kasoft.register.base.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kasoft.register.base.service.DoctorHospitalService;
 import com.kasoft.register.base.utils.KrbConstants;
-import com.kasoft.register.base.entity.DoctorHospital;
+import com.kasoft.register.base.api.entity.DoctorHospital;
 import com.kasoft.register.base.mapper.DoctorHospitalMapper;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
