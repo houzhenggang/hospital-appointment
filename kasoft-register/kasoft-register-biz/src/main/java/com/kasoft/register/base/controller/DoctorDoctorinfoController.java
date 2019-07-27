@@ -17,7 +17,7 @@
 package com.kasoft.register.base.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.kasoft.register.base.utils.EdConstants;
+import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import com.kasoft.register.base.entity.DoctorDoctorinfo;
@@ -64,7 +64,7 @@ public class DoctorDoctorinfoController {
 	@ApiOperation(value = "根据医院编号查询医生字典", notes = "根据医院编号查询医生字典,备注{{key}}表示查询全部")
 	@GetMapping("/dict/{hospitalId}" )
 	public R getDoctorDictByHospital(@PathVariable("hospitalId" )String hospitalId) {
-		if(EdConstants.ALL_KEY.equals(hospitalId)) {
+		if(KrbConstants.ALL_KEY.equals(hospitalId)) {
 			hospitalId = null;
 		}
 		return R.ok(doctorDoctorinfoService.getDoctorDictByHospital(hospitalId));
@@ -87,7 +87,7 @@ public class DoctorDoctorinfoController {
 	@ApiOperation(value = "根据团队编号查询医生字典", notes = "根据团队编号查询医生字典,备注{{key}}表示查询全部")
 	@GetMapping("/dict-team/{teamId}" )
 	public R getDoctorDictByTeam(@PathVariable("teamId" )String teamId) {
-		if(EdConstants.ALL_KEY.equals(teamId)) {
+		if(KrbConstants.ALL_KEY.equals(teamId)) {
 			teamId = null;
 		}
 		return R.ok(doctorDoctorinfoService.getDoctorDictByTeam(teamId));

@@ -22,31 +22,31 @@ public class PhysicalIndicatorsUtils {
         Integer number = Integer.valueOf(num);
         String exceptionType;
         switch (type) {
-            case EdConstants.SBP.key:
+            case KrbConstants.SBP.key:
                 if (number > 140) {
-                    exceptionType = EdConstants.IndicatorsType.ET_01;
+                    exceptionType = KrbConstants.IndicatorsType.ET_01;
                 } else if (number < 90) {
-                    exceptionType = EdConstants.IndicatorsType.ET_02;
+                    exceptionType = KrbConstants.IndicatorsType.ET_02;
                 } else {
-                    exceptionType = EdConstants.IndicatorsType.ET_03;
+                    exceptionType = KrbConstants.IndicatorsType.ET_03;
                 }
                 break;
-            case EdConstants.DBP.key:
+            case KrbConstants.DBP.key:
                 if (number > 90) {
-                    exceptionType = EdConstants.IndicatorsType.ET_01;
+                    exceptionType = KrbConstants.IndicatorsType.ET_01;
                 } else if (number < 60) {
-                    exceptionType = EdConstants.IndicatorsType.ET_02;
+                    exceptionType = KrbConstants.IndicatorsType.ET_02;
                 } else {
-                    exceptionType = EdConstants.IndicatorsType.ET_03;
+                    exceptionType = KrbConstants.IndicatorsType.ET_03;
                 }
                 break;
-            case EdConstants.HR.key:
+            case KrbConstants.HR.key:
                 if (number > 100) {
-                    exceptionType = EdConstants.IndicatorsType.ET_01;
+                    exceptionType = KrbConstants.IndicatorsType.ET_01;
                 } else if (number < 60) {
-                    exceptionType = EdConstants.IndicatorsType.ET_02;
+                    exceptionType = KrbConstants.IndicatorsType.ET_02;
                 } else {
-                    exceptionType = EdConstants.IndicatorsType.ET_03;
+                    exceptionType = KrbConstants.IndicatorsType.ET_03;
                 }
                 break;
             default:
@@ -67,11 +67,11 @@ public class PhysicalIndicatorsUtils {
         Integer number = Integer.valueOf(pulse);
         String exceptionType;
         if(number<60){
-            exceptionType = EdConstants.IndicatorsType.ET_02;
+            exceptionType = KrbConstants.IndicatorsType.ET_02;
         }else if(number>100){
-            exceptionType = EdConstants.IndicatorsType.ET_01;
+            exceptionType = KrbConstants.IndicatorsType.ET_01;
         }else {
-            exceptionType = EdConstants.IndicatorsType.ET_03;
+            exceptionType = KrbConstants.IndicatorsType.ET_03;
         }
         return exceptionType;
     }
@@ -84,7 +84,7 @@ public class PhysicalIndicatorsUtils {
 	 */
 	public static String judgeBloodSugar(String xt, String timeType) {
 		if(StrUtil.isEmpty(timeType)) {
-			timeType = EdConstants.GluType.XT_CANQIAN + "";
+			timeType = KrbConstants.GluType.XT_CANQIAN + "";
 		}
 		return judgeBloodSugar(xt, Integer.parseInt(timeType));
 	}
@@ -102,15 +102,15 @@ public class PhysicalIndicatorsUtils {
         Double glu = Double.valueOf(xt);
         String exceptionType;
         if (glu < 3.9) {
-            exceptionType = EdConstants.IndicatorsType.ET_02;
+            exceptionType = KrbConstants.IndicatorsType.ET_02;
         } else if (glu <= 6.1) {
-            exceptionType = EdConstants.IndicatorsType.ET_03;
-        } else if (glu <= 7.8 && EdConstants.GluType.XT_CANHOU_2.equals(timeType)) {
-            exceptionType = EdConstants.IndicatorsType.ET_03;
-        } else if (glu <= 11.1 && EdConstants.GluType.XT_CANHOU_1.equals(timeType)) {
-            exceptionType = EdConstants.IndicatorsType.ET_03;
+            exceptionType = KrbConstants.IndicatorsType.ET_03;
+        } else if (glu <= 7.8 && KrbConstants.GluType.XT_CANHOU_2.equals(timeType)) {
+            exceptionType = KrbConstants.IndicatorsType.ET_03;
+        } else if (glu <= 11.1 && KrbConstants.GluType.XT_CANHOU_1.equals(timeType)) {
+            exceptionType = KrbConstants.IndicatorsType.ET_03;
         } else {
-            exceptionType = EdConstants.IndicatorsType.ET_01;
+            exceptionType = KrbConstants.IndicatorsType.ET_01;
         }
         return exceptionType;
     }

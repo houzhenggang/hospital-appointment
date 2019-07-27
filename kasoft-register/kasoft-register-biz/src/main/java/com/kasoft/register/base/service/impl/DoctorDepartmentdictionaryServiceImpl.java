@@ -18,7 +18,7 @@ package com.kasoft.register.base.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kasoft.register.base.service.DoctorDepartmentdictionaryService;
-import com.kasoft.register.base.utils.EdConstants;
+import com.kasoft.register.base.utils.KrbConstants;
 import com.kasoft.register.base.entity.DoctorDepartmentdictionary;
 import com.kasoft.register.base.entity.DoctorHospital;
 import com.kasoft.register.base.mapper.DoctorDepartmentdictionaryMapper;
@@ -40,7 +40,7 @@ public class DoctorDepartmentdictionaryServiceImpl extends ServiceImpl<DoctorDep
 	@Autowired
 	private DoctorHospitalService doctorHospitalService;
 	@Override
-	@Cacheable(value = EdConstants.ED_DEPARTMENT_DETAILS, key = "#hospitalId", unless = "#result == null ")
+	@Cacheable(value = KrbConstants.ED_DEPARTMENT_DETAILS, key = "#hospitalId", unless = "#result == null ")
 	public List<DoctorDepartmentdictionary> getDepartmentDictByHospital(String hospitalId) {
 		return this.baseMapper.getDepartmentDictByHospital(hospitalId);
 	}

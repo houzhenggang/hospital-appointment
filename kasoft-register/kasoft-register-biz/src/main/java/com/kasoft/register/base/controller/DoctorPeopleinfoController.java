@@ -19,16 +19,17 @@ package com.kasoft.register.base.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.pig4cloud.pigx.admin.api.dto.UserDTO;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import com.kasoft.register.base.entity.DoctorPeopleinfo;
 import com.kasoft.register.base.service.DoctorPeopleinfoService;
+import io.swagger.annotations.*;
 import org.springframework.security.access.prepost.PreAuthorize;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 /**
@@ -109,5 +110,31 @@ public class DoctorPeopleinfoController {
     public R removeById(@PathVariable String id) {
         return R.ok(doctorPeopleinfoService.removeById(id));
     }
+
+	/**
+	 * 判断用户名是否存在
+	 * @param userName 用户名
+	 * @return R
+	 */
+	@ApiOperation(value = "判断用户名是否存在", notes = "判断用户名是否存在", response = Boolean.class)
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "userName", value = "用户名")})
+	@SysLog("注册居民账号" )
+	@GetMapping("/hasUserName/{userName}")
+	public R hasUserName(@PathVariable("userName" ) String userName) {
+		return R.ok(doctorPeopleinfoService.hasUserName(userName));
+	}
+
+	/**
+	 * 注册居民账号
+	 * @param userDTO 居民账号
+	 * @return R
+	 */
+	@ApiOperation(value = "注册居民账号", notes = "注册居民账号", response = Boolean.class)
+	@SysLog("注册居民账号" )
+	@PostMapping("/register")
+	public R register(@Valid @RequestBody UserDTO userDTO) {
+		return R.ok(doctorPeopleinfoService.register(userDTO));
+	}
 
 }

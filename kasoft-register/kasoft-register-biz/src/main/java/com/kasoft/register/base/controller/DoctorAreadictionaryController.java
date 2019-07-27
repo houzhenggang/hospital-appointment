@@ -18,7 +18,7 @@ package com.kasoft.register.base.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.kasoft.register.base.utils.EdConstants;
+import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import com.kasoft.register.base.entity.DoctorAreadictionary;
@@ -75,10 +75,10 @@ public class DoctorAreadictionaryController {
 	 */
 	@ApiOperation(value = "获取全部省", notes = "获取全部省")
 	@GetMapping("/province" )
-	@Cacheable(value = EdConstants.ED_AREA_DETAILS_PROVINCE, unless = "#result == null ")
+	@Cacheable(value = KrbConstants.ED_AREA_DETAILS_PROVINCE, unless = "#result == null ")
 	public R getProvince() {
 		DoctorAreadictionary doctorAreadictionary = new DoctorAreadictionary();
-		doctorAreadictionary.setAreaType(EdConstants.AreaType.PROVINCE);
+		doctorAreadictionary.setAreaType(KrbConstants.AreaType.PROVINCE);
 		return R.ok(doctorAreadictionaryService.list(Wrappers.query(doctorAreadictionary)));
 	}
 
@@ -89,10 +89,10 @@ public class DoctorAreadictionaryController {
 	 */
 	@ApiOperation(value = "获取省下的全部市", notes = "获取省下的全部市")
 	@GetMapping("/city/{pAreaId}" )
-	@Cacheable(value = EdConstants.ED_AREA_DETAILS_CITY,  key = "#pAreaId", unless = "#result == null ")
+	@Cacheable(value = KrbConstants.ED_AREA_DETAILS_CITY,  key = "#pAreaId", unless = "#result == null ")
 	public R getCity(@PathVariable("pAreaId" ) String pAreaId) {
 		DoctorAreadictionary doctorAreadictionary = new DoctorAreadictionary();
-		doctorAreadictionary.setAreaType(EdConstants.AreaType.CITY);
+		doctorAreadictionary.setAreaType(KrbConstants.AreaType.CITY);
 		doctorAreadictionary.setParentAreaId(pAreaId);
 		return R.ok(doctorAreadictionaryService.list(Wrappers.query(doctorAreadictionary)));
 	}
@@ -104,10 +104,10 @@ public class DoctorAreadictionaryController {
 	 */
 	@ApiOperation(value = "获取市下的全部区", notes = "获取市下的全部区")
 	@GetMapping("/area/{pAreaId}" )
-	@Cacheable(value = EdConstants.ED_AREA_DETAILS_AREA,  key = "#pAreaId", unless = "#result == null ")
+	@Cacheable(value = KrbConstants.ED_AREA_DETAILS_AREA,  key = "#pAreaId", unless = "#result == null ")
 	public R getArea(@PathVariable("pAreaId" ) String pAreaId) {
 		DoctorAreadictionary doctorAreadictionary = new DoctorAreadictionary();
-		doctorAreadictionary.setAreaType(EdConstants.AreaType.AREA);
+		doctorAreadictionary.setAreaType(KrbConstants.AreaType.AREA);
 		doctorAreadictionary.setParentAreaId(pAreaId);
 		return R.ok(doctorAreadictionaryService.list(Wrappers.query(doctorAreadictionary)));
 	}
@@ -130,8 +130,8 @@ public class DoctorAreadictionaryController {
     @SysLog("新增地区字典" )
     @PostMapping
     @PreAuthorize("@pms.hasPermission('base_doctorareadictionary_add')" )
-	@CacheEvict(value = {EdConstants.ED_AREA_DETAILS, EdConstants.ED_AREA_DETAILS_PROVINCE,  EdConstants.ED_AREA_DETAILS_CITY,
-			EdConstants.ED_AREA_DETAILS_AREA, EdConstants.ED_AREA_DETAILS_ALL}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_AREA_DETAILS, KrbConstants.ED_AREA_DETAILS_PROVINCE,  KrbConstants.ED_AREA_DETAILS_CITY,
+			KrbConstants.ED_AREA_DETAILS_AREA, KrbConstants.ED_AREA_DETAILS_ALL}, allEntries = true)
 	public R save(@Valid @RequestBody DoctorAreadictionary doctorAreadictionary) {
 		doctorAreadictionary.clearNoUseDTO();
     	return R.ok(doctorAreadictionaryService.save(doctorAreadictionary));
@@ -145,8 +145,8 @@ public class DoctorAreadictionaryController {
     @SysLog("修改地区字典" )
     @PutMapping
     @PreAuthorize("@pms.hasPermission('base_doctorareadictionary_edit')" )
-	@CacheEvict(value = {EdConstants.ED_AREA_DETAILS, EdConstants.ED_AREA_DETAILS_PROVINCE,  EdConstants.ED_AREA_DETAILS_CITY,
-			EdConstants.ED_AREA_DETAILS_AREA, EdConstants.ED_AREA_DETAILS_ALL}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_AREA_DETAILS, KrbConstants.ED_AREA_DETAILS_PROVINCE,  KrbConstants.ED_AREA_DETAILS_CITY,
+			KrbConstants.ED_AREA_DETAILS_AREA, KrbConstants.ED_AREA_DETAILS_ALL}, allEntries = true)
 	public R updateById(@Valid @RequestBody DoctorAreadictionary doctorAreadictionary) {
 		doctorAreadictionary.clearNoUseDTO();
     	return R.ok(doctorAreadictionaryService.updateById(doctorAreadictionary));
@@ -160,8 +160,8 @@ public class DoctorAreadictionaryController {
     @SysLog("删除地区字典" )
     @DeleteMapping("/{id}" )
     @PreAuthorize("@pms.hasPermission('base_doctorareadictionary_del')" )
-	@CacheEvict(value = {EdConstants.ED_AREA_DETAILS, EdConstants.ED_AREA_DETAILS_PROVINCE,  EdConstants.ED_AREA_DETAILS_CITY,
-			EdConstants.ED_AREA_DETAILS_AREA, EdConstants.ED_AREA_DETAILS_ALL}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_AREA_DETAILS, KrbConstants.ED_AREA_DETAILS_PROVINCE,  KrbConstants.ED_AREA_DETAILS_CITY,
+			KrbConstants.ED_AREA_DETAILS_AREA, KrbConstants.ED_AREA_DETAILS_ALL}, allEntries = true)
 	public R removeById(@PathVariable String id) {
         return R.ok(doctorAreadictionaryService.removeById(id));
     }

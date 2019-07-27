@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @author charlie
  */
 @Component
-public class EdConstants {
+public class KrbConstants {
 	/**
 	 * 地区信息缓存
 	 */

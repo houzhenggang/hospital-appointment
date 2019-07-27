@@ -19,7 +19,7 @@ package com.kasoft.register.base.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kasoft.register.base.dto.AreaTree;
 import com.kasoft.register.base.service.DoctorAreadictionaryService;
-import com.kasoft.register.base.utils.EdConstants;
+import com.kasoft.register.base.utils.KrbConstants;
 import com.kasoft.register.base.utils.EdTreeUtils;
 import com.kasoft.register.base.entity.DoctorAreadictionary;
 import com.kasoft.register.base.mapper.DoctorAreadictionaryMapper;
@@ -40,13 +40,13 @@ import java.util.List;
 public class DoctorAreadictionaryServiceImpl extends ServiceImpl<DoctorAreadictionaryMapper, DoctorAreadictionary> implements DoctorAreadictionaryService {
 
 	@Override
-	@Cacheable(value = EdConstants.ED_AREA_DETAILS, key = "#id", unless = "#result == null ")
+	@Cacheable(value = KrbConstants.ED_AREA_DETAILS, key = "#id", unless = "#result == null ")
 	public DoctorAreadictionary getById(String id) {
 		return super.getById(id);
 	}
 
 	@Override
-	@Cacheable(value = EdConstants.ED_AREA_DETAILS_ALL, unless = "#result == null ")
+	@Cacheable(value = KrbConstants.ED_AREA_DETAILS_ALL, unless = "#result == null ")
 	public List<AreaTree> allTree() {
 		List<DoctorAreadictionary> areaList = list();
 		List<AreaTree> areaTreeList = new ArrayList<>();
@@ -56,7 +56,7 @@ public class DoctorAreadictionaryServiceImpl extends ServiceImpl<DoctorAreadicti
 			BeanUtils.copyProperties(item, tree);
 			areaTreeList.add(tree);
 		});
-		List<AreaTree> areaTreeTrees = EdTreeUtils.buildByRecursive(areaTreeList, EdConstants.TREE_ROOT_ID);
+		List<AreaTree> areaTreeTrees = EdTreeUtils.buildByRecursive(areaTreeList, KrbConstants.TREE_ROOT_ID);
 		return areaTreeTrees;
 	}
 }

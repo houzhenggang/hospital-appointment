@@ -18,7 +18,7 @@ package com.kasoft.register.base.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.kasoft.register.base.utils.EdConstants;
+import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import com.kasoft.register.base.entity.DoctorDepartmentdictionary;
@@ -66,7 +66,7 @@ public class DoctorDepartmentdictionaryController {
 	@ApiOperation(value = "根据医院编号查询科室字典", notes = "根据医院编号查询科室字典,备注{{key}}表示查询全部")
 	@GetMapping("/dict/{hospitalId}" )
 	public R getDepartmentDictByHospital(@PathVariable("hospitalId" )String hospitalId) {
-		if(EdConstants.ALL_KEY.equals(hospitalId)) {
+		if(KrbConstants.ALL_KEY.equals(hospitalId)) {
 			hospitalId = null;
 		}
 		return R.ok(doctorDepartmentdictionaryService.getDepartmentDictByHospital(hospitalId));
@@ -102,7 +102,7 @@ public class DoctorDepartmentdictionaryController {
     @SysLog("新增科室字典" )
     @PostMapping
     @PreAuthorize("@pms.hasPermission('base_doctordepartment_add')" )
-	@CacheEvict(value = EdConstants.ED_DEPARTMENT_DETAILS, allEntries = true)
+	@CacheEvict(value = KrbConstants.ED_DEPARTMENT_DETAILS, allEntries = true)
 	public R save(@Valid @RequestBody DoctorDepartmentdictionary doctorDepartmentdictionary) {
 		doctorDepartmentdictionary.clearNoUseDTO();
         return R.ok(doctorDepartmentdictionaryService.save(doctorDepartmentdictionary));
@@ -116,7 +116,7 @@ public class DoctorDepartmentdictionaryController {
     @SysLog("修改科室字典" )
     @PutMapping
     @PreAuthorize("@pms.hasPermission('base_doctordepartment_edit')" )
-	@CacheEvict(value = EdConstants.ED_DEPARTMENT_DETAILS, allEntries = true)
+	@CacheEvict(value = KrbConstants.ED_DEPARTMENT_DETAILS, allEntries = true)
 	public R updateById(@Valid @RequestBody DoctorDepartmentdictionary doctorDepartmentdictionary) {
 		doctorDepartmentdictionary.clearNoUseDTO();
     	return R.ok(doctorDepartmentdictionaryService.updateById(doctorDepartmentdictionary));
@@ -130,7 +130,7 @@ public class DoctorDepartmentdictionaryController {
     @SysLog("删除科室字典" )
     @DeleteMapping("/{id}" )
     @PreAuthorize("@pms.hasPermission('base_doctordepartment_del')" )
-	@CacheEvict(value = EdConstants.ED_DEPARTMENT_DETAILS, allEntries = true)
+	@CacheEvict(value = KrbConstants.ED_DEPARTMENT_DETAILS, allEntries = true)
 	public R removeById(@PathVariable String id) {
         return R.ok(doctorDepartmentdictionaryService.removeById(id));
     }

@@ -18,7 +18,7 @@ package com.kasoft.register.base.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.kasoft.register.base.utils.EdConstants;
+import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import com.kasoft.register.base.entity.DoctorStreetdictionary;
@@ -66,10 +66,10 @@ public class DoctorStreetdictionaryController {
 	 */
 	@ApiOperation(value = "获取区下面全部街道", notes = "获取区下面全部街道")
 	@GetMapping("/street/{pAreaId}" )
-	@Cacheable(value = EdConstants.ED_STREET_DETAILS_STREET,  key = "#pAreaId", unless = "#result == null ")
+	@Cacheable(value = KrbConstants.ED_STREET_DETAILS_STREET,  key = "#pAreaId", unless = "#result == null ")
 	public R getStreet(@PathVariable("pAreaId" ) String pAreaId) {
 		DoctorStreetdictionary doctorStreetdictionary = new DoctorStreetdictionary();
-		doctorStreetdictionary.setStreetType(EdConstants.StreetType.STREET);
+		doctorStreetdictionary.setStreetType(KrbConstants.StreetType.STREET);
 		doctorStreetdictionary.setParentId(pAreaId);
 		return R.ok(doctorStreetdictionaryService.list(Wrappers.query(doctorStreetdictionary)));
 	}
@@ -81,10 +81,10 @@ public class DoctorStreetdictionaryController {
 	 */
 	@ApiOperation(value = "获取街道下的全部居委会", notes = "获取街道下的全部居委会")
 	@GetMapping("/neighborhood/{pAreaId}" )
-	@Cacheable(value = EdConstants.ED_STREET_DETAILS_NEIGHBORHOOD,  key = "#pAreaId", unless = "#result == null ")
+	@Cacheable(value = KrbConstants.ED_STREET_DETAILS_NEIGHBORHOOD,  key = "#pAreaId", unless = "#result == null ")
 	public R getNeighborhood(@PathVariable("pAreaId" ) String pAreaId) {
 		DoctorStreetdictionary doctorStreetdictionary = new DoctorStreetdictionary();
-		doctorStreetdictionary.setStreetType(EdConstants.StreetType.NEIGHBORHOOD);
+		doctorStreetdictionary.setStreetType(KrbConstants.StreetType.NEIGHBORHOOD);
 		doctorStreetdictionary.setParentId(pAreaId);
 		return R.ok(doctorStreetdictionaryService.list(Wrappers.query(doctorStreetdictionary)));
 	}
@@ -108,8 +108,8 @@ public class DoctorStreetdictionaryController {
     @SysLog("新增街道居委会" )
     @PostMapping
     @PreAuthorize("@pms.hasPermission('base_doctorstreetdictionary_add')" )
-	@CacheEvict(value = {EdConstants.ED_STREET_DETAILS, EdConstants.ED_STREET_DETAILS_STREET,
-			EdConstants.ED_STREET_DETAILS_NEIGHBORHOOD}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_STREET_DETAILS, KrbConstants.ED_STREET_DETAILS_STREET,
+			KrbConstants.ED_STREET_DETAILS_NEIGHBORHOOD}, allEntries = true)
 	public R save(@Valid @RequestBody DoctorStreetdictionary doctorStreetdictionary) {
 		doctorStreetdictionary.clearNoUseDTO();
     	return R.ok(doctorStreetdictionaryService.save(doctorStreetdictionary));
@@ -123,8 +123,8 @@ public class DoctorStreetdictionaryController {
     @SysLog("修改街道居委会" )
     @PutMapping
     @PreAuthorize("@pms.hasPermission('base_doctorstreetdictionary_edit')" )
-	@CacheEvict(value = {EdConstants.ED_STREET_DETAILS, EdConstants.ED_STREET_DETAILS_STREET,
-			EdConstants.ED_STREET_DETAILS_NEIGHBORHOOD}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_STREET_DETAILS, KrbConstants.ED_STREET_DETAILS_STREET,
+			KrbConstants.ED_STREET_DETAILS_NEIGHBORHOOD}, allEntries = true)
 	public R updateById(@Valid @RequestBody DoctorStreetdictionary doctorStreetdictionary) {
 		doctorStreetdictionary.clearNoUseDTO();
     	return R.ok(doctorStreetdictionaryService.updateById(doctorStreetdictionary));
@@ -138,8 +138,8 @@ public class DoctorStreetdictionaryController {
     @SysLog("删除街道居委会" )
     @DeleteMapping("/{id}" )
     @PreAuthorize("@pms.hasPermission('base_doctorstreetdictionary_del')" )
-	@CacheEvict(value = {EdConstants.ED_STREET_DETAILS, EdConstants.ED_STREET_DETAILS_STREET,
-			EdConstants.ED_STREET_DETAILS_NEIGHBORHOOD}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_STREET_DETAILS, KrbConstants.ED_STREET_DETAILS_STREET,
+			KrbConstants.ED_STREET_DETAILS_NEIGHBORHOOD}, allEntries = true)
 	public R removeById(@PathVariable String id) {
         return R.ok(doctorStreetdictionaryService.removeById(id));
     }
