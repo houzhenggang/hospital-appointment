@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.entity.DoctorInspectresource;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
-import com.kasoft.register.base.utils.EdConstants;
+import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import org.springframework.cache.annotation.CacheEvict;
@@ -49,7 +49,7 @@ public class DoctorInspectresourceController {
 	 */
 	@ApiOperation(value = "查询检查资源字典", notes = "查询检查资源字典")
 	@GetMapping("/dict")
-	@Cacheable(value = EdConstants.ED_INSPECTION_RESOURCE_DICT, unless = "#result == null")
+	@Cacheable(value = KrbConstants.ED_INSPECTION_RESOURCE_DICT, unless = "#result == null")
 	public R getInspectionResourceDict() {
 		return R.ok(doctorInspectresourceService.list(new QueryWrapper<>()));
 	}
@@ -74,7 +74,7 @@ public class DoctorInspectresourceController {
     @SysLog("新增检查资源")
     @PostMapping
     @PreAuthorize("@pms.hasPermission('base_doctorinspectresource_add')")
-	@CacheEvict(value = {EdConstants.ED_INSPECTION_RESOURCE_DICT}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_INSPECTION_RESOURCE_DICT}, allEntries = true)
 	public R save(@RequestBody DoctorInspectresource doctorInspectresource) {
         return R.ok(doctorInspectresourceService.save(doctorInspectresource));
     }
@@ -88,7 +88,7 @@ public class DoctorInspectresourceController {
     @SysLog("修改检查资源")
     @PutMapping
     @PreAuthorize("@pms.hasPermission('base_doctorinspectresource_edit')")
-	@CacheEvict(value = {EdConstants.ED_INSPECTION_RESOURCE_DICT}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_INSPECTION_RESOURCE_DICT}, allEntries = true)
 	public R updateById(@RequestBody DoctorInspectresource doctorInspectresource) {
         return R.ok(doctorInspectresourceService.updateById(doctorInspectresource));
     }
@@ -102,7 +102,7 @@ public class DoctorInspectresourceController {
     @SysLog("通过id删除检查资源")
     @DeleteMapping("/{inspResourceId}")
     @PreAuthorize("@pms.hasPermission('base_doctorinspectresource_del')")
-	@CacheEvict(value = {EdConstants.ED_INSPECTION_RESOURCE_DICT}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_INSPECTION_RESOURCE_DICT}, allEntries = true)
 	public R removeById(@PathVariable Long inspResourceId) {
         return R.ok(doctorInspectresourceService.removeById(inspResourceId));
     }

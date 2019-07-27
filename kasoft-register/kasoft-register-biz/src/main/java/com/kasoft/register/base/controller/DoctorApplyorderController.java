@@ -31,7 +31,7 @@ public class DoctorApplyorderController {
      * 分页查询
      * @param page 分页对象
      * @param doctorApplyorder 预约订单
-     * @return
+     * @return R
      */
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page")

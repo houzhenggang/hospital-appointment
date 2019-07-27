@@ -3,18 +3,17 @@ package com.kasoft.register.base.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.kasoft.register.base.entity.DoctorAreadictionary;
 import com.kasoft.register.base.entity.DoctorInspectionitem;
 import com.kasoft.register.base.service.DoctorInspectionitemService;
-import com.kasoft.register.base.utils.EdConstants;
+import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -50,7 +49,7 @@ public class DoctorInspectionitemController {
 	 */
 	@ApiOperation(value = "查询检查项目字典", notes = "查询检查项目字典")
 	@GetMapping("/dict")
-	@Cacheable(value = EdConstants.ED_INSPECTION_ITEM_DICT, unless = "#result == null")
+	@Cacheable(value = KrbConstants.ED_INSPECTION_ITEM_DICT, unless = "#result == null")
 	public R getInspectionitemDict() {
 		return R.ok(doctorInspectionitemService.list(new QueryWrapper<>()));
 	}
@@ -62,7 +61,7 @@ public class DoctorInspectionitemController {
 	 */
 	@ApiOperation(value = "根据检查类别查询检查项目", notes = "根据检查类别查询检查项目")
 	@GetMapping("/item/{inspType}")
-	@Cacheable(value = EdConstants.ED_INSPECTION_ITEM_DETAIL,  key = "#inspType", unless = "#result == null")
+	@Cacheable(value = KrbConstants.ED_INSPECTION_ITEM_DETAIL,  key = "#inspType", unless = "#result == null")
 	public R getCity(@PathVariable("inspType" ) String inspType) {
 		DoctorInspectionitem doctorInspectionitem = new DoctorInspectionitem();
 		doctorInspectionitem.setInspItemType(inspType);
@@ -89,7 +88,7 @@ public class DoctorInspectionitemController {
     @SysLog("新增检查项目" )
     @PostMapping
     @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_add')" )
-	@CacheEvict(value = {EdConstants.ED_INSPECTION_ITEM_DETAIL, EdConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_INSPECTION_ITEM_DETAIL, KrbConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
     public R save(@RequestBody DoctorInspectionitem doctorInspectionitem) {
         return R.ok(doctorInspectionitemService.save(doctorInspectionitem));
     }
@@ -103,7 +102,7 @@ public class DoctorInspectionitemController {
     @SysLog("修改检查项目" )
     @PutMapping
     @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_edit')")
-	@CacheEvict(value = {EdConstants.ED_INSPECTION_ITEM_DETAIL, EdConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_INSPECTION_ITEM_DETAIL, KrbConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
 	public R updateById(@RequestBody DoctorInspectionitem doctorInspectionitem) {
         return R.ok(doctorInspectionitemService.updateById(doctorInspectionitem));
     }
@@ -117,7 +116,7 @@ public class DoctorInspectionitemController {
     @SysLog("通过id删除检查项目" )
     @DeleteMapping("/{inspItemId}")
     @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_del')" )
-	@CacheEvict(value = {EdConstants.ED_INSPECTION_ITEM_DETAIL, EdConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_INSPECTION_ITEM_DETAIL, KrbConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
 	public R removeById(@PathVariable Long inspItemId) {
         return R.ok(doctorInspectionitemService.removeById(inspItemId));
     }
