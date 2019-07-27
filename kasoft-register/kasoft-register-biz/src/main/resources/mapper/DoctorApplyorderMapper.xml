@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kasoft.register.base.mapper.DoctorApplyorderMapper">
+
+  <resultMap id="doctorApplyorderMap" type="com.kasoft.register.base.entity.DoctorApplyorder">
+                  <id property="applyOrderId" column="apply_order_id"/>
+                        <result property="hospitalId" column="hospital_id"/>
+                        <result property="hospitalName" column="hospital_name"/>
+                        <result property="hospitalPhone" column="hospital_phone"/>
+                        <result property="hospitalAddr" column="hospital_addr"/>
+                        <result property="userId" column="user_id"/>
+                        <result property="userName" column="user_name"/>
+                        <result property="userIdcard" column="user_idcard"/>
+                        <result property="userPhone" column="user_phone"/>
+                        <result property="insptItemId" column="inspt_item_id"/>
+                        <result property="insptItemName" column="inspt_item_name"/>
+                        <result property="insptResourceId" column="inspt_resource_id"/>
+                        <result property="feeTotal" column="fee_total"/>
+                        <result property="quantity" column="quantity"/>
+                        <result property="applyTime" column="apply_time"/>
+                        <result property="detailTime" column="detail_time"/>
+                        <result property="remark" column="remark"/>
+                        <result property="orderState" column="order_state"/>
+                        <result property="createTime" column="create_time"/>
+                        <result property="updateTime" column="update_time"/>
+                        <result property="version" column="version"/>
+                        <result property="delFlag" column="del_flag"/>
+            </resultMap>
+</mapper>
