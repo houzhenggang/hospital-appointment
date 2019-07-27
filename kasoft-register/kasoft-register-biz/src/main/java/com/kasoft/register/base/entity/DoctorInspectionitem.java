@@ -1,4 +1,3 @@
-
 package com.kasoft.register.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;

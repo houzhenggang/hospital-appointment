@@ -1,19 +1,3 @@
-/*
- *    Copyright (c) 2018-2025, lengleng All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
- * Neither the name of the pig4cloud.com developer nor the names of its
- * contributors may be used to endorse or promote products derived from
- * this software without specific prior written permission.
- * Author: lengleng (wangiegie@gmail.com)
- */
 package com.kasoft.register.base.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -52,7 +36,7 @@ public class DoctorAreadictionaryController {
      * 分页查询
      * @param page 分页对象
      * @param doctorAreadictionary 地区字典
-     * @return
+     * @return R
      */
     @GetMapping("/page" )
     public R getDoctorAreadictionaryPage(Page page, DoctorAreadictionary doctorAreadictionary) {
@@ -61,7 +45,7 @@ public class DoctorAreadictionaryController {
 
 	/**
 	 * 获取全部地区树
-	 * @return
+	 * @return R
 	 */
 	@ApiOperation(value = "获取全部地区树", notes = "获取全部地区树")
 	@GetMapping("/allTree" )
@@ -71,7 +55,7 @@ public class DoctorAreadictionaryController {
 
 	/**
 	 * 获取全部省
-	 * @return
+	 * @return R
 	 */
 	@ApiOperation(value = "获取全部省", notes = "获取全部省")
 	@GetMapping("/province" )
@@ -85,7 +69,7 @@ public class DoctorAreadictionaryController {
 	/**
 	 * 获取省下的全部市
 	 * @param pAreaId 省
-	 * @return
+	 * @return R
 	 */
 	@ApiOperation(value = "获取省下的全部市", notes = "获取省下的全部市")
 	@GetMapping("/city/{pAreaId}" )
@@ -100,7 +84,7 @@ public class DoctorAreadictionaryController {
 	/**
 	 * 获取市下的全部区
 	 * @param pAreaId 市
-	 * @return
+	 * @return R
 	 */
 	@ApiOperation(value = "获取市下的全部区", notes = "获取市下的全部区")
 	@GetMapping("/area/{pAreaId}" )
