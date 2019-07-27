@@ -39,7 +39,6 @@ public class DoctorApplyorderController {
         return R.ok(doctorApplyorderService.page(page, Wrappers.query(doctorApplyorder)));
     }
 
-
     /**
      * 通过id查询预约订单
      * @param applyOrderId id
@@ -59,7 +58,7 @@ public class DoctorApplyorderController {
     @ApiOperation(value = "新增预约订单", notes = "新增预约订单")
     @SysLog("新增预约订单")
     @PostMapping
-    @PreAuthorize("@pms.hasPermission('generator_doctorapplyorder_add')")
+    @PreAuthorize("@pms.hasPermission('base_doctorapplyorder_add')")
     public R save(@RequestBody DoctorApplyorder doctorApplyorder) {
         return R.ok(doctorApplyorderService.save(doctorApplyorder));
     }
@@ -72,7 +71,7 @@ public class DoctorApplyorderController {
     @ApiOperation(value = "修改预约订单", notes = "修改预约订单")
     @SysLog("修改预约订单")
     @PutMapping
-    @PreAuthorize("@pms.hasPermission('generator_doctorapplyorder_edit')")
+    @PreAuthorize("@pms.hasPermission('base_doctorapplyorder_edit')")
     public R updateById(@RequestBody DoctorApplyorder doctorApplyorder) {
         return R.ok(doctorApplyorderService.updateById(doctorApplyorder));
     }
@@ -85,7 +84,7 @@ public class DoctorApplyorderController {
     @ApiOperation(value = "通过id删除预约订单", notes = "通过id删除预约订单")
     @SysLog("通过id删除预约订单")
     @DeleteMapping("/{applyOrderId}")
-    @PreAuthorize("@pms.hasPermission('generator_doctorapplyorder_del')")
+    @PreAuthorize("@pms.hasPermission('base_doctorapplyorder_del')")
     public R removeById(@PathVariable Long applyOrderId) {
         return R.ok(doctorApplyorderService.removeById(applyOrderId));
     }

@@ -1,11 +1,16 @@
 package com.kasoft.register.base.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.kasoft.register.base.entity.DoctorAreadictionary;
 import com.kasoft.register.base.entity.DoctorInspectionitem;
 import com.kasoft.register.base.service.DoctorInspectionitemService;
+import com.kasoft.register.base.utils.EdConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,6 +44,30 @@ public class DoctorInspectionitemController {
         return R.ok(doctorInspectionitemService.page(page, Wrappers.query(doctorInspectionitem)));
     }
 
+	/**
+	 * 查询检查项目字典
+	 * @return R
+	 */
+	@ApiOperation(value = "查询检查项目字典", notes = "查询检查项目字典")
+	@GetMapping("/dict")
+	@Cacheable(value = EdConstants.ED_INSPECTION_ITEM_DICT, unless = "#result == null")
+	public R getInspectionitemDict() {
+		return R.ok(doctorInspectionitemService.list(new QueryWrapper<>()));
+	}
+
+	/**
+	 * 根据检查类别查询检查项目
+	 * @param inspType 检查类别
+	 * @return R
+	 */
+	@ApiOperation(value = "根据检查类别查询检查项目", notes = "根据检查类别查询检查项目")
+	@GetMapping("/item/{inspType}")
+	@Cacheable(value = EdConstants.ED_INSPECTION_ITEM_DETAIL,  key = "#inspType", unless = "#result == null")
+	public R getCity(@PathVariable("inspType" ) String inspType) {
+		DoctorInspectionitem doctorInspectionitem = new DoctorInspectionitem();
+		doctorInspectionitem.setInspItemType(inspType);
+		return R.ok(doctorInspectionitemService.list(Wrappers.query(doctorInspectionitem)),"查询成功!");
+	}
 
     /**
      * 通过id查询检查项目
@@ -59,7 +88,8 @@ public class DoctorInspectionitemController {
     @ApiOperation(value = "新增检查项目", notes = "新增检查项目")
     @SysLog("新增检查项目" )
     @PostMapping
-    @PreAuthorize("@pms.hasPermission('kasoft-register-biz_doctorinspectionitem_add')" )
+    @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_add')" )
+	@CacheEvict(value = {EdConstants.ED_INSPECTION_ITEM_DETAIL, EdConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
     public R save(@RequestBody DoctorInspectionitem doctorInspectionitem) {
         return R.ok(doctorInspectionitemService.save(doctorInspectionitem));
     }
@@ -72,8 +102,9 @@ public class DoctorInspectionitemController {
     @ApiOperation(value = "修改检查项目", notes = "修改检查项目")
     @SysLog("修改检查项目" )
     @PutMapping
-    @PreAuthorize("@pms.hasPermission('kasoft-register-biz_doctorinspectionitem_edit')" )
-    public R updateById(@RequestBody DoctorInspectionitem doctorInspectionitem) {
+    @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_edit')")
+	@CacheEvict(value = {EdConstants.ED_INSPECTION_ITEM_DETAIL, EdConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
+	public R updateById(@RequestBody DoctorInspectionitem doctorInspectionitem) {
         return R.ok(doctorInspectionitemService.updateById(doctorInspectionitem));
     }
 
@@ -85,8 +116,9 @@ public class DoctorInspectionitemController {
     @ApiOperation(value = "通过id删除检查项目", notes = "通过id删除检查项目")
     @SysLog("通过id删除检查项目" )
     @DeleteMapping("/{inspItemId}")
-    @PreAuthorize("@pms.hasPermission('kasoft-register-biz_doctorinspectionitem_del')" )
-    public R removeById(@PathVariable Long inspItemId) {
+    @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_del')" )
+	@CacheEvict(value = {EdConstants.ED_INSPECTION_ITEM_DETAIL, EdConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
+	public R removeById(@PathVariable Long inspItemId) {
         return R.ok(doctorInspectionitemService.removeById(inspItemId));
     }
 

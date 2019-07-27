@@ -67,6 +67,27 @@ public class EdConstants {
 	public static final String ROLE_DEFAULT_USER = "ROLE_DEFAULT_USER";
 
 	public static final String ALL_KEY = "{{key}}";
+
+	/**
+	 * 检查项目字典信息缓存
+	 */
+	public static final String ED_INSPECTION_ITEM_DICT = "ed_inspection_item:dict";
+
+	/**
+	 * 检查项目信息缓存
+	 */
+	public static final String ED_INSPECTION_ITEM_DETAIL = "ed_inspection_item_details:item";
+
+	/**
+	 * 检查项目字典信息缓存
+	 */
+	public static final String ED_INSPECTION_RESOURCE_DICT = "ed_inspection_resource:dict";
+
+	/**
+	 * 检查资源信息缓存
+	 */
+	public static final String ED_INSPECTION_RESOURCE_DETAIL = "ed_inspection_resource_details";
+
 	/**
 	 * 地区类型
 	 */
@@ -296,4 +317,5 @@ public class EdConstants {
 		 */
 		String DOCKER = "1";
 	}
+
 }
