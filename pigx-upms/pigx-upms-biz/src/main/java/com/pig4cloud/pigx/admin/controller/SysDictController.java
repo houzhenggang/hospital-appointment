@@ -31,6 +31,7 @@ import com.pig4cloud.pigx.common.core.constant.CacheConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -104,6 +105,19 @@ public class SysDictController {
 		return R.ok(sysDictService.save(sysDict));
 	}
 
+
+	/**
+	 * 通过查找全部字典
+	 *
+	 * @return     通过查找全部字典
+	 */
+	@GetMapping("/type-all")
+	@ApiOperation(value="查找全部字典", notes="查找全部字典")
+	@Cacheable(value = CacheConstants.DICT_ALL_DETAILS)
+	public R getDictAll() {
+		return R.ok(sysDictItemService.listDictAll());
+	}
+
 	/**
 	 * 删除字典，并且清除字典缓存
 	 *
@@ -162,7 +176,7 @@ public class SysDictController {
 	 */
 	@SysLog("新增字典项")
 	@PostMapping("/item")
-	@CacheEvict(value = CacheConstants.DICT_DETAILS, allEntries = true)
+	@CacheEvict(value = {CacheConstants.DICT_DETAILS, CacheConstants.DICT_ALL_DETAILS}, allEntries = true)
 	public R save(@RequestBody SysDictItem sysDictItem) {
 		return R.ok(sysDictItemService.save(sysDictItem));
 	}

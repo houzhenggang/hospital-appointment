@@ -18,7 +18,7 @@ package com.kasoft.register.base.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.kasoft.register.base.utils.EdConstants;
+import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import com.kasoft.register.base.entity.DoctorHospital;
@@ -65,7 +65,7 @@ public class DoctorHospitalController {
 	 */
 	@ApiOperation(value = "查询医院字典", notes = "查询医院字典")
 	@GetMapping("/dict" )
-	@Cacheable(value = EdConstants.ED_HOSPITAL_DETAILS_DICT, unless = "#result == null ")
+	@Cacheable(value = KrbConstants.ED_HOSPITAL_DETAILS_DICT, unless = "#result == null ")
 	public R getHospitalDict() {
 		return R.ok(doctorHospitalService.getHospitalByName(null));
 	}
@@ -89,7 +89,7 @@ public class DoctorHospitalController {
     @SysLog("新增医院" )
     @PostMapping
     @PreAuthorize("@pms.hasPermission('base_doctorhospital_add')" )
-	@CacheEvict(value = {EdConstants.ED_HOSPITAL_DETAILS, EdConstants.ED_HOSPITAL_DETAILS_DICT}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_HOSPITAL_DETAILS, KrbConstants.ED_HOSPITAL_DETAILS_DICT}, allEntries = true)
 	public R save(@Valid @RequestBody DoctorHospital doctorHospital) {
 		doctorHospital.clearNoUseDTO();
 		return R.ok(doctorHospitalService.save(doctorHospital));
@@ -103,7 +103,7 @@ public class DoctorHospitalController {
     @SysLog("修改医院" )
     @PutMapping
     @PreAuthorize("@pms.hasPermission('base_doctorhospital_edit')" )
-	@CacheEvict(value = {EdConstants.ED_HOSPITAL_DETAILS, EdConstants.ED_HOSPITAL_DETAILS_DICT}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_HOSPITAL_DETAILS, KrbConstants.ED_HOSPITAL_DETAILS_DICT}, allEntries = true)
 	public R updateById(@Valid @RequestBody DoctorHospital doctorHospital) {
 		doctorHospital.clearNoUseDTO();
         return R.ok(doctorHospitalService.updateById(doctorHospital));
@@ -117,7 +117,7 @@ public class DoctorHospitalController {
     @SysLog("删除医院" )
     @DeleteMapping("/{id}" )
     @PreAuthorize("@pms.hasPermission('base_doctorhospital_del')" )
-	@CacheEvict(value = {EdConstants.ED_HOSPITAL_DETAILS, EdConstants.ED_HOSPITAL_DETAILS_DICT}, allEntries = true)
+	@CacheEvict(value = {KrbConstants.ED_HOSPITAL_DETAILS, KrbConstants.ED_HOSPITAL_DETAILS_DICT}, allEntries = true)
 	public R removeById(@PathVariable String id) {
         return R.ok(doctorHospitalService.removeById(id));
     }

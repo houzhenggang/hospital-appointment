@@ -20,6 +20,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.pig4cloud.pigx.admin.api.entity.SysDictItem;
 import com.pig4cloud.pigx.common.core.util.R;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 字典项
  *
@@ -43,4 +46,10 @@ public interface SysDictItemService extends IService<SysDictItem> {
 	 * @return
 	 */
 	R updateDictItem(SysDictItem item);
+
+	/**
+	 * 获取全部字典
+	 * @return
+	 */
+	Map<String, List<SysDictItem>> listDictAll();
 }

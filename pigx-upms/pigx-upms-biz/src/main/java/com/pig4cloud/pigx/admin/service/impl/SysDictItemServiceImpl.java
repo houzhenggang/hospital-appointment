@@ -16,6 +16,7 @@
  */
 package com.pig4cloud.pigx.admin.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pig4cloud.pigx.admin.api.entity.SysDict;
 import com.pig4cloud.pigx.admin.api.entity.SysDictItem;
@@ -28,6 +29,11 @@ import com.pig4cloud.pigx.common.core.util.R;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 字典项
@@ -47,7 +53,7 @@ public class SysDictItemServiceImpl extends ServiceImpl<SysDictItemMapper, SysDi
 	 * @return
 	 */
 	@Override
-	@CacheEvict(value = CacheConstants.DICT_DETAILS, allEntries = true)
+	@CacheEvict(value = {CacheConstants.DICT_DETAILS, CacheConstants.DICT_ALL_DETAILS}, allEntries = true)
 	public R removeDictItem(Integer id) {
 		//根据ID查询字典ID
 		SysDictItem dictItem = this.getById(id);
@@ -66,7 +72,7 @@ public class SysDictItemServiceImpl extends ServiceImpl<SysDictItemMapper, SysDi
 	 * @return
 	 */
 	@Override
-	@CacheEvict(value = CacheConstants.DICT_DETAILS, allEntries = true)
+	@CacheEvict(value = {CacheConstants.DICT_DETAILS, CacheConstants.DICT_ALL_DETAILS}, allEntries = true)
 	public R updateDictItem(SysDictItem item) {
 		//查询字典
 		SysDict dict = dictService.getById(item.getDictId());
@@ -75,5 +81,21 @@ public class SysDictItemServiceImpl extends ServiceImpl<SysDictItemMapper, SysDi
 			return R.failed("系统内置字典项目不能删除");
 		}
 		return R.ok(this.updateById(item));
+	}
+
+	@Override
+	public Map<String, List<SysDictItem>> listDictAll() {
+		Map<String, List<SysDictItem>> map = new HashMap<>(300);
+		List<SysDictItem> itemList = super.list();
+		itemList.forEach(item -> {
+			List<SysDictItem> list = map.get(item.getType());
+			//如果不存在新建一个
+			if(ObjectUtil.isNull(list)) {
+				list = new ArrayList<>();
+				map.put(item.getType(), list);
+			}
+			list.add(item);
+		});
+		return map;
 	}
 }

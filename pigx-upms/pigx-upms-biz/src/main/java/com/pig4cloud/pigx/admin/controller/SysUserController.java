@@ -129,7 +129,6 @@ public class SysUserController {
 	 */
 	@SysLog("添加用户")
 	@PostMapping
-	@PreAuthorize("@pms.hasPermission('sys_user_add')")
 	public R user(@RequestBody UserDTO userDto) {
 		return R.ok(userService.saveUser(userDto));
 	}

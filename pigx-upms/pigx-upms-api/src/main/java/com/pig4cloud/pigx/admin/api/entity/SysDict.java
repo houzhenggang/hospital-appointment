@@ -16,6 +16,7 @@
  */
 package com.pig4cloud.pigx.admin.api.entity;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -53,6 +54,7 @@ public class SysDict extends Model<SysDict> {
 	/**
 	 * 描述
 	 */
+	@TableField(condition = SqlCondition.LIKE)
 	@ApiModelProperty(value = "字典描述")
 	private String description;
 	/**

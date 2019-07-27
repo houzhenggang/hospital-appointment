@@ -23,6 +23,10 @@ public interface CacheConstants {
 	 */
 	String DICT_DETAILS = "dict_details";
 
+	/**
+	 * 字典全部缓存
+	 */
+	String DICT_ALL_DETAILS = "dict_all_details";
 
 	/**
 	 * oauth 客户端信息
