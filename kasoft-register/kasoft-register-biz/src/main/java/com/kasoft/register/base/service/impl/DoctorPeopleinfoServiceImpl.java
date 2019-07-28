@@ -40,7 +40,14 @@ public class DoctorPeopleinfoServiceImpl extends ServiceImpl<DoctorPeopleinfoMap
 		if(hasUserName(userDTO.getUsername())) {
 			return R.failed(false, "用户名已经存在");
 		}
-		return remoteUserService.save(userDTO);
+		remoteUserService.save(userDTO);
+		SysUser sysUser = remoteUserService.user(userDTO.getUsername()).getData();
+		DoctorPeopleinfo peopleinfo = new DoctorPeopleinfo();
+		peopleinfo.setUserId(sysUser.getUserId());
+		peopleinfo.setName(userDTO.getName());
+		peopleinfo.setSex(userDTO.getSex());
+		this.save(peopleinfo);
+		return R.ok(true, "注册成功!");
 	}
 
 	@Override

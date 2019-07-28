@@ -20,6 +20,7 @@
 package com.pig4cloud.pigx.admin.api.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -127,4 +128,12 @@ public class SysUser implements Serializable {
 	 */
 	@ApiModelProperty(value = "开源中国唯一标识")
 	private String oscId;
+
+	@ApiModelProperty(value = "真实姓名")
+	@TableField(exist = false)
+	private String name;
+
+	@ApiModelProperty(value = "性别")
+	@TableField(exist = false)
+	private String sex;
 }
