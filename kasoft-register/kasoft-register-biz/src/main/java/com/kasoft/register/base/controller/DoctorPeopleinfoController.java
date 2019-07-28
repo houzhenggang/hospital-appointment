@@ -1,5 +1,6 @@
 package com.kasoft.register.base.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pig4cloud.pigx.admin.api.dto.UserDTO;
@@ -44,13 +45,15 @@ public class DoctorPeopleinfoController {
 
     /**
      * 通过id查询居民基本信息表
-     * @param id id
+     * @param userId
      * @return R
      */
     @ApiOperation(value = "通过id查询", notes = "通过id查询")
-    @GetMapping("/{id}" )
-    public R getById(@PathVariable("id" ) String id) {
-        return R.ok(doctorPeopleinfoService.getById(id));
+    @GetMapping("/{userId}")
+    public R getById(@PathVariable("userId") String userId) {
+        return R.ok(doctorPeopleinfoService.getOne(new QueryWrapper<DoctorPeopleinfo>()
+			.eq("user_id", userId)
+		), "查询成功!");
     }
 
     /**
