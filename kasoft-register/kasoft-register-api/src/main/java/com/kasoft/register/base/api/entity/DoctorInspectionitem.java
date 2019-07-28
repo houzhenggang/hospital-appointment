@@ -29,7 +29,7 @@ public class DoctorInspectionitem extends Model<DoctorInspectionitem> {
      */
 	@TableId(value = "insp_item_id", type = IdType.UUID)
 	@ApiModelProperty(value="主键")
-    private Long inspItemId;
+    private String inspItemId;
     /**
      * 检查类别（体格检查，功能检查，化验检查）
      */
