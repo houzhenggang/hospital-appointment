@@ -26,8 +26,11 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class DoctorPeopleinfoServiceImpl extends ServiceImpl<DoctorPeopleinfoMapper, DoctorPeopleinfo> implements DoctorPeopleinfoService {
+
 	private final RemoteUserService remoteUserService;
+
 	private final RemoteSysPublicParamService remoteSysPublicParamService;
+
 	@Override
 	public R<Boolean> register(UserDTO userDTO) {
 		//添加默认角色
@@ -46,6 +49,7 @@ public class DoctorPeopleinfoServiceImpl extends ServiceImpl<DoctorPeopleinfoMap
 		peopleinfo.setUserId(sysUser.getUserId());
 		peopleinfo.setName(userDTO.getName());
 		peopleinfo.setSex(userDTO.getSex());
+		peopleinfo.setPhone(userDTO.getPhone());
 		this.save(peopleinfo);
 		return R.ok(true, "注册成功!");
 	}

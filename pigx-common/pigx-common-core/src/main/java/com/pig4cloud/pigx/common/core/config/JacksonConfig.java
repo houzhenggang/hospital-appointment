@@ -1,6 +1,7 @@
 package com.pig4cloud.pigx.common.core.config;
 
 import cn.hutool.core.date.DatePattern;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pig4cloud.pigx.common.core.jackson.PigxJavaTimeModule;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -33,6 +34,7 @@ public class JacksonConfig {
 			builder.timeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
 			builder.simpleDateFormat(DatePattern.NORM_DATETIME_PATTERN);
 			builder.modules(new PigxJavaTimeModule());
+			builder.serializationInclusion(JsonInclude.Include.NON_NULL);
 		};
 	}
 }

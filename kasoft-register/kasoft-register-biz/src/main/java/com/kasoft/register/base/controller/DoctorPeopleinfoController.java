@@ -1,8 +1,10 @@
 package com.kasoft.register.base.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pig4cloud.pigx.admin.api.dto.UserDTO;
+import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import com.kasoft.register.base.api.entity.DoctorPeopleinfo;
@@ -33,7 +35,7 @@ public class DoctorPeopleinfoController {
      * 分页查询
      * @param page 分页对象
      * @param doctorPeopleinfo 居民基本信息表
-     * @return
+     * @return R
      */
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page" )
@@ -44,13 +46,15 @@ public class DoctorPeopleinfoController {
 
     /**
      * 通过id查询居民基本信息表
-     * @param id id
+     * @param userId
      * @return R
      */
     @ApiOperation(value = "通过id查询", notes = "通过id查询")
-    @GetMapping("/{id}" )
-    public R getById(@PathVariable("id" ) String id) {
-        return R.ok(doctorPeopleinfoService.getById(id));
+    @GetMapping("/{userId}")
+    public R getById(@PathVariable("userId") String userId) {
+        return R.ok(doctorPeopleinfoService.getOne(new QueryWrapper<DoctorPeopleinfo>()
+			.eq("user_id", userId)
+		), ReturnMsgConstants.QUERY_SUCCESS);
     }
 
     /**
@@ -64,7 +68,7 @@ public class DoctorPeopleinfoController {
     @PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_add')" )
     public R save(@RequestBody DoctorPeopleinfo doctorPeopleinfo) {
     	doctorPeopleinfo.clearNoUseDTO();
-        return R.ok(doctorPeopleinfoService.save(doctorPeopleinfo));
+        return R.ok(doctorPeopleinfoService.save(doctorPeopleinfo), ReturnMsgConstants.SAVE_SUCCESS);
     }
 
     /**
@@ -75,7 +79,7 @@ public class DoctorPeopleinfoController {
     @ApiOperation(value = "修改居民基本信息表", notes = "修改居民基本信息表")
     @SysLog("修改居民基本信息表" )
     @PutMapping
-    @PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_edit')" )
+    @PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_edit')")
     public R updateById(@RequestBody DoctorPeopleinfo doctorPeopleinfo) {
 		doctorPeopleinfo.clearNoUseDTO();
         return R.ok(doctorPeopleinfoService.updateById(doctorPeopleinfo));
@@ -114,7 +118,7 @@ public class DoctorPeopleinfoController {
 	 * @return R
 	 */
 	@ApiOperation(value = "注册居民账号", notes = "注册居民账号", response = Boolean.class)
-	@SysLog("注册居民账号" )
+	@SysLog("注册居民账号")
 	@PostMapping("/register")
 	public R register(@RequestBody UserDTO userDTO) {
 		return R.ok(doctorPeopleinfoService.register(userDTO));
