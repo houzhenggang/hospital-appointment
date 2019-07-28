@@ -1,5 +1,7 @@
 package com.kasoft.register.base.controller;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -8,6 +10,7 @@ import com.kasoft.register.base.service.DoctorInspectresourceService;
 import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
+import feign.Util;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,7 +43,24 @@ public class DoctorInspectresourceController {
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page")
     public R getDoctorInspectresourcePage(Page page, DoctorInspectresource doctorInspectresource) {
-        return R.ok(doctorInspectresourceService.page(page, Wrappers.query(doctorInspectresource)));
+        return R.ok(doctorInspectresourceService.page(page, new QueryWrapper<DoctorInspectresource>()
+			.like(StrUtil.isNotBlank(doctorInspectresource.getInspItemName()), "insp_item_name", doctorInspectresource.getInspItemName())
+			.ge(ObjectUtil.isNotNull(doctorInspectresource.getStartTime()), "start_time", doctorInspectresource.getStartTime())
+			.le(ObjectUtil.isNotNull(doctorInspectresource.getEndTime()), "end_time", doctorInspectresource.getEndTime())
+		));
+    }
+
+    /**
+     * 列表查询
+     * @param doctorInspectresource 检查资源
+     * @return R
+     */
+    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @GetMapping("/list")
+    public R getDoctorInspectresourceList(DoctorInspectresource doctorInspectresource) {
+        return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
+			.like(StrUtil.isNotBlank(doctorInspectresource.getInspItemName()), "insp_item_name", doctorInspectresource.getInspItemName())
+		));
     }
 
 	/**

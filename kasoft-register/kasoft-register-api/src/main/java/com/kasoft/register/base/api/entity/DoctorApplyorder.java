@@ -31,7 +31,7 @@ public class DoctorApplyorder extends Model<DoctorApplyorder> {
      */
 	@TableId(value = "apply_order_id", type = IdType.UUID)
 	@ApiModelProperty(value="主键")
-    private Long applyOrderId;
+    private String applyOrderId;
     /**
      * 机构ID
      */
