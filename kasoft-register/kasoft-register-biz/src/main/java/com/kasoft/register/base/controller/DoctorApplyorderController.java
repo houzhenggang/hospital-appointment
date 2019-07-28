@@ -85,7 +85,7 @@ public class DoctorApplyorderController {
     @SysLog("通过id删除预约订单")
     @DeleteMapping("/{applyOrderId}")
     @PreAuthorize("@pms.hasPermission('base_doctorapplyorder_del')")
-    public R removeById(@PathVariable Long applyOrderId) {
+    public R removeById(@PathVariable String applyOrderId) {
         return R.ok(doctorApplyorderService.removeById(applyOrderId));
     }
 

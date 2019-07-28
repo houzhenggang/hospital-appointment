@@ -75,7 +75,7 @@ public class DoctorInspectionitemController {
      */
     @ApiOperation(value = "通过id查询", notes = "通过id查询")
     @GetMapping("/{inspItemId}" )
-    public R getById(@PathVariable("inspItemId" ) Long inspItemId) {
+    public R getById(@PathVariable("inspItemId" ) String inspItemId) {
         return R.ok(doctorInspectionitemService.getById(inspItemId));
     }
 
@@ -117,7 +117,7 @@ public class DoctorInspectionitemController {
     @DeleteMapping("/{inspItemId}")
     @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_del')" )
 	@CacheEvict(value = {KrbConstants.ED_INSPECTION_ITEM_DETAIL, KrbConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
-	public R removeById(@PathVariable Long inspItemId) {
+	public R removeById(@PathVariable String inspItemId) {
         return R.ok(doctorInspectionitemService.removeById(inspItemId));
     }
 

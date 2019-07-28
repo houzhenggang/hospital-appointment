@@ -123,7 +123,7 @@ public class DoctorInspectresourceController {
     @DeleteMapping("/{inspResourceId}")
     @PreAuthorize("@pms.hasPermission('base_doctorinspectresource_del')")
 	@CacheEvict(value = {KrbConstants.ED_INSPECTION_RESOURCE_DICT}, allEntries = true)
-	public R removeById(@PathVariable Long inspResourceId) {
+	public R removeById(@PathVariable String inspResourceId) {
         return R.ok(doctorInspectresourceService.removeById(inspResourceId));
     }
 
