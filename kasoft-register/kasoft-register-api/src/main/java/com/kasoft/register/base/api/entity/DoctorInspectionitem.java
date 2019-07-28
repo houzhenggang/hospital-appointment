@@ -61,4 +61,4 @@ public class DoctorInspectionitem extends Model<DoctorInspectionitem> {
      */
     @ApiModelProperty(value="乐观锁字段")
     private Integer version;
-    }
+}

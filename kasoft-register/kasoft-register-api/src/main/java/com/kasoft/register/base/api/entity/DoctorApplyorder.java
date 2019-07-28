@@ -36,7 +36,7 @@ public class DoctorApplyorder extends Model<DoctorApplyorder> {
      * 机构ID
      */
     @ApiModelProperty(value="机构ID")
-    private Integer hospitalId;
+    private String hospitalId;
     /**
      * 机构名称
      */
@@ -56,7 +56,7 @@ public class DoctorApplyorder extends Model<DoctorApplyorder> {
      * 预约人ID
      */
     @ApiModelProperty(value="预约人ID")
-    private Integer userId;
+    private String userId;
     /**
      * 预约人姓名
      */
@@ -76,7 +76,7 @@ public class DoctorApplyorder extends Model<DoctorApplyorder> {
      * 检查项目ID
      */
     @ApiModelProperty(value="检查项目ID")
-    private Integer insptItemId;
+    private String insptItemId;
     /**
      * 预约检查项目名称
      */
@@ -86,7 +86,8 @@ public class DoctorApplyorder extends Model<DoctorApplyorder> {
      * 检查资源ID
      */
     @ApiModelProperty(value="检查资源ID")
-    private Integer insptResourceId;
+    private String insptResourceId;
+
     /**
      * 检查费用
      */

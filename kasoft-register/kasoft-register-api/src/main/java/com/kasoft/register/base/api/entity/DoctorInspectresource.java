@@ -34,6 +34,13 @@ public class DoctorInspectresource extends Model<DoctorInspectresource> {
 	@TableId(value = "insp_resource_id", type = IdType.UUID)
 	@ApiModelProperty(value="主键")
     private String inspResourceId;
+
+	/**
+	 * 医院ID
+	 */
+	@ApiModelProperty(value="医院ID")
+	private String hospitalId;
+
 	/**
      * 医院名称
      */
@@ -50,7 +57,7 @@ public class DoctorInspectresource extends Model<DoctorInspectresource> {
      * 检查项目ID
      */
     @ApiModelProperty(value="检查项目ID")
-    private Integer inspItemId;
+    private String inspItemId;
 
     /**
      * 检查项目名称
