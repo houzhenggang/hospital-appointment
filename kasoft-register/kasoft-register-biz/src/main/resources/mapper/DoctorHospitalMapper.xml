@@ -52,7 +52,7 @@
 
 	<select id="getHospitalByName" parameterType="String" resultType="com.kasoft.register.base.api.entity.DoctorHospital">
 		SELECT
-			t.id,
+			t.hospital_id as hospitalId,
 			t.`name`
 		FROM
 			kasoft_doctor_hospital t

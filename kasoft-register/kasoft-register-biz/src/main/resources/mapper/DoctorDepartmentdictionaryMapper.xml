@@ -41,7 +41,7 @@
 
 	<select id="getDepartmentDictByHospital" parameterType="String" resultType="com.kasoft.register.base.api.entity.DoctorDepartmentdictionary">
 		SELECT
-		t.id,
+		t.department_id as departmentId,
 		t.`name`
 		FROM
 		kasoft_doctor_departmentdictionary t
