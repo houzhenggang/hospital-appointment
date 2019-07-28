@@ -116,7 +116,7 @@ public class DoctorPeopleinfoController {
 	@ApiOperation(value = "注册居民账号", notes = "注册居民账号", response = Boolean.class)
 	@SysLog("注册居民账号" )
 	@PostMapping("/register")
-	public R register(@Valid @RequestBody UserDTO userDTO) {
+	public R register(@RequestBody UserDTO userDTO) {
 		return R.ok(doctorPeopleinfoService.register(userDTO));
 	}
 

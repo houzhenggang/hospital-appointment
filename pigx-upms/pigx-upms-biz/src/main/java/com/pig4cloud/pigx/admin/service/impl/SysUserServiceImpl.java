@@ -82,14 +82,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		sysUser.setDelFlag(CommonConstants.STATUS_NORMAL);
 		sysUser.setPassword(ENCODER.encode(userDto.getPassword()));
 		baseMapper.insert(sysUser);
-		List<SysUserRole> userRoleList = userDto.getRole()
-				.stream().map(roleId -> {
-					SysUserRole userRole = new SysUserRole();
-					userRole.setUserId(sysUser.getUserId());
-					userRole.setRoleId(roleId);
-					return userRole;
-				}).collect(Collectors.toList());
-		return sysUserRoleService.saveBatch(userRoleList);
+//		List<SysUserRole> userRoleList = userDto.getRole()
+//				.stream().map(roleId -> {
+//					SysUserRole userRole = new SysUserRole();
+//					userRole.setUserId(sysUser.getUserId());
+//					userRole.setRoleId(roleId);
+//					return userRole;
+//				}).collect(Collectors.toList());
+//		return sysUserRoleService.saveBatch(userRoleList);
+		return true;
 	}
 
 	/**
