@@ -74,6 +74,13 @@ public class DoctorInspectresource extends Model<DoctorInspectresource> {
      */
     @ApiModelProperty(value="数量")
     private Integer quantity;
+
+	/**
+	 * 时间段
+	 */
+	@ApiModelProperty(value="时间段")
+	private String period;
+
     /**
      * 开始时间
      */
