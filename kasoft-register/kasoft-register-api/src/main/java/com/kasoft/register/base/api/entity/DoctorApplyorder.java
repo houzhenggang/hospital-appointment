@@ -52,26 +52,27 @@ public class DoctorApplyorder extends Model<DoctorApplyorder> {
      */
     @ApiModelProperty(value="机构地址")
     private String hospitalAddr;
+
     /**
      * 预约人ID
      */
     @ApiModelProperty(value="预约人ID")
-    private String userId;
+    private String peopleId;
     /**
      * 预约人姓名
      */
     @ApiModelProperty(value="预约人姓名")
-    private String userName;
+    private String peopleName;
     /**
      * 预约人身份证号
      */
     @ApiModelProperty(value="预约人身份证号")
-    private String userIdcard;
+    private String peopleIdcard;
     /**
      * 预约人手机号
      */
     @ApiModelProperty(value="预约人手机号")
-    private String userPhone;
+    private String peoplePhone;
     /**
      * 检查项目ID
      */
