@@ -77,17 +77,17 @@ public class DoctorApplyorder extends Model<DoctorApplyorder> {
      * 检查项目ID
      */
     @ApiModelProperty(value="检查项目ID")
-    private String insptItemId;
+    private String inspItemId;
     /**
      * 预约检查项目名称
      */
     @ApiModelProperty(value="预约检查项目名称")
-    private String insptItemName;
+    private String inspItemName;
     /**
      * 检查资源ID
      */
     @ApiModelProperty(value="检查资源ID")
-    private String insptResourceId;
+    private String inspResourceId;
 
     /**
      * 检查费用
