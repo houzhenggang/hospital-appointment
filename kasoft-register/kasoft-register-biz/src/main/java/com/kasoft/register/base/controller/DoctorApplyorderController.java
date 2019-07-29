@@ -46,7 +46,7 @@ public class DoctorApplyorderController {
      */
     @ApiOperation(value = "通过id查询", notes = "通过id查询")
     @GetMapping("/{applyOrderId}")
-    public R getById(@PathVariable("applyOrderId") Long applyOrderId) {
+    public R getById(@PathVariable("applyOrderId") String applyOrderId) {
         return R.ok(doctorApplyorderService.getById(applyOrderId));
     }
 
