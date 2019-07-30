@@ -114,11 +114,13 @@ public class DoctorApplyorder extends Model<DoctorApplyorder> {
      */
     @ApiModelProperty(value="备注或说明")
     private String remark;
+
     /**
      * 订单状态
      */
     @ApiModelProperty(value="订单状态")
-    private Integer orderState;
+    private String orderState;
+
     /**
      * 创建时间
      */
