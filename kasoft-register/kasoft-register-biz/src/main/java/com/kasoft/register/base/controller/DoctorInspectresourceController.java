@@ -37,16 +37,16 @@ public class DoctorInspectresourceController {
     /**
      * 分页查询
      * @param page 分页对象
-     * @param doctorInspectresource 检查资源
+     * @param args 参数
      * @return R
      */
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page")
-    public R getDoctorInspectresourcePage(Page page, DoctorInspectresource doctorInspectresource) {
+    public R getDoctorInspectresourcePage(Page page, InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.page(page, new QueryWrapper<DoctorInspectresource>()
-			.like(StrUtil.isNotBlank(doctorInspectresource.getInspItemName()), "insp_item_name", doctorInspectresource.getInspItemName())
-			.ge(ObjectUtil.isNotNull(doctorInspectresource.getStartTime()), "start_time", doctorInspectresource.getStartTime())
-			.le(ObjectUtil.isNotNull(doctorInspectresource.getEndTime()), "end_time", doctorInspectresource.getEndTime())
+			.like(StrUtil.isNotBlank(args.getInspItemName()), "insp_item_name", args.getInspItemName())
+			.ge(ObjectUtil.isNotNull(args.getStartTime()), "start_time", args.getStartTime())
+			.le(ObjectUtil.isNotNull(args.getEndTime()), "end_time", args.getEndTime())
 		));
     }
 
