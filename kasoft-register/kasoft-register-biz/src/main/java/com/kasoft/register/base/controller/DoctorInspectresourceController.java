@@ -3,7 +3,6 @@ package com.kasoft.register.base.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
 import com.kasoft.register.base.api.vo.InspSourcesVO;
@@ -12,16 +11,13 @@ import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
-import feign.Util;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 
 /**
@@ -92,8 +88,9 @@ public class DoctorInspectresourceController {
     public R getDoctorInspectresourceGroupDetail(InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
 				.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap,period")
-				.between("insp_item_date", args.getStartDate(), args.getEndDate())
+				.eq("insp_item_date", args.getQueryDate())
 				.eq("insp_item_ap", args.getInspItemAp())
+				.groupBy("insp_item_date,insp_item_week,insp_item_ap,period")
 		), ReturnMsgConstants.QUERY_SUCCESS);
     }
 

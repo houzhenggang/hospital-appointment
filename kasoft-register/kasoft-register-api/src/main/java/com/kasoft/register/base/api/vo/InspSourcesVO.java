@@ -1,6 +1,5 @@
 package com.kasoft.register.base.api.vo;
 
-import com.kasoft.register.base.api.entity.DoctorDoctorinfo;
 import lombok.Data;
 
 /**
@@ -8,7 +7,9 @@ import lombok.Data;
  * @author charlie
  */
 @Data
-public class InspSourcesVO extends DoctorDoctorinfo {
+public class InspSourcesVO {
+
+	private String queryDate;
 
 	private String startDate;
 
