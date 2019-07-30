@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -76,9 +75,27 @@ public class DoctorInspectresource extends Model<DoctorInspectresource> {
     private Integer quantity;
 
 	/**
-	 * 时间段
+	 * 预约日期
 	 */
-	@ApiModelProperty(value="时间段")
+	@ApiModelProperty(value="预约日期")
+	private String inspItemDate;
+
+	/**
+	 * 预约星期
+	 */
+	@ApiModelProperty(value="预约星期")
+	private String inspItemWeek;
+
+	/**
+	 * 预约上下午
+	 */
+	@ApiModelProperty(value="预约上下午")
+	private String inspItemAp;
+
+	/**
+	 * 预约时间段
+	 */
+	@ApiModelProperty(value="预约时间段")
 	private String period;
 
     /**
