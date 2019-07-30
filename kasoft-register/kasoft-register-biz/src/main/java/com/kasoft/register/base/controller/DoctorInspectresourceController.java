@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
+import com.kasoft.register.base.api.vo.InspSourcesVO;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
 import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
@@ -73,12 +74,10 @@ public class DoctorInspectresourceController {
      */
     @ApiOperation(value = "分组查询头部信息", notes = "分组查询头部信息")
     @GetMapping("/list/group")
-    public R getDoctorInspectresourceGroupList(Map<String, String> args) {
-    	String startDate = args.get("startDate");
-    	String endDate = args.get("endDate");
+    public R getDoctorInspectresourceGroupList(InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
 			.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap")
-			.between("insp_item_date", startDate, endDate)
+			.between("insp_item_date", args.getStartDate(), args.getEndDate())
 				.groupBy("insp_item_date,insp_item_week,insp_item_ap")
 		),  ReturnMsgConstants.QUERY_SUCCESS);
     }
@@ -90,14 +89,11 @@ public class DoctorInspectresourceController {
      */
     @ApiOperation(value = "分组查询详情信息", notes = "分组查询详情信息")
     @GetMapping("/detail/group")
-    public R getDoctorInspectresourceGroupDetail(Map<String, String> args) {
-		String startDate = args.get("startDate");
-		String endDate = args.get("endDate");
-		String inspItemAp = args.get("inspItemAp");
+    public R getDoctorInspectresourceGroupDetail(InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
 				.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap,period")
-				.between("insp_item_date", startDate, endDate)
-				.eq("insp_item_ap", inspItemAp)
+				.between("insp_item_date", args.getStartDate(), args.getEndDate())
+				.eq("insp_item_ap", args.getInspItemAp())
 		), ReturnMsgConstants.QUERY_SUCCESS);
     }
 
