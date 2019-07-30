@@ -16,4 +16,13 @@ public class InspSourcesVO {
 	private String endDate;
 
 	private String inspItemAp;
+
+	private String inspItemName;
+
+	private String startTime;
+
+	private String endTime;
+
+	private String hospitalId;
+
 }

@@ -52,14 +52,17 @@ public class DoctorInspectresourceController {
 
     /**
      * 列表查询
-     * @param doctorInspectresource 检查资源
+     * @param args 检查资源
      * @return R
      */
-    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @ApiOperation(value = "查询", notes = "查询")
     @GetMapping("/list")
-    public R getDoctorInspectresourceList(DoctorInspectresource doctorInspectresource) {
+    public R getDoctorInspectresourceList(InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
-			.like(StrUtil.isNotBlank(doctorInspectresource.getInspItemName()), "insp_item_name", doctorInspectresource.getInspItemName())
+			.like(StrUtil.isNotBlank(args.getInspItemName()), "insp_item_name", args.getInspItemName())
+				.ge(StrUtil.isNotBlank(args.getStartTime()), "start_time", args.getStartTime())
+				.le(StrUtil.isNotBlank(args.getEndTime()), "end_time", args.getEndTime())
+				.eq(StrUtil.isNotBlank(args.getHospitalId()), "hospital_id", args.getHospitalId())
 		));
     }
 
