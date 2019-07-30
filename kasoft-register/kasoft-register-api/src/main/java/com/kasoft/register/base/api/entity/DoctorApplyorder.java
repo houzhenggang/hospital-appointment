@@ -108,7 +108,7 @@ public class DoctorApplyorder extends Model<DoctorApplyorder> {
      * 详细时间
      */
     @ApiModelProperty(value="详细时间")
-    private LocalDateTime detailTime;
+    private String detailTime;
     /**
      * 备注或说明
      */
