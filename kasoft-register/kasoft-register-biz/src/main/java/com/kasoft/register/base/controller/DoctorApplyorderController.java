@@ -61,7 +61,7 @@ public class DoctorApplyorderController {
     @PreAuthorize("@pms.hasPermission('base_doctorapplyorder_add')")
     public R save(@RequestBody DoctorApplyorder doctorApplyorder) {
 		doctorApplyorderService.addApplyorder(doctorApplyorder);
-        return R.ok();
+        return R.ok(doctorApplyorder);
     }
 
     /**
