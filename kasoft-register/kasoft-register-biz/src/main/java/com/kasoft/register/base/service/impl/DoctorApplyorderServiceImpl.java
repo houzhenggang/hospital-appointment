@@ -6,6 +6,7 @@ import com.kasoft.register.base.api.entity.DoctorInspectresource;
 import com.kasoft.register.base.mapper.DoctorApplyorderMapper;
 import com.kasoft.register.base.service.DoctorApplyorderService;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
+import com.pig4cloud.pigx.common.core.exception.CheckedException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,9 +28,15 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void addApplyorder(DoctorApplyorder doctorApplyorder) {
+
+		DoctorInspectresource quInspectresource = doctorInspectresourceService.getById(doctorApplyorder.getInspResourceId());
+		if (quInspectresource == null) {
+			throw new CheckedException("资源不存在!");
+		}
 		doctorApplyorderService.save(doctorApplyorder);
 		DoctorInspectresource upInspectresource = new DoctorInspectresource();
-//		upInspectresource
-//		doctorInspectresourceService.updateById();
+		upInspectresource.setInspResourceId(doctorApplyorder.getInspResourceId());
+		upInspectresource.setQuantity(quInspectresource.getQuantity() - 1);
+		doctorInspectresourceService.updateById(upInspectresource);
 	}
 }
