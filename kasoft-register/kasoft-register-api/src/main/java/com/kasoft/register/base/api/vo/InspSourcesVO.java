@@ -17,6 +17,8 @@ public class InspSourcesVO {
 
 	private String inspItemAp;
 
+	private String inspItemId;
+
 	private String inspItemName;
 
 	private String startTime;

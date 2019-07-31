@@ -64,6 +64,7 @@ public class DoctorInspectresourceController {
     public R getDoctorInspectresourceList(InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
 			.like(StrUtil.isNotBlank(args.getInspItemName()), "insp_item_name", args.getInspItemName())
+			.eq(StrUtil.isNotBlank(args.getInspItemId()), "insp_item_id", args.getInspItemId())
 				.ge(StrUtil.isNotBlank(args.getStartTime()), "start_time", args.getStartTime())
 				.le(StrUtil.isNotBlank(args.getEndTime()), "end_time", args.getEndTime())
 				.eq(StrUtil.isNotBlank(args.getHospitalId()), "hospital_id", args.getHospitalId())
@@ -81,6 +82,7 @@ public class DoctorInspectresourceController {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
 			.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap")
 			.between("insp_item_date", args.getStartDate(), args.getEndDate())
+				.eq(StrUtil.isNotBlank(args.getInspItemId()), "insp_item_id", args.getInspItemId())
 				.eq(StrUtil.isNotBlank(args.getHospitalId()), "hospital_id", args.getHospitalId())
 				.groupBy("insp_item_date,insp_item_week,insp_item_ap")
 				.orderByAsc("insp_item_date,insp_item_week,insp_item_ap")
