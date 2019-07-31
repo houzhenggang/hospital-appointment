@@ -3,6 +3,7 @@ package com.kasoft.register.base.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
 import com.kasoft.register.base.api.vo.InspSourcesVO;
@@ -41,7 +42,7 @@ public class DoctorInspectresourceController {
      * @return R
      */
     @ApiOperation(value = "分页查询", notes = "分页查询")
-    @GetMapping("/page")
+    @GetMapping("/page/group")
     public R getDoctorInspectresourcePage(Page page, InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.page(page, new QueryWrapper<DoctorInspectresource>()
 				.select("SUM(quantity) as quantity,MAX(hospital_id) as hospital_id,MAX(hospital_name) as hospital_name," +
@@ -52,6 +53,18 @@ public class DoctorInspectresourceController {
 			.le(ObjectUtil.isNotNull(args.getEndTime()), "end_time", args.getEndTime())
 				.groupBy("hospital_id, insp_item_id")
 		));
+    }
+
+    /**
+     * 分页查询
+     * @param page 分页对象
+     * @param args 参数
+     * @return R
+     */
+    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @GetMapping("/page")
+    public R page(Page page, DoctorInspectresource args) {
+        return R.ok(doctorInspectresourceService.page(page, Wrappers.query(args)));
     }
 
     /**
