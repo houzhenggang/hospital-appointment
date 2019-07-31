@@ -11,4 +11,6 @@ import com.kasoft.register.base.api.entity.DoctorApplyorder;
  */
 public interface DoctorApplyorderService extends IService<DoctorApplyorder> {
 
+
+	void addApplyorder(DoctorApplyorder doctorApplyorder);
 }
