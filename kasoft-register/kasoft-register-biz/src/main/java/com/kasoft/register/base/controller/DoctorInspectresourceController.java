@@ -77,7 +77,9 @@ public class DoctorInspectresourceController {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
 			.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap")
 			.between("insp_item_date", args.getStartDate(), args.getEndDate())
+				.eq(StrUtil.isNotBlank(args.getHospitalId()), "hospital_id", args.getHospitalId())
 				.groupBy("insp_item_date,insp_item_week,insp_item_ap")
+				.orderByAsc("insp_item_date,insp_item_week,insp_item_ap")
 		),  ReturnMsgConstants.QUERY_SUCCESS);
     }
 
@@ -91,9 +93,11 @@ public class DoctorInspectresourceController {
     public R getDoctorInspectresourceGroupDetail(InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
 				.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap,period")
+				.eq(StrUtil.isNotBlank(args.getHospitalId()), "hospital_id", args.getHospitalId())
 				.eq("insp_item_date", args.getQueryDate())
 				.eq("insp_item_ap", args.getInspItemAp())
 				.groupBy("insp_item_date,insp_item_week,insp_item_ap,period")
+				.orderByAsc("insp_item_date,insp_item_week,insp_item_ap,period")
 		), ReturnMsgConstants.QUERY_SUCCESS);
     }
 
