@@ -115,7 +115,7 @@ public class DoctorInspectresourceController {
      */
     @ApiOperation(value = "通过id查询", notes = "通过id查询")
     @GetMapping("/{inspResourceId}")
-    public R getById(@PathVariable("inspResourceId") Long inspResourceId) {
+    public R getById(@PathVariable("inspResourceId") String inspResourceId) {
         return R.ok(doctorInspectresourceService.getById(inspResourceId));
     }
 
