@@ -99,6 +99,7 @@ public class SysUserController {
 	 * @return
 	 */
 	@GetMapping("/details/{username}")
+	@Inner(false)
 	public R user(@PathVariable String username) {
 		SysUser condition = new SysUser();
 		condition.setUsername(username);
