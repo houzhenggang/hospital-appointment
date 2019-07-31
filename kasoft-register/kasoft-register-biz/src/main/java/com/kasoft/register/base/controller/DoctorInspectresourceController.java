@@ -46,7 +46,7 @@ public class DoctorInspectresourceController {
         return R.ok(doctorInspectresourceService.page(page, new QueryWrapper<DoctorInspectresource>()
 				.select("SUM(quantity) as quantity,MAX(hospital_id) as hospital_phone,MAX(hospital_name) as hospital_name," +
 						"MAX(hospital_phone) as hospital_phone,MAX(insp_item_id) as insp_item_id,MAX(insp_item_name) as insp_item_name," +
-						"MAX(unitPrice) as unitPrice")
+						"MAX(unit_price) as unit_price")
 			.like(StrUtil.isNotBlank(args.getInspItemName()), "insp_item_name", args.getInspItemName())
 			.ge(ObjectUtil.isNotNull(args.getStartTime()), "start_time", args.getStartTime())
 			.le(ObjectUtil.isNotNull(args.getEndTime()), "end_time", args.getEndTime())
