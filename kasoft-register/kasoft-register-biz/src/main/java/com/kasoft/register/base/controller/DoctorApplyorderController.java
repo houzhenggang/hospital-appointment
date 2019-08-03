@@ -36,7 +36,7 @@ public class DoctorApplyorderController {
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page")
     public R getDoctorApplyorderPage(Page page, DoctorApplyorder doctorApplyorder) {
-        return R.ok(doctorApplyorderService.page(page, Wrappers.query(doctorApplyorder)));
+        return R.ok(doctorApplyorderService.page(page, Wrappers.query(doctorApplyorder).orderByDesc("create_time")));
     }
 
     /**

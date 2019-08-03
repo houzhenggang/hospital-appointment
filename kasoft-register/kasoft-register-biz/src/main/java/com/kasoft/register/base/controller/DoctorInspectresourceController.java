@@ -72,7 +72,7 @@ public class DoctorInspectresourceController {
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page")
     public R page(Page page, DoctorInspectresource args) {
-        return R.ok(doctorInspectresourceService.page(page, Wrappers.query(args)));
+        return R.ok(doctorInspectresourceService.page(page, Wrappers.query(args).orderByDesc("create_time")));
     }
 
     /**
