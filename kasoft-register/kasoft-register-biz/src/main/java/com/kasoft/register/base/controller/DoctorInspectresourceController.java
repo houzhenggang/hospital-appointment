@@ -111,7 +111,7 @@ public class DoctorInspectresourceController {
     @GetMapping("/detail/group")
     public R getDoctorInspectresourceGroupDetail(InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
-				.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap,period")
+				.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap,period,max(insp_resource_id) as insp_resource_id")
 				.eq(StrUtil.isNotBlank(args.getHospitalId()), "hospital_id", args.getHospitalId())
 				.eq("insp_item_date", args.getQueryDate())
 				.eq("insp_item_ap", args.getInspItemAp())

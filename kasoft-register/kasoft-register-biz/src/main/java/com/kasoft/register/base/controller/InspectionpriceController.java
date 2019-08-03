@@ -59,7 +59,7 @@ public class InspectionpriceController {
 	 * @param inspItemId 检查项目
 	 * @return R
 	 */
-	@ApiOperation(value = "通过id查询", notes = "通过id查询")
+	@ApiOperation(value = "通过机构和检查项目查询检查价格", notes = "通过机构和检查项目查询检查价格")
 	@GetMapping("/get/price/by/hospital/and/item")
 	public R gePricetByHospitalAndItem(@RequestParam String hospitalId,@RequestParam String inspItemId) {
 		return R.ok(inspectionpriceService.getOne(new QueryWrapper<Inspectionprice>()
