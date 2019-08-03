@@ -1,16 +1,17 @@
 package com.kasoft.register.base.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.api.entity.Inspectionprice;
+import com.kasoft.register.base.service.InspectionpriceService;
+import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
-import com.kasoft.register.base.service.InspectionpriceService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -52,6 +53,21 @@ public class InspectionpriceController {
         return R.ok(inspectionpriceService.getById(inspPriceId));
     }
 
+	/**
+	 * 通过机构和检查项目查询检查价格
+	 * @param hospitalId 机构
+	 * @param inspItemId 检查项目
+	 * @return R
+	 */
+	@ApiOperation(value = "通过id查询", notes = "通过id查询")
+	@GetMapping("/get/price/by/hospital/and/item")
+	public R gePricetByHospitalAndItem(@RequestParam String hospitalId,@RequestParam String inspItemId) {
+		return R.ok(inspectionpriceService.getOne(new QueryWrapper<Inspectionprice>()
+			.eq("hospital_id", hospitalId)
+			.eq("insp_item_id", inspItemId)
+		), ReturnMsgConstants.QUERY_SUCCESS);
+	}
+
     /**
      * 新增检查价格
      * @param inspectionprice 检查价格
@@ -62,7 +78,13 @@ public class InspectionpriceController {
     @PostMapping
     @PreAuthorize("@pms.hasPermission('base_inspectionprice_add')")
     public R save(@RequestBody Inspectionprice inspectionprice) {
-        return R.ok(inspectionpriceService.save(inspectionprice));
+		int count = inspectionpriceService.count(new QueryWrapper<Inspectionprice>()
+				.eq("hospital_id", inspectionprice.getHospitalId())
+				.eq("insp_item_id", inspectionprice.getInspItemId()));
+		if (count > 0) {
+			return R.failed("同一机构同一项目不允许多个价格!");
+		}
+		return R.ok(inspectionpriceService.save(inspectionprice));
     }
 
     /**

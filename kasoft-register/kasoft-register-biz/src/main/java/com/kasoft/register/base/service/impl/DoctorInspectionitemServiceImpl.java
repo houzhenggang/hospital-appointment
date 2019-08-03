@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kasoft.register.base.api.entity.DoctorInspectionitem;
 import com.kasoft.register.base.mapper.DoctorInspectionitemMapper;
 import com.kasoft.register.base.service.DoctorInspectionitemService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 检查项目
@@ -15,4 +18,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DoctorInspectionitemServiceImpl extends ServiceImpl<DoctorInspectionitemMapper, DoctorInspectionitem> implements DoctorInspectionitemService {
 
+	@Autowired
+	DoctorInspectionitemMapper doctorInspectionitemMapper;
+
+	@Override
+	public List<DoctorInspectionitem> queryHotInspitem() {
+		return doctorInspectionitemMapper.queryHotInspitem();
+	}
 }

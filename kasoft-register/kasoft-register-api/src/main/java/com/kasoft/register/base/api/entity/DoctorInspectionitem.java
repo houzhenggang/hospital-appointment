@@ -46,6 +46,10 @@ public class DoctorInspectionitem extends Model<DoctorInspectionitem> {
      */
     @ApiModelProperty(value="检查项目说明（比如检查前3小时不能进食）")
     private String inspItemExp;
+
+	@ApiModelProperty(value="是否热门")
+	private String hotFlag;
+
     /**
      * 创建时间
      */
