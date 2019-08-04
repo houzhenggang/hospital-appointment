@@ -32,8 +32,13 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 	public void addApplyorder(DoctorApplyorder doctorApplyorder) {
 		DoctorInspectresource quInspectresource = doctorInspectresourceService.getById(doctorApplyorder.getInspResourceId());
 		if (quInspectresource == null) {
-			throw new CheckedException("资源不存在!");
+			throw new CheckedException("检查资源不存在!");
 		}
+		if (quInspectresource.getQuantity() == 0) {
+			throw new CheckedException("该检查资源已被预约完!");
+		}
+		doctorApplyorder.setInspItemDate(quInspectresource.getInspItemDate());
+		doctorApplyorder.setPeriod(quInspectresource.getPeriod());
 		doctorApplyorderService.save(doctorApplyorder);
 		DoctorInspectresource upInspectresource = new DoctorInspectresource();
 		upInspectresource.setInspResourceId(doctorApplyorder.getInspResourceId());

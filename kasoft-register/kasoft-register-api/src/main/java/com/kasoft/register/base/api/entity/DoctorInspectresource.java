@@ -12,6 +12,7 @@ import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -79,7 +80,7 @@ public class DoctorInspectresource extends Model<DoctorInspectresource> {
 	 * 预约日期
 	 */
 	@ApiModelProperty(value="预约日期")
-	private String inspItemDate;
+	private LocalDate inspItemDate;
 
 	/**
 	 * 预约星期

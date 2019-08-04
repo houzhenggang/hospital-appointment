@@ -2,4 +2,6 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.pig4cloud.pigx.common.core.config.JacksonConfig,\
   com.pig4cloud.pigx.common.core.config.MessageSourceConfig,\
   com.pig4cloud.pigx.common.core.config.RestTemplateConfig,\
+  com.pig4cloud.pigx.common.core.jackson.StringToLocalDateTimeConverter,\
+  com.pig4cloud.pigx.common.core.jackson.StringToLocalDateConverter,\
   com.pig4cloud.pigx.common.core.util.SpringContextHolder
