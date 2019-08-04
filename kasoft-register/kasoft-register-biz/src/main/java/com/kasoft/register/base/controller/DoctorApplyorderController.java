@@ -37,7 +37,6 @@ public class DoctorApplyorderController {
      * @param doctorApplyorder 预约订单
      * @return R
      */
-    @Inner(value = false)
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page")
     public R getDoctorApplyorderPage(Page page, DoctorApplyorder doctorApplyorder,
