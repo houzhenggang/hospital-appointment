@@ -48,6 +48,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -82,18 +83,23 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		sysUser.setDelFlag(CommonConstants.STATUS_NORMAL);
 		sysUser.setPassword(ENCODER.encode(userDto.getPassword()));
 		baseMapper.insert(sysUser);
-//		List<SysUserRole> userRoleList = userDto.getRole()
-//				.stream().map(roleId -> {
-//					SysUserRole userRole = new SysUserRole();
-//					userRole.setUserId(sysUser.getUserId());
-//					userRole.setRoleId(roleId);
-//					return userRole;
-//				}).collect(Collectors.toList());
-//		return sysUserRoleService.saveBatch(userRoleList);
-		SysUserRole sysUserRole = new SysUserRole();
-		sysUserRole.setUserId(sysUser.getUserId());
-		sysUserRole.setRoleId(1);
-		return sysUserRoleService.save(sysUserRole);
+		if (userDto.getRole() == null) {
+			List<Integer> roleList = new ArrayList<>();
+			roleList.add(1);
+			userDto.setRole(roleList);
+		}
+		List<SysUserRole> userRoleList = userDto.getRole()
+				.stream().map(roleId -> {
+					SysUserRole userRole = new SysUserRole();
+					userRole.setUserId(sysUser.getUserId());
+					userRole.setRoleId(roleId);
+					return userRole;
+				}).collect(Collectors.toList());
+		return sysUserRoleService.saveBatch(userRoleList);
+//		SysUserRole sysUserRole = new SysUserRole();
+//		sysUserRole.setUserId(sysUser.getUserId());
+//		sysUserRole.setRoleId(1);
+//		return sysUserRoleService.save(sysUserRole);
 	}
 
 	/**

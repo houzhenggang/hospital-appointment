@@ -9,7 +9,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
 /**
  * @author lengleng
  * @date 2018/07/29
- * 代码生成模块
+ *
  */
 @EnablePigxSwagger2
 @SpringCloudApplication

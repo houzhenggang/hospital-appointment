@@ -8,7 +8,6 @@ import com.kasoft.register.base.service.DoctorApplyorderService;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
 import com.pig4cloud.pigx.common.core.exception.CheckedException;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,13 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2019-07-27 10:32:12
  */
 @Service
+@AllArgsConstructor
 public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMapper, DoctorApplyorder> implements DoctorApplyorderService {
 
-	@Autowired
-	private DoctorApplyorderService doctorApplyorderService;
-
-	@Autowired
-	private DoctorInspectresourceService doctorInspectresourceService;
+	private final DoctorInspectresourceService doctorInspectresourceService;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -39,7 +35,7 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 		}
 		doctorApplyorder.setInspItemDate(quInspectresource.getInspItemDate());
 		doctorApplyorder.setPeriod(quInspectresource.getPeriod());
-		doctorApplyorderService.save(doctorApplyorder);
+		this.save(doctorApplyorder);
 		DoctorInspectresource upInspectresource = new DoctorInspectresource();
 		upInspectresource.setInspResourceId(doctorApplyorder.getInspResourceId());
 		upInspectresource.setQuantity(quInspectresource.getQuantity() - 1);
