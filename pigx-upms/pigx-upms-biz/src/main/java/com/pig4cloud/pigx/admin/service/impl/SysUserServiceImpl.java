@@ -96,10 +96,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 					return userRole;
 				}).collect(Collectors.toList());
 		return sysUserRoleService.saveBatch(userRoleList);
-//		SysUserRole sysUserRole = new SysUserRole();
-//		sysUserRole.setUserId(sysUser.getUserId());
-//		sysUserRole.setRoleId(1);
-//		return sysUserRoleService.save(sysUserRole);
 	}
 
 	/**

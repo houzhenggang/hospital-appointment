@@ -121,6 +121,7 @@ public class DoctorInspectresourceController {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
 				.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap,period,max(insp_resource_id) as insp_resource_id")
 				.eq(StrUtil.isNotBlank(args.getHospitalId()), "hospital_id", args.getHospitalId())
+				.eq(StrUtil.isNotBlank(args.getInspItemId()), "insp_item_id", args.getInspItemId())
 				.eq("insp_item_date", args.getQueryDate())
 				.eq("insp_item_ap", args.getInspItemAp())
 				.groupBy("insp_item_date,insp_item_week,insp_item_ap,period")
