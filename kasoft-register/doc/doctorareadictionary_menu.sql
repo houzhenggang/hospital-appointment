@@ -2,15 +2,15 @@
 
 -- 菜单SQL
 insert into `sys_menu` ( `parent_id`, `path`, `permission`, `type`, `icon`, `del_flag`, `create_time`, `sort`, `update_time`, `name`)
-    values ( '40000', '/base/doctorinspectresource/index', '', '0', 'icon-bangzhushouji', '0', '2018-01-20 13:17:19', '8', '2018-07-29 13:38:19', '检查资源管理');
+    values ( '40000', '/base/doctorareadictionary/index', '', '0', 'icon-bangzhushouji', '0', '2018-01-20 13:17:19', '8', '2018-07-29 13:38:19', '地区字典管理');
 
 -- 按钮父菜单ID
 set @parentId = @@identity;
 
 -- 菜单对应按钮SQL
 insert into `sys_menu` ( `parent_id`, `permission`, `type`, `path`, `icon`, `del_flag`, `create_time`, `sort`, `update_time`, `name`)
-    SELECT @parentId, 'generator_doctorinspectresource_add', '1', null, '1',  '0', '2018-05-15 21:35:18', '0', '2018-07-29 13:38:59', '检查资源新增';
+    SELECT @parentId, 'base_doctorareadictionary_add', '1', null, '1',  '0', '2018-05-15 21:35:18', '0', '2018-07-29 13:38:59', '地区字典新增';
 insert into `sys_menu` ( `parent_id`, `permission`, `type`, `path`, `icon`,  `del_flag`, `create_time`, `sort`, `update_time`, `name`)
-    SELECT @parentId, 'generator_doctorinspectresource_edit', '1', null, '1',  '0', '2018-05-15 21:35:18', '1', '2018-07-29 13:38:59', '检查资源修改';
+    SELECT @parentId, 'base_doctorareadictionary_edit', '1', null, '1',  '0', '2018-05-15 21:35:18', '1', '2018-07-29 13:38:59', '地区字典修改';
 insert into `sys_menu` ( `parent_id`, `permission`, `type`, `path`, `icon`, `del_flag`, `create_time`, `sort`, `update_time`, `name`)
-    SELECT @parentId, 'generator_doctorinspectresource_del', '1', null, '1',  '0', '2018-05-15 21:35:18', '2', '2018-07-29 13:38:59', '检查资源删除';
+    SELECT @parentId, 'base_doctorareadictionary_del', '1', null, '1',  '0', '2018-05-15 21:35:18', '2', '2018-07-29 13:38:59', '地区字典删除';
