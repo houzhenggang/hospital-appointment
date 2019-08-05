@@ -1,5 +1,7 @@
 package com.kasoft.register.base.controller;
 
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -19,6 +21,10 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 
 /**
@@ -51,7 +57,9 @@ public class DoctorInspectresourceController {
 			.like(StrUtil.isNotBlank(args.getInspItemName()), "insp_item_name", args.getInspItemName())
 			.ge(ObjectUtil.isNotNull(args.getStartTime()), "start_time", args.getStartTime())
 			.le(ObjectUtil.isNotNull(args.getEndTime()), "end_time", args.getEndTime())
-				.groupBy("hospital_id, insp_item_id")
+			.between("insp_item_date", DateUtil.format(new Date(), DatePattern.NORM_DATE_PATTERN),
+					DateUtil.format(DateUtil.offsetDay(new Date(), 14), DatePattern.NORM_DATE_PATTERN))
+			.groupBy("hospital_id, insp_item_id")
 		));
     }
 
@@ -64,7 +72,7 @@ public class DoctorInspectresourceController {
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page")
     public R page(Page page, DoctorInspectresource args) {
-        return R.ok(doctorInspectresourceService.page(page, Wrappers.query(args)));
+        return R.ok(doctorInspectresourceService.page(page, Wrappers.query(args).orderByDesc("create_time")));
     }
 
     /**
@@ -111,7 +119,7 @@ public class DoctorInspectresourceController {
     @GetMapping("/detail/group")
     public R getDoctorInspectresourceGroupDetail(InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
-				.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap,period")
+				.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap,period,max(insp_resource_id) as insp_resource_id")
 				.eq(StrUtil.isNotBlank(args.getHospitalId()), "hospital_id", args.getHospitalId())
 				.eq("insp_item_date", args.getQueryDate())
 				.eq("insp_item_ap", args.getInspItemAp())

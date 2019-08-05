@@ -1,16 +1,20 @@
 package com.kasoft.register.base.controller;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.api.entity.DoctorApplyorder;
 import com.kasoft.register.base.service.DoctorApplyorderService;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
+import com.pig4cloud.pigx.common.security.annotation.Inner;
 import org.springframework.security.access.prepost.PreAuthorize;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 
 /**
@@ -35,8 +39,11 @@ public class DoctorApplyorderController {
      */
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page")
-    public R getDoctorApplyorderPage(Page page, DoctorApplyorder doctorApplyorder) {
-        return R.ok(doctorApplyorderService.page(page, Wrappers.query(doctorApplyorder)));
+    public R getDoctorApplyorderPage(Page page, DoctorApplyorder doctorApplyorder,
+									 @RequestParam(required = false)LocalDate startDate, @RequestParam(required = false)LocalDate endDate) {
+        return R.ok(doctorApplyorderService.page(page, Wrappers.query(doctorApplyorder)
+				.between(ObjectUtil.isNotNull(startDate), "insp_item_date", startDate, endDate)
+				.orderByDesc("create_time")));
     }
 
     /**

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.api.entity.DoctorInspectionitem;
 import com.kasoft.register.base.service.DoctorInspectionitemService;
 import com.kasoft.register.base.utils.KrbConstants;
+import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
@@ -80,6 +81,16 @@ public class DoctorInspectionitemController {
     }
 
     /**
+     * 查询热门检查项目
+     * @return R
+     */
+    @ApiOperation(value = "查询热门检查项目", notes = "查询热门检查项目")
+    @GetMapping("/query/hot/inspitem")
+    public R queryHotInspitem() {
+        return R.ok(doctorInspectionitemService.queryHotInspitem(), ReturnMsgConstants.QUERY_SUCCESS);
+    }
+
+    /**
      * 新增检查项目
      * @param doctorInspectionitem 检查项目
      * @return R
@@ -99,7 +110,7 @@ public class DoctorInspectionitemController {
      * @return R
      */
     @ApiOperation(value = "修改检查项目", notes = "修改检查项目")
-    @SysLog("修改检查项目" )
+    @SysLog("修改检查项目")
     @PutMapping
     @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_edit')")
 	@CacheEvict(value = {KrbConstants.ED_INSPECTION_ITEM_DETAIL, KrbConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)

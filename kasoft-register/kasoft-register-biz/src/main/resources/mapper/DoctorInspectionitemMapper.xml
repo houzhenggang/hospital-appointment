@@ -4,4 +4,11 @@
 
 <mapper namespace="com.kasoft.register.base.mapper.DoctorInspectionitemMapper">
 
+	<select id="queryHotInspitem" resultType="com.kasoft.register.base.api.entity.DoctorInspectionitem">
+		SELECT a.insp_item_name FROM `kasoft_doctor_inspectionitem` a
+		 LEFT JOIN kasoft_doctor_inspectresource b ON a.insp_item_id = b.insp_item_id AND b.del_flag = 0
+		WHERE a.hot_flag = 1 AND b.insp_resource_id IS NOT NULL
+		GROUP BY a.insp_item_id
+		LIMIT 10
+	</select>
 </mapper>

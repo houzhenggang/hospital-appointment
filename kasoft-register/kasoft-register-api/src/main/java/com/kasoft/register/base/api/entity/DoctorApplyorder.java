@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -99,6 +100,18 @@ public class DoctorApplyorder extends Model<DoctorApplyorder> {
      */
     @ApiModelProperty(value="数量")
     private Integer quantity;
+
+	/**
+	 * 资源日期
+	 */
+	@ApiModelProperty(value="资源日期")
+	private LocalDate inspItemDate;
+
+	/**
+	 * 资源时间段
+	 */
+	@ApiModelProperty(value="资源时间段")
+	private String period;
     /**
      * 预约时间
      */
