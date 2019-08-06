@@ -1,5 +1,6 @@
 package com.kasoft.register.base.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kasoft.register.base.api.entity.DoctorApplyorder;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
@@ -40,5 +41,19 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 		upInspectresource.setInspResourceId(doctorApplyorder.getInspResourceId());
 		upInspectresource.setQuantity(quInspectresource.getQuantity() - 1);
 		doctorInspectresourceService.updateById(upInspectresource);
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void updateApplyOrder(DoctorApplyorder doctorApplyorder) {
+		this.updateById(doctorApplyorder);
+		if (doctorApplyorder.getOrderState() != null && StrUtil.equals(doctorApplyorder.getOrderState(), "40")) {
+			DoctorApplyorder quApplyorder = this.getById(doctorApplyorder.getApplyOrderId());
+			DoctorInspectresource quInspectresource = doctorInspectresourceService.getById(quApplyorder.getInspResourceId());
+			DoctorInspectresource upInspectresource = new DoctorInspectresource();
+			upInspectresource.setInspResourceId(quApplyorder.getInspResourceId());
+			upInspectresource.setQuantity(quInspectresource.getQuantity() + 1);
+			doctorInspectresourceService.updateById(upInspectresource);
+		}
 	}
 }

@@ -13,4 +13,7 @@ public interface DoctorApplyorderService extends IService<DoctorApplyorder> {
 
 
 	void addApplyorder(DoctorApplyorder doctorApplyorder);
+
+
+	void updateApplyOrder(DoctorApplyorder doctorApplyorder);
 }

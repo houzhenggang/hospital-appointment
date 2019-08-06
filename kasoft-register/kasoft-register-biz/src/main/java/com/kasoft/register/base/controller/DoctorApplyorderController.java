@@ -8,11 +8,10 @@ import com.kasoft.register.base.api.entity.DoctorApplyorder;
 import com.kasoft.register.base.service.DoctorApplyorderService;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
-import com.pig4cloud.pigx.common.security.annotation.Inner;
-import org.springframework.security.access.prepost.PreAuthorize;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -38,7 +37,6 @@ public class DoctorApplyorderController {
      * @param doctorApplyorder 预约订单
      * @return R
      */
-    @Inner(value = false)
     @ApiOperation(value = "pc端分页查询", notes = "pc端分页查询")
     @GetMapping("/page")
     public R getDoctorApplyorderPage(Page page, DoctorApplyorder doctorApplyorder,
@@ -54,7 +52,6 @@ public class DoctorApplyorderController {
      * @param doctorApplyorder 预约订单
      * @return R
      */
-    @Inner(value = false)
     @ApiOperation(value = "移动端分页查询", notes = "移动端分页查询")
     @GetMapping("/page/mobile")
     public R getDoctorApplyorderPageMobile(Page page, DoctorApplyorder doctorApplyorder,
@@ -102,7 +99,8 @@ public class DoctorApplyorderController {
     @PutMapping
     @PreAuthorize("@pms.hasPermission('base_doctorapplyorder_edit')")
     public R updateById(@RequestBody DoctorApplyorder doctorApplyorder) {
-        return R.ok(doctorApplyorderService.updateById(doctorApplyorder));
+		doctorApplyorderService.updateApplyOrder(doctorApplyorder);
+        return R.ok();
     }
 
     /**
