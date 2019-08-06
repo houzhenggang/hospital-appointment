@@ -1,6 +1,7 @@
 package com.kasoft.register.base.controller;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.api.entity.DoctorApplyorder;
@@ -32,17 +33,36 @@ public class DoctorApplyorderController {
     private final DoctorApplyorderService doctorApplyorderService;
 
     /**
-     * 分页查询
+     * pc端分页查询
      * @param page 分页对象
      * @param doctorApplyorder 预约订单
      * @return R
      */
     @Inner(value = false)
-    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @ApiOperation(value = "pc端分页查询", notes = "pc端分页查询")
     @GetMapping("/page")
     public R getDoctorApplyorderPage(Page page, DoctorApplyorder doctorApplyorder,
 									 @RequestParam(required = false)LocalDate startDate, @RequestParam(required = false)LocalDate endDate) {
-        return R.ok(doctorApplyorderService.page(page, Wrappers.query(doctorApplyorder)
+		return R.ok(doctorApplyorderService.page(page, Wrappers.query(doctorApplyorder)
+				.between(ObjectUtil.isNotNull(startDate), "insp_item_date", startDate, endDate)
+				.orderByDesc("create_time")));
+    }
+
+    /**
+     * 移动端分页查询
+     * @param page 分页对象
+     * @param doctorApplyorder 预约订单
+     * @return R
+     */
+    @Inner(value = false)
+    @ApiOperation(value = "移动端分页查询", notes = "移动端分页查询")
+    @GetMapping("/page/mobile")
+    public R getDoctorApplyorderPageMobile(Page page, DoctorApplyorder doctorApplyorder,
+									 @RequestParam(required = false)LocalDate startDate, @RequestParam(required = false)LocalDate endDate) {
+		if (StrUtil.isBlank(doctorApplyorder.getPeopleId())) {
+			return R.failed("业务参数缺失:peopleId");
+		}
+		return R.ok(doctorApplyorderService.page(page, Wrappers.query(doctorApplyorder)
 				.between(ObjectUtil.isNotNull(startDate), "insp_item_date", startDate, endDate)
 				.orderByDesc("create_time")));
     }
