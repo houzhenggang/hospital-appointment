@@ -162,7 +162,17 @@ public class DoctorInspectresourceController {
     @PreAuthorize("@pms.hasPermission('base_doctorinspectresource_add')")
 	@CacheEvict(value = {KrbConstants.ED_INSPECTION_RESOURCE_DICT}, allEntries = true)
 	public R save(@RequestBody DoctorInspectresource doctorInspectresource) {
-        return R.ok(doctorInspectresourceService.save(doctorInspectresource));
+		int count = doctorInspectresourceService.count(new QueryWrapper<DoctorInspectresource>()
+			.eq("hospital_id", doctorInspectresource.getHospitalId())
+			.eq("inspItem_id", doctorInspectresource.getInspItemId())
+			.eq("insp_item_date", doctorInspectresource.getInspItemDate())
+			.eq("period", doctorInspectresource.getPeriod())
+		);
+		if (count > 0) {
+			return R.failed("同一医院,同一项目,同一时间段只允许添加一个检查资源!");
+		}
+		return R.ok(doctorInspectresourceService.save(doctorInspectresource));
+
     }
 
     /**
