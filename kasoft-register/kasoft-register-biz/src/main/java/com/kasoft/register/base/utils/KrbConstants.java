@@ -318,4 +318,26 @@ public class KrbConstants {
 		String DOCKER = "1";
 	}
 
+	public interface OrderState {
+
+		/**
+		 * 已预约
+		 */
+		String HAD_APPLY = "10";
+
+		/**
+		 * 已过期
+		 */
+		String HAD_EXPIRE = "30";
+
+		/**
+		 * 已取消
+		 */
+		String HAD_CANCEL = "40";
+
+		/**
+		 * 已检查
+		 */
+		String HAD_CHECK = "50";
+	}
 }

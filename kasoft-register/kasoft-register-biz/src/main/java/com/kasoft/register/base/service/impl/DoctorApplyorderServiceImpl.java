@@ -7,6 +7,7 @@ import com.kasoft.register.base.api.entity.DoctorInspectresource;
 import com.kasoft.register.base.mapper.DoctorApplyorderMapper;
 import com.kasoft.register.base.service.DoctorApplyorderService;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
+import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.exception.CheckedException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,8 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 	@Transactional(rollbackFor = Exception.class)
 	public void updateApplyOrder(DoctorApplyorder doctorApplyorder) {
 		this.updateById(doctorApplyorder);
-		if (doctorApplyorder.getOrderState() != null && StrUtil.equals(doctorApplyorder.getOrderState(), "40")) {
+		if (doctorApplyorder.getOrderState() != null &&
+				StrUtil.equals(doctorApplyorder.getOrderState(), KrbConstants.OrderState.HAD_CANCEL)) {
 			DoctorApplyorder quApplyorder = this.getById(doctorApplyorder.getApplyOrderId());
 			DoctorInspectresource quInspectresource = doctorInspectresourceService.getById(quApplyorder.getInspResourceId());
 			DoctorInspectresource upInspectresource = new DoctorInspectresource();
