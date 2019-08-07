@@ -165,7 +165,7 @@ public class DoctorInspectresourceController {
 	public R save(@RequestBody DoctorInspectresource doctorInspectresource) {
 		int count = doctorInspectresourceService.count(new QueryWrapper<DoctorInspectresource>()
 			.eq("hospital_id", doctorInspectresource.getHospitalId())
-			.eq("inspItem_id", doctorInspectresource.getInspItemId())
+			.eq("insp_item_id", doctorInspectresource.getInspItemId())
 			.eq("insp_item_date", doctorInspectresource.getInspItemDate())
 			.eq("period", doctorInspectresource.getPeriod())
 		);
