@@ -85,7 +85,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		baseMapper.insert(sysUser);
 		if (userDto.getRole() == null) {
 			List<Integer> roleList = new ArrayList<>();
-			roleList.add(1);
+			roleList.add(8);
 			userDto.setRole(roleList);
 		}
 		List<SysUserRole> userRoleList = userDto.getRole()
