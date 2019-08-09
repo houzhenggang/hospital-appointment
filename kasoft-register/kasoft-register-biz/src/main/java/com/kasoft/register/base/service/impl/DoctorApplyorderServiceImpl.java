@@ -4,10 +4,13 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kasoft.register.base.api.entity.DoctorApplyorder;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
+import com.kasoft.register.base.api.entity.DoctorPeopleinfo;
 import com.kasoft.register.base.mapper.DoctorApplyorderMapper;
+import com.kasoft.register.base.mapper.DoctorPeopleinfoMapper;
 import com.kasoft.register.base.service.DoctorApplyorderService;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
 import com.kasoft.register.base.utils.KrbConstants;
+import com.kasoft.register.base.utils.SmsUtils;
 import com.pig4cloud.pigx.common.core.exception.CheckedException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,9 +28,15 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 
 	private final DoctorInspectresourceService doctorInspectresourceService;
 
+	private final DoctorPeopleinfoMapper doctorPeopleinfoMapper;
+
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void addApplyorder(DoctorApplyorder doctorApplyorder) {
+		DoctorPeopleinfo quPeopleinfo = doctorPeopleinfoMapper.selectById(doctorApplyorder.getPeopleId());
+		if (quPeopleinfo == null) {
+			throw new CheckedException("患者信息不存在!");
+		}
 		DoctorInspectresource quInspectresource = doctorInspectresourceService.getById(doctorApplyorder.getInspResourceId());
 		if (quInspectresource == null) {
 			throw new CheckedException("检查资源不存在!");
@@ -42,6 +51,14 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 		upInspectresource.setInspResourceId(doctorApplyorder.getInspResourceId());
 		upInspectresource.setQuantity(quInspectresource.getQuantity() - 1);
 		doctorInspectresourceService.updateById(upInspectresource);
+		//发送短信提示
+		if (quPeopleinfo.getPhone() != null){
+			String mobile = quPeopleinfo.getPhone();
+			String name = quPeopleinfo.getName();
+			String time = doctorApplyorder.getApplyTime();
+			String hospital = doctorApplyorder.getHospitalName();
+			SmsUtils.sendApplySuccessSms(mobile, name, time, hospital);
+		}
 	}
 
 	@Override
@@ -58,4 +75,5 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 			doctorInspectresourceService.updateById(upInspectresource);
 		}
 	}
+
 }

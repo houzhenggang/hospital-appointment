@@ -82,4 +82,5 @@ public interface RemoteUserService {
 	 */
 	@GetMapping("/user/details/{username}")
 	R<SysUser> user(@PathVariable("username") String username);
+
 }
