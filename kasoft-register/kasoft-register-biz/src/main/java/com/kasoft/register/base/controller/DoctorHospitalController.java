@@ -7,6 +7,7 @@ import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import com.kasoft.register.base.api.entity.DoctorHospital;
 import com.kasoft.register.base.service.DoctorHospitalService;
+import com.pig4cloud.pigx.common.security.annotation.Inner;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -47,6 +48,7 @@ public class DoctorHospitalController {
 	 * 查询医院字典
 	 * @return
 	 */
+	@Inner(false)
 	@ApiOperation(value = "查询医院字典", notes = "查询医院字典")
 	@GetMapping("/dict" )
 	@Cacheable(value = KrbConstants.ED_HOSPITAL_DETAILS_DICT, unless = "#result == null ")

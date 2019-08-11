@@ -4,6 +4,7 @@ import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -48,7 +50,6 @@ public class DoctorInspectresourceController {
      * @param args 参数
      * @return R
      */
-    @Inner(value = false)
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page/group")
     public R getDoctorInspectresourcePage(Page page, InspSourcesVO args) {
@@ -173,7 +174,20 @@ public class DoctorInspectresourceController {
 			return R.failed("同一医院,同一项目,同一时间段只允许添加一个检查资源!");
 		}
 		return R.ok(doctorInspectresourceService.save(doctorInspectresource));
+    }
 
+    /**
+     * 新增检查资源-批量
+     * @param inspectresources 检查资源
+     * @return R
+     */
+    @ApiOperation(value = "批量新增检查资源", notes = "批量新增检查资源")
+    @SysLog("批量新增检查资源")
+    @PostMapping("/save/batch")
+    @PreAuthorize("@pms.hasPermission('base_doctorinspectresource_add')")
+	@CacheEvict(value = {KrbConstants.ED_INSPECTION_RESOURCE_DICT}, allEntries = true)
+	public R saveInspectresourceBatch(@RequestBody List<DoctorInspectresource> inspectresources) {
+		return R.ok(doctorInspectresourceService.saveInspectresourceBatch(inspectresources));
     }
 
     /**
