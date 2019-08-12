@@ -181,6 +181,7 @@ public class DoctorInspectresourceController {
      * @param inspectresources 检查资源
      * @return R
      */
+    @Inner(false)
     @ApiOperation(value = "批量新增检查资源", notes = "批量新增检查资源")
     @SysLog("批量新增检查资源")
     @PostMapping("/save/batch")

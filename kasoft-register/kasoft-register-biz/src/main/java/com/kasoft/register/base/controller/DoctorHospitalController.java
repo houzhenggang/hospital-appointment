@@ -48,7 +48,6 @@ public class DoctorHospitalController {
 	 * 查询医院字典
 	 * @return
 	 */
-	@Inner(false)
 	@ApiOperation(value = "查询医院字典", notes = "查询医院字典")
 	@GetMapping("/dict" )
 	@Cacheable(value = KrbConstants.ED_HOSPITAL_DETAILS_DICT, unless = "#result == null ")
