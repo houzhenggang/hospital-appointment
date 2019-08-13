@@ -90,7 +90,7 @@
 		<dependency>
 			<groupId>com.yunpian.sdk</groupId>
 			<artifactId>yunpian-java-sdk</artifactId>
-			<version>1.2.7</version>
+			<version>${yunpian.version}</version>
 		</dependency>
 	</dependencies>
 

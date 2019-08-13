@@ -27,12 +27,16 @@ import com.pig4cloud.pigx.common.core.constant.CommonConstants;
 import com.pig4cloud.pigx.common.core.constant.SecurityConstants;
 import com.pig4cloud.pigx.common.core.constant.enums.LoginTypeEnum;
 import com.pig4cloud.pigx.common.core.util.R;
+import com.yunpian.sdk.YunpianClient;
+import com.yunpian.sdk.model.Result;
+import com.yunpian.sdk.model.SmsSingleSend;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -75,6 +79,14 @@ public class MobileServiceImpl implements MobileService {
 		}
 
 		String code = RandomUtil.randomNumbers(Integer.parseInt(SecurityConstants.CODE_SIZE));
+		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
+		Map<String, String> param = clnt.newParam(2);
+		param.put(YunpianClient.MOBILE, mobile);
+		param.put(YunpianClient.TEXT, "【南京擎卡医疗】正在进行登录操作，您的验证码是" + code);
+		Result<SmsSingleSend> r = clnt.sms().single_send(param);
+		if (r.getCode() != 0) {
+			return R.ok(Boolean.FALSE, r.getMsg());
+		}
 		log.debug("手机号生成验证码成功:{},{}", mobile, code);
 		redisTemplate.opsForValue().set(
 			CommonConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + "@" + mobile
