@@ -50,4 +50,9 @@ public class UserDTO extends SysUser {
 	 */
 	@ApiModelProperty(value = "新密码")
 	private String newpassword1;
+
+	/**
+	 * 身份证号码
+	 */
+	private String idCard;
 }

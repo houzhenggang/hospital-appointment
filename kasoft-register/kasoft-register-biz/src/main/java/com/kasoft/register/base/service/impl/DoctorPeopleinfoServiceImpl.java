@@ -50,6 +50,7 @@ public class DoctorPeopleinfoServiceImpl extends ServiceImpl<DoctorPeopleinfoMap
 		peopleinfo.setName(userDTO.getName());
 		peopleinfo.setSex(userDTO.getSex());
 		peopleinfo.setPhone(userDTO.getPhone());
+		peopleinfo.setIdCard(userDTO.getIdCard());
 		this.save(peopleinfo);
 		return R.ok(true, "注册成功!");
 	}

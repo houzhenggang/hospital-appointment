@@ -14,3 +14,13 @@ spring:
         shared-dataids: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   profiles:
     active: dev
+
+---
+spring:
+  profiles: test
+  cloud:
+    nacos:
+      config:
+        namespace: feb94f87-9c40-4815-b58e-dbf32f8f7c20
+      discovery:
+        namespace: feb94f87-9c40-4815-b58e-dbf32f8f7c20
