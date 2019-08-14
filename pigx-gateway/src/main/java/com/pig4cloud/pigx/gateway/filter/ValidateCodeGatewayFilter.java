@@ -58,10 +58,10 @@ public class ValidateCodeGatewayFilter extends AbstractGatewayFilterFactory {
 		return (exchange, chain) -> {
 			ServerHttpRequest request = exchange.getRequest();
 
-			// 不是登录请求，直接向下执行
+			// 不是登录或注册请求，直接向下执行
 			if (!StrUtil.containsAnyIgnoreCase(request.getURI().getPath()
 					, SecurityConstants.OAUTH_TOKEN_URL, SecurityConstants.SMS_TOKEN_URL
-					, SecurityConstants.SOCIAL_TOKEN_URL)) {
+					, SecurityConstants.SOCIAL_TOKEN_URL, SecurityConstants.MOBILE_REGISTER_URL)) {
 				return chain.filter(exchange);
 			}
 

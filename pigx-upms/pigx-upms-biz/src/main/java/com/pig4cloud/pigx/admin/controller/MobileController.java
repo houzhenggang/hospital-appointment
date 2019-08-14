@@ -45,4 +45,10 @@ public class MobileController {
 	public R sendSmsCode(@PathVariable String mobile) {
 		return mobileService.sendSmsCode(mobile);
 	}
+
+	@Inner(value = false)
+	@GetMapping("/valid/sms")
+	public R validSmsCode() {
+		return R.ok(null, "验证成功!");
+	}
 }

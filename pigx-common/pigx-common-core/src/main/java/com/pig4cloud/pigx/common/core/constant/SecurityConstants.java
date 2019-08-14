@@ -78,6 +78,11 @@ public interface SecurityConstants {
 	 * 社交登录URL
 	 */
 	String SOCIAL_TOKEN_URL = "/mobile/token/social";
+
+	/**
+	 * 移动端注册URL
+	 */
+	String MOBILE_REGISTER_URL = "/mobile/valid/sms";
 	/**
 	 * 自定义登录URL
 	 */

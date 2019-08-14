@@ -62,14 +62,14 @@ public class MobileServiceImpl implements MobileService {
 	 */
 	@Override
 	public R<Boolean> sendSmsCode(String mobile) {
-		List<SysUser> userList = userMapper.selectList(Wrappers
-			.<SysUser>query().lambda()
-			.eq(SysUser::getPhone, mobile));
-
-		if (CollUtil.isEmpty(userList)) {
-			log.info("手机号未注册:{}", mobile);
-			return R.ok(Boolean.FALSE, "手机号未注册");
-		}
+//		List<SysUser> userList = userMapper.selectList(Wrappers
+//			.<SysUser>query().lambda()
+//			.eq(SysUser::getPhone, mobile));
+//
+//		if (CollUtil.isEmpty(userList)) {
+//			log.info("手机号未注册:{}", mobile);
+//			return R.ok(Boolean.FALSE, "手机号未注册");
+//		}
 
 		Object codeObj = redisTemplate.opsForValue().get(CommonConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + "@" + mobile);
 
@@ -82,7 +82,7 @@ public class MobileServiceImpl implements MobileService {
 		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
 		Map<String, String> param = clnt.newParam(2);
 		param.put(YunpianClient.MOBILE, mobile);
-		param.put(YunpianClient.TEXT, "【南京擎卡医疗】正在进行登录操作，您的验证码是" + code);
+		param.put(YunpianClient.TEXT, "【南京擎卡医疗】您的验证码是" + code);
 		Result<SmsSingleSend> r = clnt.sms().single_send(param);
 		if (r.getCode() != 0) {
 			return R.ok(Boolean.FALSE, r.getMsg());
