@@ -26,7 +26,7 @@ public class Applyerinfo extends Model<Applyerinfo> {
         /**
      * 主键
      */
-    @TableId
+    @TableId(value = "applyer_id", type = IdType.UUID)
     @ApiModelProperty(value="主键")
     private String applyerId;
         /**
