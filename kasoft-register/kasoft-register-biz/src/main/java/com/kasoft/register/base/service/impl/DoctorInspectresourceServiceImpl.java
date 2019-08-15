@@ -1,5 +1,7 @@
 package com.kasoft.register.base.service.impl;
 
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -11,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,6 +47,7 @@ public class DoctorInspectresourceServiceImpl extends ServiceImpl<DoctorInspectr
 
 	@Override
 	public List<DoctorInspectresource> getAllItemGroupPage() {
+		String curr = DateUtil.format(new Date(), DatePattern.NORM_DATE_PATTERN);
 		return doctorInspectresourceMapper.getAllItemGroup();
 	}
 }

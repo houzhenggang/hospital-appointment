@@ -42,12 +42,11 @@ public class DoctorInspectresourceController {
 
 	/**
 	 * 资源分类列表
-	 * @param page 分页对象
 	 * @return R
 	 */
 	@ApiOperation(value = "分页查询", notes = "分页查询")
 	@GetMapping("/page/all/item/group")
-	public R getAllItemGroupPage(Page page) {
+	public R getAllItemGroupPage() {
 		List<DoctorInspectresource> list = doctorInspectresourceService.getAllItemGroupPage();
 		return R.ok(list);
 	}

@@ -55,7 +55,6 @@ public class MobileServiceImpl implements MobileService {
 
 	/**
 	 * 发送手机验证码
-	 * TODO: 调用短信网关发送验证码,测试返回前端
 	 *
 	 * @param mobile mobile
 	 * @return code
@@ -79,7 +78,7 @@ public class MobileServiceImpl implements MobileService {
 		}
 
 		String code = RandomUtil.randomNumbers(Integer.parseInt(SecurityConstants.CODE_SIZE));
-		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
+		YunpianClient clnt = new YunpianClient("a2d92f9316692af77ca628217b20a0ae").init();
 		Map<String, String> param = clnt.newParam(2);
 		param.put(YunpianClient.MOBILE, mobile);
 		param.put(YunpianClient.TEXT, "【南京擎卡医疗】您的验证码是" + code);
@@ -93,4 +92,55 @@ public class MobileServiceImpl implements MobileService {
 			, code, SecurityConstants.CODE_TIME, TimeUnit.SECONDS);
 		return R.ok(Boolean.TRUE, code);
 	}
+
+	@Override
+	public R<Boolean> sendRegisterSmsCode(String mobile) {
+		Object codeObj = redisTemplate.opsForValue().get(CommonConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + "@" + mobile);
+
+		if (codeObj != null) {
+			log.info("手机号验证码未过期:{}，{}", mobile, codeObj);
+			return R.ok(Boolean.FALSE, "验证码发送过频繁");
+		}
+
+		String code = RandomUtil.randomNumbers(Integer.parseInt(SecurityConstants.CODE_SIZE));
+		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
+		Map<String, String> param = clnt.newParam(2);
+		param.put(YunpianClient.MOBILE, mobile);
+		param.put(YunpianClient.TEXT, "【南京擎卡医疗】您的验证码是" + code);
+		Result<SmsSingleSend> r = clnt.sms().single_send(param);
+		if (r.getCode() != 0) {
+			return R.ok(Boolean.FALSE, r.getMsg());
+		}
+		log.debug("手机号生成验证码成功:{},{}", mobile, code);
+		redisTemplate.opsForValue().set(
+				CommonConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + "@" + mobile
+				, code, SecurityConstants.CODE_TIME, TimeUnit.SECONDS);
+		return R.ok(Boolean.TRUE, code);
+	}
+
+	@Override
+	public R<Boolean> sendLoginSmsCode(String mobile) {
+		Object codeObj = redisTemplate.opsForValue().get(CommonConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + "@" + mobile);
+		if (codeObj != null) {
+			log.info("手机号验证码未过期:{}，{}", mobile, codeObj);
+			return R.ok(Boolean.FALSE, "验证码发送过频繁");
+		}
+
+		String code = RandomUtil.randomNumbers(Integer.parseInt(SecurityConstants.CODE_SIZE));
+		YunpianClient clnt = new YunpianClient("a2d92f9316692af77ca628217b20a0ae").init();
+		Map<String, String> param = clnt.newParam(2);
+		param.put(YunpianClient.MOBILE, mobile);
+		param.put(YunpianClient.TEXT, "【南京市智慧医疗】您本次登录验证码是"+ code +"，该验证码仅用于身份验证，请勿泄露给他人使用。");
+		Result<SmsSingleSend> r = clnt.sms().single_send(param);
+		if (r.getCode() != 0) {
+			return R.ok(Boolean.FALSE, r.getMsg());
+		}
+		log.debug("手机号生成验证码成功:{},{}", mobile, code);
+		redisTemplate.opsForValue().set(
+				CommonConstants.DEFAULT_CODE_KEY + LoginTypeEnum.SMS.getType() + "@" + mobile
+				, code, SecurityConstants.CODE_TIME, TimeUnit.SECONDS);
+		return R.ok(Boolean.TRUE, code);
+	}
+
+
 }

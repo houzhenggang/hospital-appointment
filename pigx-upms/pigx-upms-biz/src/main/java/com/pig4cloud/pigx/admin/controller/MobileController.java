@@ -41,9 +41,15 @@ public class MobileController {
 	private final MobileService mobileService;
 
 	@Inner(value = false)
-	@GetMapping("/{mobile}")
-	public R sendSmsCode(@PathVariable String mobile) {
-		return mobileService.sendSmsCode(mobile);
+	@GetMapping("/register/{mobile}")
+	public R sendRegisterSmsCode(@PathVariable String mobile) {
+		return mobileService.sendRegisterSmsCode(mobile);
+	}
+
+	@Inner(value = false)
+	@GetMapping("/login/{mobile}")
+	public R sendLoginSmsCode(@PathVariable String mobile) {
+		return mobileService.sendLoginSmsCode(mobile);
 	}
 
 	@Inner(value = false)

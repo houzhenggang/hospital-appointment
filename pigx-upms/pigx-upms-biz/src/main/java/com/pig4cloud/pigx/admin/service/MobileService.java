@@ -31,4 +31,8 @@ public interface MobileService {
 	 * @return code
 	 */
 	R<Boolean> sendSmsCode(String mobile);
+
+	R<Boolean> sendRegisterSmsCode(String mobile);
+
+	R<Boolean> sendLoginSmsCode(String mobile);
 }
