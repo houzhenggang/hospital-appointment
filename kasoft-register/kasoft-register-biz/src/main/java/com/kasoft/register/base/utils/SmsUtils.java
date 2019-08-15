@@ -4,6 +4,7 @@ import com.yunpian.sdk.YunpianClient;
 import com.yunpian.sdk.model.Result;
 import com.yunpian.sdk.model.SmsSingleSend;
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 
@@ -30,6 +31,5 @@ public class SmsUtils {
 		param.put(YunpianClient.TEXT, text);
 		Result<SmsSingleSend> r = yunpianClient.sms().single_send(param);
 		System.out.println(r.getData());
-		yunpianClient.close();
 	}
 }

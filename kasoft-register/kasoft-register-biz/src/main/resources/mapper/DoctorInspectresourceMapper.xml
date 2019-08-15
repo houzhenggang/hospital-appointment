@@ -28,5 +28,6 @@
 				kasoft_doctor_inspectresource a
 				LEFT JOIN kasoft_doctor_inspectionitem b ON a.insp_item_id = b.insp_item_id
 			GROUP BY a.insp_item_id
+
 	</select>
 </mapper>

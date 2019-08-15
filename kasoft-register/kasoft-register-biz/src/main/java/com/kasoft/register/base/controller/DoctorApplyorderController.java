@@ -92,7 +92,7 @@ public class DoctorApplyorderController {
     @ApiOperation(value = "新增预约订单", notes = "新增预约订单")
     @SysLog("新增预约订单")
     @PostMapping
-    @PreAuthorize("@pms.hasPermission('base_doctorapplyorder_add')")
+//    @PreAuthorize("@pms.hasPermission('base_doctorapplyorder_add')")
     public R save(@RequestBody DoctorApplyorder doctorApplyorder) {
 		doctorApplyorderService.addApplyorder(doctorApplyorder);
         return R.ok(doctorApplyorder);

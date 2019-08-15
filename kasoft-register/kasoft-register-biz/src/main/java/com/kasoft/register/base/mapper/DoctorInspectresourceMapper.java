@@ -2,7 +2,9 @@ package com.kasoft.register.base.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
+import org.apache.ibatis.annotations.Param;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 /**
@@ -12,7 +14,6 @@ import java.util.List;
  * @date 2019-07-27 10:32:30
  */
 public interface DoctorInspectresourceMapper extends BaseMapper<DoctorInspectresource> {
-
 
 	List<DoctorInspectresource> getAllItemGroup();
 }

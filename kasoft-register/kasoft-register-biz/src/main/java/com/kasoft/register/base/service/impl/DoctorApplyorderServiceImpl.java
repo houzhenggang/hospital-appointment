@@ -30,8 +30,6 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 
 	private final DoctorInspectresourceService doctorInspectresourceService;
 
-	private final DoctorPeopleinfoMapper doctorPeopleinfoMapper;
-
 	private final YunpianClient yunpianClient;
 
 	private final YunpianPropertiesConfig yunpianPropertiesConfig;
@@ -39,10 +37,6 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void addApplyorder(DoctorApplyorder doctorApplyorder) {
-		DoctorPeopleinfo quPeopleinfo = doctorPeopleinfoMapper.selectById(doctorApplyorder.getPeopleId());
-		if (quPeopleinfo == null) {
-			throw new CheckedException("患者信息不存在!");
-		}
 		DoctorInspectresource quInspectresource = doctorInspectresourceService.getById(doctorApplyorder.getInspResourceId());
 		if (quInspectresource == null) {
 			throw new CheckedException("检查资源不存在!");
@@ -58,14 +52,14 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 		upInspectresource.setQuantity(quInspectresource.getQuantity() - 1);
 		doctorInspectresourceService.updateById(upInspectresource);
 		//发送短信提示
-		if (quPeopleinfo.getPhone() != null){
-			String mobile = quPeopleinfo.getPhone();
-			String name = quPeopleinfo.getName();
+		if (doctorApplyorder.getPeoplePhone() != null){
+			String mobile = doctorApplyorder.getPeoplePhone();
+			String name = doctorApplyorder.getInspItemName();
 			String time = doctorApplyorder.getApplyTime();
 			String hospital = doctorApplyorder.getHospitalName();
 			String price = doctorApplyorder.getFeeTotal().toString();
 			String detail = yunpianPropertiesConfig.getSignature() + "您已成功预约" + hospital + "的" + name + "，收费" + price
-					+ "请您携带身份证于" + time + "到达" + hospital + "导医台处登记就诊，稍后医院工作人员会电话告知注意事项，请您注意接听。";
+					+ "，请您携带身份证于" + time + "到达" + hospital + "导医台处登记就诊，稍后医院工作人员会电话告知注意事项，请您注意接听。";
 			SmsUtils.sendSms(yunpianClient, mobile, detail);
 		}
 	}
