@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kasoft.register.base.api.entity.DoctorApplyorder;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
 import com.kasoft.register.base.api.entity.DoctorPeopleinfo;
+import com.kasoft.register.base.config.YunpianPropertiesConfig;
 import com.kasoft.register.base.mapper.DoctorApplyorderMapper;
 import com.kasoft.register.base.mapper.DoctorPeopleinfoMapper;
 import com.kasoft.register.base.service.DoctorApplyorderService;
@@ -12,6 +13,7 @@ import com.kasoft.register.base.service.DoctorInspectresourceService;
 import com.kasoft.register.base.utils.KrbConstants;
 import com.kasoft.register.base.utils.SmsUtils;
 import com.pig4cloud.pigx.common.core.exception.CheckedException;
+import com.yunpian.sdk.YunpianClient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,10 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 	private final DoctorInspectresourceService doctorInspectresourceService;
 
 	private final DoctorPeopleinfoMapper doctorPeopleinfoMapper;
+
+	private final YunpianClient yunpianClient;
+
+	private final YunpianPropertiesConfig yunpianPropertiesConfig;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -57,23 +63,40 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 			String name = quPeopleinfo.getName();
 			String time = doctorApplyorder.getApplyTime();
 			String hospital = doctorApplyorder.getHospitalName();
-			SmsUtils.sendApplySuccessSms(mobile, name, time, hospital);
+			String price = doctorApplyorder.getFeeTotal().toString();
+			String detail = yunpianPropertiesConfig.getSignature() + "您已成功预约" + hospital + "的" + name + "，收费" + price
+					+ "请您携带身份证于" + time + "到达" + hospital + "导医台处登记就诊，稍后医院工作人员会电话告知注意事项，请您注意接听。";
+			SmsUtils.sendSms(yunpianClient, mobile, detail);
 		}
 	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void updateApplyOrder(DoctorApplyorder doctorApplyorder) {
-		this.updateById(doctorApplyorder);
-		if (doctorApplyorder.getOrderState() != null &&
-				StrUtil.equals(doctorApplyorder.getOrderState(), KrbConstants.OrderState.HAD_CANCEL)) {
-			DoctorApplyorder quApplyorder = this.getById(doctorApplyorder.getApplyOrderId());
-			DoctorInspectresource quInspectresource = doctorInspectresourceService.getById(quApplyorder.getInspResourceId());
-			DoctorInspectresource upInspectresource = new DoctorInspectresource();
-			upInspectresource.setInspResourceId(quApplyorder.getInspResourceId());
-			upInspectresource.setQuantity(quInspectresource.getQuantity() + 1);
-			doctorInspectresourceService.updateById(upInspectresource);
+		//查询预约订单是否存在
+		DoctorApplyorder quApplyOrder = this.getById(doctorApplyorder.getApplyOrderId());
+		if (quApplyOrder == null) {
+			throw new CheckedException("预约订单不存在!");
 		}
+		this.updateById(doctorApplyorder);
+		if(doctorApplyorder.getOrderState() != null){
+			String detail = null;
+			if (StrUtil.equals(doctorApplyorder.getOrderState(), KrbConstants.OrderState.HAD_CANCEL)) {
+				DoctorApplyorder quApplyorder = this.getById(doctorApplyorder.getApplyOrderId());
+				DoctorInspectresource quInspectresource = doctorInspectresourceService.getById(quApplyorder.getInspResourceId());
+				DoctorInspectresource upInspectresource = new DoctorInspectresource();
+				upInspectresource.setInspResourceId(quApplyorder.getInspResourceId());
+				upInspectresource.setQuantity(quInspectresource.getQuantity() + 1);
+				doctorInspectresourceService.updateById(upInspectresource);
+				detail = yunpianPropertiesConfig.getSignature() + "您好，您的预约"+ quApplyOrder.getApplyTime()
+						+ quApplyOrder.getHospitalName() + quApplyOrder.getInspItemName()+"服务已成功取消。";
+			} else if (StrUtil.equals(doctorApplyorder.getOrderState(), KrbConstants.OrderState.HAD_CHECK)) {
+				detail = yunpianPropertiesConfig.getSignature() + "您好，您已按照约定到场履约"+ quApplyOrder.getApplyTime()
+						+ quApplyOrder.getHospitalName() + quApplyOrder.getInspItemName()+"服务。";
+			}
+			SmsUtils.sendSms(yunpianClient, quApplyOrder.getPeoplePhone(), detail);
+		}
+
 	}
 
 }

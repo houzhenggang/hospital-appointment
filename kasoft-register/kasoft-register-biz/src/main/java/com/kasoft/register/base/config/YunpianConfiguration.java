@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @author kylin
  * @create 2019-08-15 11:01
  */
-@Component
+@Configuration
 @AllArgsConstructor
 public class YunpianConfiguration {
 
@@ -19,7 +19,6 @@ public class YunpianConfiguration {
 	@Bean
 	public YunpianClient yunpianClient() {
 		String appKey = yunpianPropertiesConfig.getApikey();
-		System.out.println(appKey);
 		return new YunpianClient(appKey).init();
 	}
 }

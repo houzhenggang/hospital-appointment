@@ -5,26 +5,20 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.api.entity.DoctorApplyorder;
+import com.kasoft.register.base.config.YunpianPropertiesConfig;
 import com.kasoft.register.base.service.DoctorApplyorderService;
 import com.kasoft.register.base.utils.SmsUtils;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import com.pig4cloud.pigx.common.security.annotation.Inner;
 import com.yunpian.sdk.YunpianClient;
-import com.yunpian.sdk.model.Result;
-import com.yunpian.sdk.model.SmsSingleSend;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URLEncoder;
 import java.time.LocalDate;
-import java.util.Map;
-
-import static com.yunpian.sdk.constant.Config.ENCODING;
-import static com.yunpian.sdk.constant.YunpianConstant.*;
 
 
 /**
@@ -40,6 +34,10 @@ import static com.yunpian.sdk.constant.YunpianConstant.*;
 public class DoctorApplyorderController {
 
     private final DoctorApplyorderService doctorApplyorderService;
+
+    private final YunpianClient yunpianClient;
+
+    private final YunpianPropertiesConfig yunpianPropertiesConfig;
 
     /**
      * pc端分页查询
@@ -137,7 +135,8 @@ public class DoctorApplyorderController {
     @GetMapping("/test/send/message")
     public R sendMessageTest(@RequestParam String mobile)throws Exception {
 		//初始化clnt,使用单例方式
-		SmsUtils.sendApplyOrderCancelSms(mobile, "外科7项", "2019年08月09日 9:00-10:00", "南京市中西医结合医院");
+		String text = yunpianPropertiesConfig.getSignature()+ "您好，您的预约" + "2019年08月15日 8:00-9:00南京市中西医结合医院外科7项" + "服务已成功取消。";
+		SmsUtils.sendSms(yunpianClient, mobile, text);
 		return R.ok(null, "发送成功!");
     }
 

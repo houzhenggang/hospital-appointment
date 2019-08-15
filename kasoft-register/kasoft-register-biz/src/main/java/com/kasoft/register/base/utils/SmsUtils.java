@@ -8,128 +8,28 @@ import lombok.experimental.UtilityClass;
 import java.util.Map;
 
 /**
+ * <p>
+ * 发送短息提示工具类
+ * </p>
+ *
  * @author kylin
- * @create 2019-08-09 20:40
+ * @since 2019/8/15 15:48
  */
 @UtilityClass
 public class SmsUtils {
 
 	/**
-	 * 使用SDK发送单条短信,智能匹配短信模板
+	 * 短信提醒
 	 *
-	 * @param mobile 患者手机号
-	 * @param name 患者姓名
-	 * @param time 预约时间
-	 * @param hospital 预约医院
+	 * @param mobile   患者手机号
+	 * @param text     发送内容
 	 */
-	public void sendApplySuccessSms(String mobile, String name, String time, String hospital) {
-		//初始化client,apikey作为所有请求的默认值(可以为空)
-//		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
-		YunpianClient clnt = new YunpianClient("a2d92f9316692af77ca628217b20a0ae").init();
-		Map<String, String> param = clnt.newParam(2);
+	public void sendSms(YunpianClient yunpianClient, String mobile, String text) {
+		Map<String, String> param = yunpianClient.newParam(2);
 		param.put(YunpianClient.MOBILE, mobile);
-		param.put(YunpianClient.TEXT, "【南京市智慧医疗】" + name + "您预约已成功:请您携带身份证于" + time + "到达" + hospital + "，前日请勿饮酒,注意休息.当日晨勿进食,水,药。祝您生活愉快！");
-		Result<SmsSingleSend> r = clnt.sms().single_send(param);
-		//获取返回结果，返回码:r.getCode(),返回码描述:r.getMsg(),API结果:r.getData(),其他说明:r.getDetail(),调用异常:r.getThrowable()
-		r.getData();
-		clnt.close();
-	}
-
-
-	/**
-	 * 预约订单过期提醒
-	 *
-	 * @param mobile 患者手机号
-	 * @param name 患者姓名
-	 * @param time 预约时间
-	 * @param hospital 预约医院
-	 */
-	public void sendApplyOrderExpireSms(String mobile, String name, String time, String hospital) {
-		//初始化client,apikey作为所有请求的默认值(可以为空)
-		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
-//		YunpianClient clnt = new YunpianClient("a2d92f9316692af77ca628217b20a0ae").init();
-		Map<String, String> param = clnt.newParam(2);
-		param.put(YunpianClient.MOBILE, mobile);
-		param.put(YunpianClient.TEXT, "【南京市智慧医疗】" + name + "您预约已成功:请您携带身份证于" + time + "到达" + hospital + "，前日请勿饮酒,注意休息.当日晨勿进食,水,药。祝您生活愉快！");
-		Result<SmsSingleSend> r = clnt.sms().single_send(param);
-		r.getData();
-		clnt.close();
-	}
-
-	/**
-	 * 预约订单取消提醒
-	 *
-	 * @param mobile 患者手机号
-	 * @param name 患者姓名
-	 * @param time 预约时间
-	 * @param hospital 预约医院
-	 */
-	public void sendApplyOrderCancelSms(String mobile, String name, String time, String hospital) {
-		//初始化client,apikey作为所有请求的默认值(可以为空)
-		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
-//		YunpianClient clnt = new YunpianClient("a2d92f9316692af77ca628217b20a0ae").init();
-		Map<String, String> param = clnt.newParam(2);
-		param.put(YunpianClient.MOBILE, mobile);
-		param.put(YunpianClient.TEXT, "【南京擎卡医疗】您好，您的预约" + time + hospital + name + "服务已成功取消。");
-		Result<SmsSingleSend> r = clnt.sms().single_send(param);
-		r.getData();
-		clnt.close();
-	}
-
-	/**
-	 * 预约订单到场确认提醒
-	 *
-	 * @param mobile 患者手机号
-	 * @param name 患者姓名
-	 * @param time 预约时间
-	 * @param hospital 预约医院
-	 */
-	public void sendApplyOrderConfirmSms(String mobile, String name, String time, String hospital) {
-		//初始化client,apikey作为所有请求的默认值(可以为空)
-		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
-//		YunpianClient clnt = new YunpianClient("a2d92f9316692af77ca628217b20a0ae").init();
-		Map<String, String> param = clnt.newParam(2);
-		param.put(YunpianClient.MOBILE, mobile);
-		param.put(YunpianClient.TEXT, "【南京市智慧医疗】" + name + "您预约已成功:请您携带身份证于" + time + "到达" + hospital + "，前日请勿饮酒,注意休息.当日晨勿进食,水,药。祝您生活愉快！");
-		Result<SmsSingleSend> r = clnt.sms().single_send(param);
-		r.getData();
-		clnt.close();
-	}
-
-
-
-
-	public String getPeriodDetail(String period) {
-		String periodDetail;
-		switch (period){
-			case "1":
-				periodDetail = "8:00~9:00";
-				break;
-			case "2":
-				periodDetail = "9:00~10:00";
-				break;
-			case "3":
-				periodDetail = "10:00~11:00";
-				break;
-			case "4":
-				periodDetail = "11:00~12:00";
-				break;
-			case "5":
-				periodDetail = "13:00~14:00";
-				break;
-			case "6":
-				periodDetail = "14:00~15:00";
-				break;
-			case "7":
-				periodDetail = "15:00~16:00";
-				break;
-			case "8":
-				periodDetail = "16:00~17:00";
-				break;
-			default:
-				periodDetail = "全天";
-				break;
-		}
-		return periodDetail;
+		param.put(YunpianClient.TEXT, text);
+		Result<SmsSingleSend> r = yunpianClient.sms().single_send(param);
+		System.out.println(r.getData());
+		yunpianClient.close();
 	}
 }
