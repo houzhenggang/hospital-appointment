@@ -20,4 +20,7 @@ public interface DoctorInspectresourceService extends IService<DoctorInspectreso
 	 * @return boolean
 	 */
 	boolean saveInspectresourceBatch(List<DoctorInspectresource> inspectresources);
+
+
+	List<DoctorInspectresource> getAllItemGroupPage();
 }

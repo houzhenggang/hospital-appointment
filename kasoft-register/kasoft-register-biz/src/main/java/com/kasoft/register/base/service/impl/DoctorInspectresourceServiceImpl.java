@@ -7,6 +7,7 @@ import com.kasoft.register.base.api.entity.DoctorInspectresource;
 import com.kasoft.register.base.mapper.DoctorInspectresourceMapper;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
 import com.pig4cloud.pigx.common.core.exception.CheckedException;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,10 @@ import java.util.List;
  * @date 2019-07-27 10:32:30
  */
 @Service
+@AllArgsConstructor
 public class DoctorInspectresourceServiceImpl extends ServiceImpl<DoctorInspectresourceMapper, DoctorInspectresource> implements DoctorInspectresourceService {
+
+	private final DoctorInspectresourceMapper doctorInspectresourceMapper;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -36,5 +40,10 @@ public class DoctorInspectresourceServiceImpl extends ServiceImpl<DoctorInspectr
 			}
 		});
 		return this.saveBatch(inspectresources);
+	}
+
+	@Override
+	public List<DoctorInspectresource> getAllItemGroupPage() {
+		return doctorInspectresourceMapper.getAllItemGroup();
 	}
 }

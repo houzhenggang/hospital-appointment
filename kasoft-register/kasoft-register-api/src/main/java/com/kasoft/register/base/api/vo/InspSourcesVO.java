@@ -21,6 +21,8 @@ public class InspSourcesVO {
 
 	private String inspItemName;
 
+	private String otherItemName;
+
 	private String startTime;
 
 	private String endTime;

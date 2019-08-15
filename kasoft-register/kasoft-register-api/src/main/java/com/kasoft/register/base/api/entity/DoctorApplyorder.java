@@ -84,6 +84,13 @@ public class DoctorApplyorder extends Model<DoctorApplyorder> {
      */
     @ApiModelProperty(value="预约检查项目名称")
     private String inspItemName;
+
+	/**
+	 * 预约检查项目禁忌
+	 */
+	@ApiModelProperty(value="预约检查项目禁忌")
+	private String inspItemTaboo;
+
     /**
      * 检查资源ID
      */

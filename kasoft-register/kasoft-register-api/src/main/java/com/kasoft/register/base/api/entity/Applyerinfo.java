@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -54,7 +56,7 @@ public class Applyerinfo extends Model<Applyerinfo> {
      * 出生日期
      */
     @ApiModelProperty(value="出生日期")
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
         /**
      * 关联用户编号
      */

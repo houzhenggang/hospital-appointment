@@ -35,6 +35,70 @@ public class SmsUtils {
 		clnt.close();
 	}
 
+
+	/**
+	 * 预约订单过期提醒
+	 *
+	 * @param mobile 患者手机号
+	 * @param name 患者姓名
+	 * @param time 预约时间
+	 * @param hospital 预约医院
+	 */
+	public void sendApplyOrderExpireSms(String mobile, String name, String time, String hospital) {
+		//初始化client,apikey作为所有请求的默认值(可以为空)
+		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
+//		YunpianClient clnt = new YunpianClient("a2d92f9316692af77ca628217b20a0ae").init();
+		Map<String, String> param = clnt.newParam(2);
+		param.put(YunpianClient.MOBILE, mobile);
+		param.put(YunpianClient.TEXT, "【南京市智慧医疗】" + name + "您预约已成功:请您携带身份证于" + time + "到达" + hospital + "，前日请勿饮酒,注意休息.当日晨勿进食,水,药。祝您生活愉快！");
+		Result<SmsSingleSend> r = clnt.sms().single_send(param);
+		r.getData();
+		clnt.close();
+	}
+
+	/**
+	 * 预约订单取消提醒
+	 *
+	 * @param mobile 患者手机号
+	 * @param name 患者姓名
+	 * @param time 预约时间
+	 * @param hospital 预约医院
+	 */
+	public void sendApplyOrderCancelSms(String mobile, String name, String time, String hospital) {
+		//初始化client,apikey作为所有请求的默认值(可以为空)
+		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
+//		YunpianClient clnt = new YunpianClient("a2d92f9316692af77ca628217b20a0ae").init();
+		Map<String, String> param = clnt.newParam(2);
+		param.put(YunpianClient.MOBILE, mobile);
+		param.put(YunpianClient.TEXT, "【南京擎卡医疗】您好，您的预约" + time + hospital + name + "服务已成功取消。");
+		Result<SmsSingleSend> r = clnt.sms().single_send(param);
+		r.getData();
+		clnt.close();
+	}
+
+	/**
+	 * 预约订单到场确认提醒
+	 *
+	 * @param mobile 患者手机号
+	 * @param name 患者姓名
+	 * @param time 预约时间
+	 * @param hospital 预约医院
+	 */
+	public void sendApplyOrderConfirmSms(String mobile, String name, String time, String hospital) {
+		//初始化client,apikey作为所有请求的默认值(可以为空)
+		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
+//		YunpianClient clnt = new YunpianClient("a2d92f9316692af77ca628217b20a0ae").init();
+		Map<String, String> param = clnt.newParam(2);
+		param.put(YunpianClient.MOBILE, mobile);
+		param.put(YunpianClient.TEXT, "【南京市智慧医疗】" + name + "您预约已成功:请您携带身份证于" + time + "到达" + hospital + "，前日请勿饮酒,注意休息.当日晨勿进食,水,药。祝您生活愉快！");
+		Result<SmsSingleSend> r = clnt.sms().single_send(param);
+		r.getData();
+		clnt.close();
+	}
+
+
+
+
 	public String getPeriodDetail(String period) {
 		String periodDetail;
 		switch (period){

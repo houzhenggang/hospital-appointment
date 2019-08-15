@@ -3,6 +3,8 @@ package com.kasoft.register.base.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
 
+import java.util.List;
+
 /**
  * 检查资源
  *
@@ -11,4 +13,6 @@ import com.kasoft.register.base.api.entity.DoctorInspectresource;
  */
 public interface DoctorInspectresourceMapper extends BaseMapper<DoctorInspectresource> {
 
+
+	List<DoctorInspectresource> getAllItemGroup();
 }

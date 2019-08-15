@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.api.entity.DoctorApplyorder;
 import com.kasoft.register.base.service.DoctorApplyorderService;
+import com.kasoft.register.base.utils.SmsUtils;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import com.pig4cloud.pigx.common.security.annotation.Inner;
@@ -93,7 +94,7 @@ public class DoctorApplyorderController {
     @ApiOperation(value = "新增预约订单", notes = "新增预约订单")
     @SysLog("新增预约订单")
     @PostMapping
-//    @PreAuthorize("@pms.hasPermission('base_doctorapplyorder_add')")
+    @PreAuthorize("@pms.hasPermission('base_doctorapplyorder_add')")
     public R save(@RequestBody DoctorApplyorder doctorApplyorder) {
 		doctorApplyorderService.addApplyorder(doctorApplyorder);
         return R.ok(doctorApplyorder);
@@ -133,19 +134,11 @@ public class DoctorApplyorderController {
      */
     @Inner(false)
     @ApiOperation(value = "短信推送测试", notes = "短信推送测试")
-    @SysLog("短信推送测试")
     @GetMapping("/test/send/message")
     public R sendMessageTest(@RequestParam String mobile)throws Exception {
 		//初始化clnt,使用单例方式
-		YunpianClient clnt = new YunpianClient("7a9a24894961a2377760f79b44bdf7be").init();
-		//发送短信API
-		Map<String, String> param = clnt.newParam(2);
-		param.put(YunpianClient.MOBILE, mobile);
-		param.put(YunpianClient.TEXT, "【南京擎卡医疗】郭其林您预约已成功:请您携带身份证于2019-08到达南京第二人民医院，前日请勿饮酒,注意休息.当日晨勿进食,水,药。祝您生活愉快！");
-		Result<SmsSingleSend> r = clnt.sms().single_send(param);
-		//释放clnt
-		clnt.close();
-		return R.ok(null, r.getMsg());
+		SmsUtils.sendApplyOrderCancelSms(mobile, "外科7项", "2019年08月09日 9:00-10:00", "南京市中西医结合医院");
+		return R.ok(null, "发送成功!");
     }
 
 }

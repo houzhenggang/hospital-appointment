@@ -2,9 +2,7 @@ package com.kasoft.register.base.controller;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -24,8 +22,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -44,8 +40,21 @@ public class DoctorInspectresourceController {
 
     private final DoctorInspectresourceService doctorInspectresourceService;
 
+	/**
+	 * 资源分类列表
+	 * @param page 分页对象
+	 * @return R
+	 */
+	@ApiOperation(value = "分页查询", notes = "分页查询")
+	@GetMapping("/page/all/item/group")
+	public R getAllItemGroupPage(Page page) {
+		List<DoctorInspectresource> list = doctorInspectresourceService.getAllItemGroupPage();
+		return R.ok(list);
+	}
+
+
     /**
-     * 分页查询
+     * 移动端资源列表
      * @param page 分页对象
      * @param args 参数
      * @return R
