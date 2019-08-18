@@ -41,10 +41,11 @@ public class DoctorInspectresourceController {
     private final DoctorInspectresourceService doctorInspectresourceService;
 
 	/**
-	 * 资源分类列表
+	 * 查询资源分类列表
 	 * @return R
 	 */
-	@ApiOperation(value = "分页查询", notes = "分页查询")
+	@Inner(false)
+	@ApiOperation(value = "查询资源分类列表", notes = "查询资源分类列表")
 	@GetMapping("/page/all/item/group")
 	public R getAllItemGroupPage() {
 		List<DoctorInspectresource> list = doctorInspectresourceService.getAllItemGroupPage();
