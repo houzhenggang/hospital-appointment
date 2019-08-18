@@ -59,7 +59,7 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 			String hospital = doctorApplyorder.getHospitalName();
 			String price = doctorApplyorder.getFeeTotal().toString();
 			String detail = yunpianPropertiesConfig.getSignature() + "您已成功预约" + hospital + "的" + name + "，收费" + price
-					+ "元，请您携带身份证于" + time + "到达" + hospital + "导医台处登记就诊，稍后医院工作人员会电话告知注意事项，请您注意接听。";
+					+ "，请您携带身份证于" + time + "到达" + hospital + "导医台处登记就诊，稍后医院工作人员会电话告知注意事项，请您注意接听。";
 			SmsUtils.sendSms(yunpianClient, mobile, detail);
 		}
 	}

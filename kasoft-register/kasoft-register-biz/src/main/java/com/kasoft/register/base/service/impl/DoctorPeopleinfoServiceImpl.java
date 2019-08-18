@@ -51,10 +51,10 @@ public class DoctorPeopleinfoServiceImpl extends ServiceImpl<DoctorPeopleinfoMap
 		if(hasUserName(userDTO.getUsername())) {
 			return R.failed(false, "用户名已经存在");
 		}
-//		UserInfo quUserInfo = remoteUserService.social("SMS@" + userDTO.getPhone(), SecurityConstants.FROM_IN).getData();
-//		if (quUserInfo != null){
-//			return R.failed(false, "手机号重复!");
-//		}
+		UserInfo quUserInfo = remoteUserService.social("SMS@" + userDTO.getPhone(), SecurityConstants.FROM_IN).getData();
+		if (quUserInfo != null){
+			return R.failed(false, "手机号重复!");
+		}
 		remoteUserService.save(userDTO);
 		SysUser sysUser = remoteUserService.user(userDTO.getUsername()).getData();
 		DoctorPeopleinfo peopleinfo = new DoctorPeopleinfo();
