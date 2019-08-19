@@ -6,8 +6,10 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.kasoft.register.base.api.entity.DoctorInspectionitem;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
 import com.kasoft.register.base.api.vo.InspSourcesVO;
+import com.kasoft.register.base.service.DoctorInspectionitemService;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
 import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
@@ -40,6 +42,8 @@ public class DoctorInspectresourceController {
 
     private final DoctorInspectresourceService doctorInspectresourceService;
 
+    private final DoctorInspectionitemService doctorInspectionitemService;
+
 	/**
 	 * 查询资源分类列表
 	 * @return R
@@ -64,8 +68,9 @@ public class DoctorInspectresourceController {
     public R getDoctorInspectresourcePage(Page page, InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.page(page, new QueryWrapper<DoctorInspectresource>()
 				.select("SUM(quantity) as quantity,MAX(hospital_id) as hospital_id,MAX(hospital_name) as hospital_name," +
-						"MAX(hospital_phone) as hospital_phone,MAX(insp_item_id) as insp_item_id,MAX(insp_item_name) as insp_item_name," +
+						"MAX(hospital_phone) as hospital_phone,MAX(insp_item_id) as insp_item_id, MAX(insp_item_type) as insp_item_type, MAX(insp_item_name) as insp_item_name," +
 						"MIN(unit_price) as unit_price, MAX(unit_price) as max_unit_price, MAX(insp_resource_id) as insp_resource_id")
+			.eq(StrUtil.isNotBlank(args.getInspItemType()), "insp_item_type", args.getInspItemType())
 			.like(StrUtil.isNotBlank(args.getInspItemName()), "insp_item_name", args.getInspItemName())
 			.between(StrUtil.isNotBlank(args.getStartDate()), "insp_item_date", args.getStartDate(), args.getEndDate())
 			.between(StrUtil.isBlank(args.getStartDate()), "insp_item_date", DateUtil.format(new Date(), DatePattern.NORM_DATE_PATTERN),
@@ -182,6 +187,8 @@ public class DoctorInspectresourceController {
 		if (count > 0) {
 			return R.failed("同一医院,同一项目,同一时间段只允许添加一个检查资源!");
 		}
+		DoctorInspectionitem qu = doctorInspectionitemService.getById(doctorInspectresource.getInspItemId());
+		doctorInspectresource.setInspItemType(qu.getInspItemType());
 		return R.ok(doctorInspectresourceService.save(doctorInspectresource));
     }
 

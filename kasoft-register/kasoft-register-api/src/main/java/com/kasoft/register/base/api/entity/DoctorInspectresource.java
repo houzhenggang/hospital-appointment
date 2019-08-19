@@ -58,6 +58,12 @@ public class DoctorInspectresource extends Model<DoctorInspectresource> {
     private String inspItemId;
 
     /**
+     * 检查项目类别
+     */
+    @ApiModelProperty(value="检查项目类别")
+    private String inspItemType;
+
+    /**
      * 检查项目名称
      */
     @ApiModelProperty(value="检查项目名称")

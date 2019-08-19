@@ -19,6 +19,8 @@ public class InspSourcesVO {
 
 	private String inspItemId;
 
+	private String inspItemType;
+
 	private String inspItemName;
 
 	private String otherItemName;
