@@ -129,6 +129,12 @@ public class SysUser implements Serializable {
 	@ApiModelProperty(value = "开源中国唯一标识")
 	private String oscId;
 
+	/**
+	 * 我的南京唯一标识
+	 */
+	@ApiModelProperty(value = "我的南京唯一标识")
+	private String mynjOpenid;
+
 	@ApiModelProperty(value = "真实姓名")
 	@TableField(exist = false)
 	private String name;

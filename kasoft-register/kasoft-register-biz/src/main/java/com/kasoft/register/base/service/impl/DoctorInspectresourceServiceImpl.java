@@ -45,8 +45,6 @@ public class DoctorInspectresourceServiceImpl extends ServiceImpl<DoctorInspectr
 			if (count > 0) {
 				throw new CheckedException("同一医院,同一项目,同一时间段只允许添加一个检查资源!");
 			}
-			DoctorInspectionitem qu = doctorInspectionitemMapper.selectById(inspectresource.getInspItemId());
-			inspectresource.setInspItemType(qu.getInspItemType());
 		});
 		return this.saveBatch(inspectresources);
 	}

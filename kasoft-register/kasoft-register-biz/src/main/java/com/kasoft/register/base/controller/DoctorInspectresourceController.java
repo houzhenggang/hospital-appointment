@@ -63,6 +63,7 @@ public class DoctorInspectresourceController {
      * @param args 参数
      * @return R
      */
+    @Inner(false)
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page/group")
     public R getDoctorInspectresourcePage(Page page, InspSourcesVO args) {
@@ -71,11 +72,15 @@ public class DoctorInspectresourceController {
 						"MAX(hospital_phone) as hospital_phone,MAX(insp_item_id) as insp_item_id, MAX(insp_item_type) as insp_item_type, MAX(insp_item_name) as insp_item_name," +
 						"MIN(unit_price) as unit_price, MAX(unit_price) as max_unit_price, MAX(insp_resource_id) as insp_resource_id")
 			.eq(StrUtil.isNotBlank(args.getInspItemType()), "insp_item_type", args.getInspItemType())
-			.like(StrUtil.isNotBlank(args.getInspItemName()), "insp_item_name", args.getInspItemName())
+
 			.between(StrUtil.isNotBlank(args.getStartDate()), "insp_item_date", args.getStartDate(), args.getEndDate())
 			.between(StrUtil.isBlank(args.getStartDate()), "insp_item_date", DateUtil.format(new Date(), DatePattern.NORM_DATE_PATTERN),
 				DateUtil.format(DateUtil.offsetDay(new Date(), 14), DatePattern.NORM_DATE_PATTERN))
+				.and(StrUtil.isNotBlank(args.getInspItemName()), wrapper -> wrapper.like("insp_item_type", args.getInspItemName()).or()
+				.like("insp_item_name", args.getInspItemName()))
 			.groupBy("hospital_id, insp_item_id")
+//				.having(StrUtil.isNotBlank(args.getInspItemName()), "insp_item_type like " + "'%" + args.getInspItemName() + "%'"
+//						+ " or insp_item_name like " + "'%" + args.getInspItemName() + "%'")
 		));
     }
 
@@ -187,8 +192,6 @@ public class DoctorInspectresourceController {
 		if (count > 0) {
 			return R.failed("同一医院,同一项目,同一时间段只允许添加一个检查资源!");
 		}
-		DoctorInspectionitem qu = doctorInspectionitemService.getById(doctorInspectresource.getInspItemId());
-		doctorInspectresource.setInspItemType(qu.getInspItemType());
 		return R.ok(doctorInspectresourceService.save(doctorInspectresource));
     }
 
