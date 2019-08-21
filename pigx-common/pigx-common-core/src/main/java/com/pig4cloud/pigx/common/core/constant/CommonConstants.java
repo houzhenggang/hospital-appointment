@@ -100,5 +100,5 @@ public interface CommonConstants {
 	/**
 	 * 默认存储bucket
 	 */
-	String BUCKET_NAME = "lengleng";
+	String BUCKET_NAME = "register";
 }

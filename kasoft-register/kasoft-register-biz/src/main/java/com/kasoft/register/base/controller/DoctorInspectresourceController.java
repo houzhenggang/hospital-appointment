@@ -6,10 +6,8 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.kasoft.register.base.api.entity.DoctorInspectionitem;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
 import com.kasoft.register.base.api.vo.InspSourcesVO;
-import com.kasoft.register.base.service.DoctorInspectionitemService;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
 import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
@@ -41,8 +39,6 @@ import java.util.List;
 public class DoctorInspectresourceController {
 
     private final DoctorInspectresourceService doctorInspectresourceService;
-
-    private final DoctorInspectionitemService doctorInspectionitemService;
 
 	/**
 	 * 查询资源分类列表
@@ -79,8 +75,6 @@ public class DoctorInspectresourceController {
 				.and(StrUtil.isNotBlank(args.getInspItemName()), wrapper -> wrapper.like("insp_item_type", args.getInspItemName()).or()
 				.like("insp_item_name", args.getInspItemName()))
 			.groupBy("hospital_id, insp_item_id")
-//				.having(StrUtil.isNotBlank(args.getInspItemName()), "insp_item_type like " + "'%" + args.getInspItemName() + "%'"
-//						+ " or insp_item_name like " + "'%" + args.getInspItemName() + "%'")
 		));
     }
 
