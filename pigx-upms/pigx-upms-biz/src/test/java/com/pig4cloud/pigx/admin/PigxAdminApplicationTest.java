@@ -30,14 +30,14 @@ import java.time.format.DateTimeFormatter;
  * 加解密单元测试
  */
 public class PigxAdminApplicationTest {
-	@Test
-	public void testJasypt() {
-		 DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
-
-		String date = DateUtil.date().toDateStr();
-
-		LocalDateTime dateTime = LocalDateTime.parse("2019-06-11",formatter);
-
-		System.out.println(dateTime);
-	}
+//	@Test
+//	public void testJasypt() {
+//		 DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
+//
+//		String date = DateUtil.date().toDateStr();
+//
+//		LocalDateTime dateTime = LocalDateTime.parse("2019-06-11",formatter);
+//
+//		System.out.println(dateTime);
+//	}
 }

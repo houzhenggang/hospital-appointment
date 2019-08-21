@@ -38,7 +38,7 @@ public class InspectionpriceController {
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page")
     public R getInspectionpricePage(Page page, Inspectionprice inspectionprice) {
-        return R.ok(inspectionpriceService.page(page, Wrappers.query(inspectionprice)));
+        return R.ok(inspectionpriceService.page(page, Wrappers.query(inspectionprice).orderByDesc("create_time")));
     }
 
 

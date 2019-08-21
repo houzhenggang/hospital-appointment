@@ -41,7 +41,7 @@ public class DoctorInspectionitemController {
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page" )
     public R getDoctorInspectionitemPage(Page page, DoctorInspectionitem doctorInspectionitem) {
-        return R.ok(doctorInspectionitemService.page(page, Wrappers.query(doctorInspectionitem)));
+        return R.ok(doctorInspectionitemService.page(page, Wrappers.query(doctorInspectionitem).orderByDesc("create_time")));
     }
 
 	/**
