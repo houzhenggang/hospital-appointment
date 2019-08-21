@@ -66,9 +66,8 @@ public class DoctorInspectresourceController {
         return R.ok(doctorInspectresourceService.page(page, new QueryWrapper<DoctorInspectresource>()
 				.select("SUM(quantity) as quantity,MAX(hospital_id) as hospital_id,MAX(hospital_name) as hospital_name," +
 						"MAX(hospital_phone) as hospital_phone,MAX(insp_item_id) as insp_item_id, MAX(insp_item_type) as insp_item_type, MAX(insp_item_name) as insp_item_name," +
-						"MIN(unit_price) as unit_price, MAX(unit_price) as max_unit_price, MAX(insp_resource_id) as insp_resource_id")
+						"insp_item_exp,MIN(unit_price) as unit_price, MAX(unit_price) as max_unit_price, MAX(insp_resource_id) as insp_resource_id")
 			.eq(StrUtil.isNotBlank(args.getInspItemType()), "insp_item_type", args.getInspItemType())
-
 			.between(StrUtil.isNotBlank(args.getStartDate()), "insp_item_date", args.getStartDate(), args.getEndDate())
 			.between(StrUtil.isBlank(args.getStartDate()), "insp_item_date", DateUtil.format(new Date(), DatePattern.NORM_DATE_PATTERN),
 				DateUtil.format(DateUtil.offsetDay(new Date(), 14), DatePattern.NORM_DATE_PATTERN))

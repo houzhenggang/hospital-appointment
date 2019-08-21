@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -68,6 +67,13 @@ public class DoctorInspectresource extends Model<DoctorInspectresource> {
      */
     @ApiModelProperty(value="检查项目名称")
     private String inspItemName;
+
+	/**
+	 * 检查项目说明
+	 */
+	@ApiModelProperty(value="检查项目说明")
+	private String inspItemExp;
+
     /**
      * 收费单价
      */
