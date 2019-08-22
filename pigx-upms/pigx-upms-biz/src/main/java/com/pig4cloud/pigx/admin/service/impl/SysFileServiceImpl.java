@@ -65,7 +65,8 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 		Map<String, String> resultMap = new HashMap<>(4);
 		resultMap.put("bucketName", CommonConstants.BUCKET_NAME);
 		resultMap.put("fileName", fileName);
-
+		resultMap.put("name", CommonConstants.BUCKET_NAME + StrUtil.DASHED + fileName);
+		resultMap.put("url", "/admin/sys-file/" + resultMap.get("name"));
 		try {
 			minioTemplate.putObject(CommonConstants.BUCKET_NAME, fileName, file.getInputStream());
 			//文件管理数据记录,收集管理追踪文件

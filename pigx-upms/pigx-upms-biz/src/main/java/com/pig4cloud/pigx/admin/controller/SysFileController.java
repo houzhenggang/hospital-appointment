@@ -23,9 +23,11 @@ import com.pig4cloud.pigx.admin.api.entity.SysFile;
 import com.pig4cloud.pigx.admin.service.SysFileService;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
+import com.pig4cloud.pigx.common.security.annotation.Inner;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,10 +44,10 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/sys-file")
+@Slf4j
 @Api(value = "sys-file", tags = "文件管理")
 public class SysFileController {
 	private final SysFileService sysFileService;
-
 	/**
 	 * 分页查询
 	 *
@@ -86,6 +88,7 @@ public class SysFileController {
 		return sysFileService.uploadFile(file);
 	}
 
+
 	/**
 	 * 获取文件
 	 *
@@ -94,6 +97,7 @@ public class SysFileController {
 	 * @return
 	 */
 	@GetMapping("/{fileName}")
+	@Inner(false)
 	public void file(@PathVariable String fileName, HttpServletResponse response) {
 		sysFileService.getFile(fileName, response);
 	}
