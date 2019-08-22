@@ -20,8 +20,8 @@
             </resultMap>
 	<select id="getAllItemGroup" resultType="com.kasoft.register.base.api.entity.DoctorInspectresource">
 			SELECT
-				a.insp_item_name,
-				b.insp_item_exp AS 'remark',
+				MAX( a.insp_item_name ) AS insp_item_name,
+				MAX( b.insp_item_exp ) AS 'remark',
 				MIN( unit_price ) AS unit_price,
 				MAX( unit_price ) AS max_unit_price
 			FROM
