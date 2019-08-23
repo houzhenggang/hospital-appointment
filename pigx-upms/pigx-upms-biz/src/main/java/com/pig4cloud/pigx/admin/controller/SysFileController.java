@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 
 /**
@@ -86,6 +87,19 @@ public class SysFileController {
 	@PostMapping("/upload")
 	public R upload(@RequestParam("file") MultipartFile file) {
 		return sysFileService.uploadFile(file);
+	}
+
+	/**
+	 * 上传文件
+	 * 文件名采用uuid,避免原始文件名中带"-"符号导致下载的时候解析出现异常
+	 *
+	 * @param file 资源
+	 * @return R(bucketName, filename)
+	 */
+	@PostMapping("/uploadNew")
+	@Inner(false)
+	public Map<String, String> uploadNew(@RequestParam("file") MultipartFile file) {
+		return (Map<String, String>)sysFileService.uploadFile(file).getData();
 	}
 
 
