@@ -45,6 +45,12 @@ public class DoctorInspectresource extends Model<DoctorInspectresource> {
     private String hospitalName;
 
 	/**
+	 * 医院图片
+	 */
+	@ApiModelProperty(value="医院图片")
+    private String hospitalImage;
+
+	/**
      * 医院电话
      */
     @ApiModelProperty(value="医院电话")
