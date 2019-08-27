@@ -49,6 +49,14 @@ public interface SysFileService extends IService<SysFile> {
 	void getFile(String fileName, HttpServletResponse response);
 
 	/**
+	 * 读取图片缩略图
+	 *
+	 * @param fileName
+	 * @param response
+	 */
+	void getFileScale(String fileName, HttpServletResponse response);
+
+	/**
 	 * 删除文件
 	 *
 	 * @param id

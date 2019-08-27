@@ -89,19 +89,6 @@ public class SysFileController {
 		return sysFileService.uploadFile(file);
 	}
 
-	/**
-	 * 上传文件
-	 * 文件名采用uuid,避免原始文件名中带"-"符号导致下载的时候解析出现异常
-	 *
-	 * @param file 资源
-	 * @return R(bucketName, filename)
-	 */
-	@PostMapping("/uploadNew")
-	@Inner(false)
-	public Map<String, String> uploadNew(@RequestParam("file") MultipartFile file) {
-		return (Map<String, String>)sysFileService.uploadFile(file).getData();
-	}
-
 
 	/**
 	 * 获取文件
@@ -110,10 +97,21 @@ public class SysFileController {
 	 * @param response
 	 * @return
 	 */
-	@GetMapping("/{fileName}")
 	@Inner(false)
+	@GetMapping("/{fileName}")
 	public void file(@PathVariable String fileName, HttpServletResponse response) {
 		sysFileService.getFile(fileName, response);
 	}
 
+	/**
+	 * 获取文件
+	 *
+	 * @param fileName 文件空间/名称
+	 * @param response 响应信息
+	 */
+	@Inner(false)
+	@GetMapping("/scale/{fileName}")
+	public void getFileScale(@PathVariable String fileName, HttpServletResponse response) {
+		sysFileService.getFileScale(fileName, response);
+	}
 }

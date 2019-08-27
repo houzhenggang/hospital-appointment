@@ -16,6 +16,7 @@
  */
 package com.pig4cloud.pigx.admin.service.impl;
 
+import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.IdUtil;
@@ -91,6 +92,24 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 				fileName.substring(separator + 1))) {
 			response.setContentType("application/octet-stream; charset=UTF-8");
 			IoUtil.copy(inputStream, response.getOutputStream());
+		} catch (Exception e) {
+			log.error("文件读取异常", e);
+		}
+	}
+
+	/**
+	 * 读取缩略图
+	 *
+	 * @param fileName 文件
+	 * @param response 响应信息
+	 */
+	@Override
+	public void getFileScale(String fileName, HttpServletResponse response) {
+		int separator = fileName.lastIndexOf(StrUtil.DASHED);
+		try (InputStream inputStream = minioTemplate.getObject(fileName.substring(0, separator),
+				fileName.substring(separator + 1))) {
+			response.setContentType("application/octet-stream; charset=UTF-8");
+			ImgUtil.scale(inputStream, response.getOutputStream(), 0.5f);
 		} catch (Exception e) {
 			log.error("文件读取异常", e);
 		}
