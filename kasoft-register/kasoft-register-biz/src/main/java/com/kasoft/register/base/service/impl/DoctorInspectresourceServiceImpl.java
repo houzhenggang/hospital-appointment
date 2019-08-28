@@ -5,8 +5,10 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.kasoft.register.base.api.entity.DoctorHospital;
 import com.kasoft.register.base.api.entity.DoctorInspectionitem;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
+import com.kasoft.register.base.mapper.DoctorHospitalMapper;
 import com.kasoft.register.base.mapper.DoctorInspectionitemMapper;
 import com.kasoft.register.base.mapper.DoctorInspectresourceMapper;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
@@ -30,7 +32,7 @@ public class DoctorInspectresourceServiceImpl extends ServiceImpl<DoctorInspectr
 
 	private final DoctorInspectresourceMapper doctorInspectresourceMapper;
 
-	private final DoctorInspectionitemMapper doctorInspectionitemMapper;
+	private final DoctorHospitalMapper doctorHospitalMapper;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
@@ -45,13 +47,14 @@ public class DoctorInspectresourceServiceImpl extends ServiceImpl<DoctorInspectr
 			if (count > 0) {
 				throw new CheckedException("同一医院,同一项目,同一时间段只允许添加一个检查资源!");
 			}
+			DoctorHospital doctorHospital = doctorHospitalMapper.selectById(inspectresource.getHospitalId());
+			inspectresource.setHospitalImage(doctorHospital.getHospitalImage());
 		});
 		return this.saveBatch(inspectresources);
 	}
 
 	@Override
 	public List<DoctorInspectresource> getAllItemGroupPage() {
-		String curr = DateUtil.format(new Date(), DatePattern.NORM_DATE_PATTERN);
 		return doctorInspectresourceMapper.getAllItemGroup();
 	}
 }
