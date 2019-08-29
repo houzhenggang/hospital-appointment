@@ -80,6 +80,8 @@ public class DoctorApplyorderServiceImpl extends ServiceImpl<DoctorApplyorderMap
 				DoctorInspectresource quInspectresource = doctorInspectresourceService.getById(quApplyorder.getInspResourceId());
 				DoctorInspectresource upInspectresource = new DoctorInspectresource();
 				upInspectresource.setInspResourceId(quApplyorder.getInspResourceId());
+//				if () {
+//				}
 				upInspectresource.setQuantity(quInspectresource.getQuantity() + 1);
 				doctorInspectresourceService.updateById(upInspectresource);
 				detail = yunpianPropertiesConfig.getSignature() + "您好，您的预约"+ quApplyOrder.getApplyTime()

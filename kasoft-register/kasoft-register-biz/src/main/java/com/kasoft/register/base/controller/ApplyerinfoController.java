@@ -58,7 +58,6 @@ public class ApplyerinfoController {
     @ApiOperation(value = "新增预约人信息", notes = "新增预约人信息")
     @SysLog("新增预约人信息")
     @PostMapping
-//    @PreAuthorize("@pms.hasPermission('base_applyerinfo_add')")
     public R save(@RequestBody Applyerinfo applyerinfo) {
         return R.ok(applyerinfoService.save(applyerinfo));
     }
@@ -71,7 +70,6 @@ public class ApplyerinfoController {
     @ApiOperation(value = "修改预约人信息", notes = "修改预约人信息")
     @SysLog("修改预约人信息")
     @PutMapping
-//    @PreAuthorize("@pms.hasPermission('base_applyerinfo_edit')")
     public R updateById(@RequestBody Applyerinfo applyerinfo) {
         return R.ok(applyerinfoService.updateById(applyerinfo));
     }
@@ -84,7 +82,6 @@ public class ApplyerinfoController {
     @ApiOperation(value = "通过id删除预约人信息", notes = "通过id删除预约人信息")
     @SysLog("通过id删除预约人信息")
     @DeleteMapping("/{applyerId}")
-//    @PreAuthorize("@pms.hasPermission('kasoft-register-biz_applyerinfo_del')")
     public R removeById(@PathVariable String applyerId) {
         return R.ok(applyerinfoService.removeById(applyerId));
     }

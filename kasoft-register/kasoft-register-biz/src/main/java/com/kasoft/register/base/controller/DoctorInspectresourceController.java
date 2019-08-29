@@ -6,8 +6,10 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.kasoft.register.base.api.entity.DoctorApplyorder;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
 import com.kasoft.register.base.api.vo.InspSourcesVO;
+import com.kasoft.register.base.mapper.DoctorApplyorderMapper;
 import com.kasoft.register.base.service.DoctorInspectresourceService;
 import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
@@ -39,6 +41,8 @@ import java.util.List;
 public class DoctorInspectresourceController {
 
     private final DoctorInspectresourceService doctorInspectresourceService;
+
+	private final DoctorApplyorderMapper doctorApplyorderMapper;
 
 	/**
 	 * 查询资源分类列表
@@ -228,6 +232,12 @@ public class DoctorInspectresourceController {
     @PreAuthorize("@pms.hasPermission('base_doctorinspectresource_del')")
 	@CacheEvict(value = {KrbConstants.ED_INSPECTION_RESOURCE_DICT}, allEntries = true)
 	public R removeById(@PathVariable String inspResourceId) {
+		int count = doctorApplyorderMapper.selectCount(Wrappers.<DoctorApplyorder>lambdaQuery()
+			.eq(DoctorApplyorder::getInspItemId, inspResourceId)
+		);
+    	if (count > 0){
+			return R.failed("该资源存在预约订单,不允许删除!");
+		}
         return R.ok(doctorInspectresourceService.removeById(inspResourceId));
     }
 
