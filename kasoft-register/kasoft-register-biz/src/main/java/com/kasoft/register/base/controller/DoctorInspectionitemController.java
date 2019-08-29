@@ -98,11 +98,10 @@ public class DoctorInspectionitemController {
      * @param doctorInspectionitem 检查项目
      * @return R
      */
-    @Inner(false)
     @ApiOperation(value = "新增检查项目", notes = "新增检查项目")
     @SysLog("新增检查项目" )
     @PostMapping
-//    @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_add')" )
+    @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_add')" )
 	@CacheEvict(value = {KrbConstants.ED_INSPECTION_ITEM_DETAIL, KrbConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
     public R save(@Valid @RequestBody DoctorInspectionitem doctorInspectionitem) {
 		int count = doctorInspectionitemService.count(Wrappers.<DoctorInspectionitem>lambdaQuery()
