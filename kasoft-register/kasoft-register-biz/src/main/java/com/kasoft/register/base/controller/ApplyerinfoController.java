@@ -59,6 +59,13 @@ public class ApplyerinfoController {
     @SysLog("新增预约人信息")
     @PostMapping
     public R save(@RequestBody Applyerinfo applyerinfo) {
+		int count = applyerinfoService.count(Wrappers.<Applyerinfo>lambdaQuery()
+				.eq(Applyerinfo::getUserId, applyerinfo.getUserId())
+				.eq(Applyerinfo::getIdCard, applyerinfo.getIdCard())
+		);
+    	if(count > 0){
+			return R.failed("该就诊人已存在!");
+		}
         return R.ok(applyerinfoService.save(applyerinfo));
     }
 
