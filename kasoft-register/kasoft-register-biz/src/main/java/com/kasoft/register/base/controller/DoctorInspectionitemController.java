@@ -9,6 +9,7 @@ import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
+import com.pig4cloud.pigx.common.security.annotation.Inner;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 /**
@@ -95,12 +98,18 @@ public class DoctorInspectionitemController {
      * @param doctorInspectionitem 检查项目
      * @return R
      */
+    @Inner(false)
     @ApiOperation(value = "新增检查项目", notes = "新增检查项目")
     @SysLog("新增检查项目" )
     @PostMapping
-    @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_add')" )
+//    @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_add')" )
 	@CacheEvict(value = {KrbConstants.ED_INSPECTION_ITEM_DETAIL, KrbConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
-    public R save(@RequestBody DoctorInspectionitem doctorInspectionitem) {
+    public R save(@Valid @RequestBody DoctorInspectionitem doctorInspectionitem) {
+		int count = doctorInspectionitemService.count(Wrappers.<DoctorInspectionitem>lambdaQuery()
+				.eq(DoctorInspectionitem::getInspItemName, doctorInspectionitem.getInspItemName()));
+		if (count > 0){
+			return R.failed("检查项目名称重复!");
+		}
         return R.ok(doctorInspectionitemService.save(doctorInspectionitem));
     }
 

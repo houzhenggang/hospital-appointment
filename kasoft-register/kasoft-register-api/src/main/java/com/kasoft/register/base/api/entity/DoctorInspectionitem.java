@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 /**
@@ -34,13 +35,16 @@ public class DoctorInspectionitem extends Model<DoctorInspectionitem> {
     /**
      * 检查类别（体格检查，功能检查，化验检查）
      */
-    @ApiModelProperty(value="检查类别（体格检查，功能检查，化验检查）")
+	@NotBlank(message = "检查类别不能为空!")
+	@ApiModelProperty(value="检查类别（体格检查，功能检查，化验检查）")
     private String inspItemType;
     /**
      * 检查项目名称
      */
+    @NotBlank(message = "检查项目不能为空!")
     @ApiModelProperty(value="检查项目名称")
     private String inspItemName;
+
     /**
      * 检查项目说明（比如检查前3小时不能进食）
      */
