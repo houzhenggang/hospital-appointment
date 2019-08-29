@@ -233,7 +233,7 @@ public class DoctorInspectresourceController {
 	@CacheEvict(value = {KrbConstants.ED_INSPECTION_RESOURCE_DICT}, allEntries = true)
 	public R removeById(@PathVariable String inspResourceId) {
 		int count = doctorApplyorderMapper.selectCount(Wrappers.<DoctorApplyorder>lambdaQuery()
-			.eq(DoctorApplyorder::getInspItemId, inspResourceId)
+			.eq(DoctorApplyorder::getInspResourceId, inspResourceId)
 		);
     	if (count > 0){
 			return R.failed("该资源存在预约订单,不允许删除!");
