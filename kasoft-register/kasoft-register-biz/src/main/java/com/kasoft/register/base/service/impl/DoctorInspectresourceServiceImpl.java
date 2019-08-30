@@ -34,6 +34,8 @@ public class DoctorInspectresourceServiceImpl extends ServiceImpl<DoctorInspectr
 
 	private final DoctorHospitalMapper doctorHospitalMapper;
 
+	private final DoctorInspectionitemMapper doctorInspectionitemMapper;
+
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public boolean saveInspectresourceBatch(List<DoctorInspectresource> inspectresources) {
@@ -49,6 +51,8 @@ public class DoctorInspectresourceServiceImpl extends ServiceImpl<DoctorInspectr
 			}
 			DoctorHospital doctorHospital = doctorHospitalMapper.selectById(inspectresource.getHospitalId());
 			inspectresource.setHospitalImage(doctorHospital.getHospitalImage());
+			DoctorInspectionitem doctorInspectionitem = doctorInspectionitemMapper.selectById(inspectresource.getInspItemId());
+			inspectresource.setInspItemType(doctorInspectionitem.getInspItemType());
 		});
 		return this.saveBatch(inspectresources);
 	}
