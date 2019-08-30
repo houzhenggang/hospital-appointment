@@ -121,6 +121,7 @@ public class DoctorInspectresourceController {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
 			.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap")
 			.between("insp_item_date", args.getStartDate(), args.getEndDate())
+				.gt("end_time", new Date())
 				.eq(StrUtil.isNotBlank(args.getInspItemId()), "insp_item_id", args.getInspItemId())
 				.eq(StrUtil.isNotBlank(args.getHospitalId()), "hospital_id", args.getHospitalId())
 				.groupBy("insp_item_date,insp_item_week,insp_item_ap")
@@ -137,7 +138,9 @@ public class DoctorInspectresourceController {
     @GetMapping("/detail/group")
     public R getDoctorInspectresourceGroupDetail(InspSourcesVO args) {
         return R.ok(doctorInspectresourceService.list(new QueryWrapper<DoctorInspectresource>()
-				.select("SUM(quantity) as quantity,insp_item_date,insp_item_week,insp_item_ap,period,max(insp_resource_id) as insp_resource_id")
+				.select("SUM(quantity) as quantity, insp_item_date, insp_item_week, insp_item_ap," +
+						"period, max(insp_resource_id) as insp_resource_id")
+				.gt("end_time", new Date())
 				.eq(StrUtil.isNotBlank(args.getHospitalId()), "hospital_id", args.getHospitalId())
 				.eq(StrUtil.isNotBlank(args.getInspItemId()), "insp_item_id", args.getInspItemId())
 				.eq("insp_item_date", args.getQueryDate())
