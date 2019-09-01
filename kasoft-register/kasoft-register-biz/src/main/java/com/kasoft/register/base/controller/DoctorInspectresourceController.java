@@ -63,7 +63,6 @@ public class DoctorInspectresourceController {
      * @param args 参数
      * @return R
      */
-    @Inner(false)
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page/group")
     public R getDoctorInspectresourcePage(Page page, InspSourcesVO args) {
@@ -78,6 +77,27 @@ public class DoctorInspectresourceController {
 				.and(StrUtil.isNotBlank(args.getInspItemName()), wrapper -> wrapper.like("insp_item_type", args.getInspItemName()).or()
 				.like("insp_item_name", args.getInspItemName()))
 			.groupBy("hospital_id, insp_item_id")
+		));
+    }
+
+    /**
+     * 移动端资源列表(实时医院信息)
+     * @param page 分页对象
+     * @param args 参数
+     * @return R
+     */
+    @Inner(false)
+    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @GetMapping("/page/group/new")
+    public R getDoctorInspectresourcePageNew(Page page, InspSourcesVO args) {
+        return R.ok(doctorInspectresourceService.getDoctorInspectresourcePageNew(page, Wrappers.<DoctorInspectresource>query()
+				.isNotNull("b.hospital_id")
+				.eq("a.del_flag", 0)
+				.eq(StrUtil.isNotBlank(args.getInspItemType()), "insp_item_type", args.getInspItemType())
+				.between(StrUtil.isNotBlank(args.getStartDate()), "insp_item_date", args.getStartDate(), args.getEndDate())
+				.between(StrUtil.isBlank(args.getStartDate()), "insp_item_date", DateUtil.format(new Date(), DatePattern.NORM_DATE_PATTERN),
+						DateUtil.format(DateUtil.offsetDay(new Date(), 14), DatePattern.NORM_DATE_PATTERN))
+				.like(StrUtil.isNotBlank(args.getInspItemName()), "insp_item_name", args.getInspItemName())
 		));
     }
 

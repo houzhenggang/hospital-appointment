@@ -1,13 +1,13 @@
 package com.kasoft.register.base.service.impl;
 
-import cn.hutool.core.date.DatePattern;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.json.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kasoft.register.base.api.entity.DoctorHospital;
 import com.kasoft.register.base.api.entity.DoctorInspectionitem;
 import com.kasoft.register.base.api.entity.DoctorInspectresource;
+import com.kasoft.register.base.api.vo.InspSourcesVO;
 import com.kasoft.register.base.mapper.DoctorHospitalMapper;
 import com.kasoft.register.base.mapper.DoctorInspectionitemMapper;
 import com.kasoft.register.base.mapper.DoctorInspectresourceMapper;
@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.sql.Wrapper;
 import java.util.List;
 
 /**
@@ -60,5 +60,10 @@ public class DoctorInspectresourceServiceImpl extends ServiceImpl<DoctorInspectr
 	@Override
 	public List<DoctorInspectresource> getAllItemGroupPage() {
 		return doctorInspectresourceMapper.getAllItemGroup();
+	}
+
+	@Override
+	public IPage<DoctorInspectresource> getDoctorInspectresourcePageNew(Page<DoctorInspectresource> page, QueryWrapper wrapper) {
+		return doctorInspectresourceMapper.getDoctorInspectresourceNew(page, wrapper);
 	}
 }

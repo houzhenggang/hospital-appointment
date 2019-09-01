@@ -30,4 +30,27 @@
 				WHERE a.del_flag = '0'
 			GROUP BY a.insp_item_id
 	</select>
+	<select id="getDoctorInspectresourceNew" resultType="com.kasoft.register.base.api.entity.DoctorInspectresource">
+		SELECT
+			SUM( quantity ) AS quantity,
+			MAX( b.hospital_id ) AS hospital_id,
+			MAX( b.NAME ) AS hospital_name,
+			MAX( b.hospital_image ) AS hospital_image,
+			MAX( b.phone ) AS hospital_phone,
+			MAX( insp_item_id ) AS insp_item_id,
+			MAX( insp_item_type ) AS insp_item_type,
+			MAX( insp_item_name ) AS insp_item_name,
+			MAX( insp_item_exp ) AS insp_item_exp,
+			MIN( unit_price ) AS unit_price,
+			MAX( unit_price ) AS max_unit_price,
+			MAX( insp_resource_id ) AS insp_resource_id
+		FROM
+			kasoft_doctor_inspectresource a
+			LEFT JOIN kasoft_doctor_hospital b ON a.hospital_id = b.hospital_id
+			AND b.del_flag = 0
+			${ew.customSqlSegment}
+		GROUP BY
+			a.hospital_id,
+			insp_item_id
+	</select>
 </mapper>
