@@ -1,5 +1,6 @@
 package com.kasoft.register.base.controller;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -8,6 +9,7 @@ import com.kasoft.register.base.service.InspectionpriceService;
 import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
+import com.pig4cloud.pigx.common.security.annotation.Inner;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -61,10 +63,27 @@ public class InspectionpriceController {
 	 */
 	@ApiOperation(value = "通过机构和检查项目查询检查价格", notes = "通过机构和检查项目查询检查价格")
 	@GetMapping("/get/price/by/hospital/and/item")
-	public R gePricetByHospitalAndItem(@RequestParam String hospitalId,@RequestParam String inspItemId) {
+	public R getPricetByHospitalAndItem(@RequestParam String hospitalId,@RequestParam String inspItemId) {
 		return R.ok(inspectionpriceService.getOne(new QueryWrapper<Inspectionprice>()
 			.eq("hospital_id", hospitalId)
 			.eq("insp_item_id", inspItemId)
+		), ReturnMsgConstants.QUERY_SUCCESS);
+	}
+
+	/**
+	 * 项目价格联合项目查询
+	 * @return R
+	 */
+	@ApiOperation(value = "项目价格联合项目查询", notes = "通项目价格联合项目查询")
+	@GetMapping("/get/price/left/item/list/page")
+	public R getPriceLeftItemPage(Page page, @RequestParam(required = false) String hospitalId,
+								  @RequestParam(required = false) String inspItemId,
+								  @RequestParam(required = false) String inspItemType) {
+		return R.ok(inspectionpriceService.getPriceLeftItemPage(page, Wrappers.query()
+				.eq("a.del_flag", 0)
+				.eq(StrUtil.isNotBlank(hospitalId), "hospital_id", hospitalId)
+				.eq(StrUtil.isNotBlank(inspItemType),"insp_item_type", inspItemType)
+				.eq(StrUtil.isNotBlank(inspItemId),"insp_item_id", inspItemId)
 		), ReturnMsgConstants.QUERY_SUCCESS);
 	}
 
