@@ -98,6 +98,16 @@ public interface CommonConstants {
 	Integer FAIL = 1;
 
 	/**
+	 * 是本人
+	 */
+	String IS_SELF = "1";
+
+	/**
+	 * 不是本人
+	 */
+	String NOT_SELF = "0";
+
+	/**
 	 * 默认存储bucket
 	 */
 	String BUCKET_NAME = "register";

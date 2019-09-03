@@ -1,6 +1,7 @@
 package com.kasoft.register.base.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kasoft.register.base.api.entity.Applyerinfo;
 import com.kasoft.register.base.api.entity.DoctorPeopleinfo;
@@ -13,6 +14,7 @@ import com.pig4cloud.pigx.admin.api.dto.UserInfo;
 import com.pig4cloud.pigx.admin.api.entity.SysUser;
 import com.pig4cloud.pigx.admin.api.feign.RemoteSysPublicParamService;
 import com.pig4cloud.pigx.admin.api.feign.RemoteUserService;
+import com.pig4cloud.pigx.common.core.constant.CommonConstants;
 import com.pig4cloud.pigx.common.core.constant.SecurityConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import lombok.AllArgsConstructor;
@@ -70,6 +72,7 @@ public class DoctorPeopleinfoServiceImpl extends ServiceImpl<DoctorPeopleinfoMap
 		inApplyerInfo.setPhone(userDTO.getPhone());
 		inApplyerInfo.setSex(userDTO.getSex());
 		inApplyerInfo.setIdCard(userDTO.getIdCard());
+		inApplyerInfo.setIsSelf(CommonConstants.IS_SELF);
 		applyerinfoMapper.insert(inApplyerInfo);
 		return R.ok(true, "注册成功!");
 	}
@@ -81,5 +84,20 @@ public class DoctorPeopleinfoServiceImpl extends ServiceImpl<DoctorPeopleinfoMap
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public boolean updatePeopeleInfo(DoctorPeopleinfo doctorPeopleinfo) {
+		this.updateById(doctorPeopleinfo);
+		applyerinfoMapper.update(null, Wrappers.<Applyerinfo>lambdaUpdate()
+				.eq(Applyerinfo::getUserId, doctorPeopleinfo.getUserId())
+				.eq(Applyerinfo::getIsSelf, CommonConstants.IS_SELF)
+				.set(Applyerinfo::getIdCard, doctorPeopleinfo.getIdCard())
+				.set(Applyerinfo::getApplyerName, doctorPeopleinfo.getName())
+				.set(Applyerinfo::getPhone, doctorPeopleinfo.getPhone())
+				.set(Applyerinfo::getSex, doctorPeopleinfo.getSex())
+		);
+		return Boolean.TRUE;
 	}
 }

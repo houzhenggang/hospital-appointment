@@ -9,6 +9,7 @@ import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import com.kasoft.register.base.api.entity.DoctorPeopleinfo;
 import com.kasoft.register.base.service.DoctorPeopleinfoService;
+import com.pig4cloud.pigx.common.security.annotation.Inner;
 import io.swagger.annotations.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import lombok.AllArgsConstructor;
@@ -81,8 +82,7 @@ public class DoctorPeopleinfoController {
     @PutMapping
     @PreAuthorize("@pms.hasPermission('base_doctorpeopleinfo_edit')")
     public R updateById(@RequestBody DoctorPeopleinfo doctorPeopleinfo) {
-		doctorPeopleinfo.clearNoUseDTO();
-        return R.ok(doctorPeopleinfoService.updateById(doctorPeopleinfo));
+        return R.ok(doctorPeopleinfoService.updatePeopeleInfo(doctorPeopleinfo));
     }
 
     /**

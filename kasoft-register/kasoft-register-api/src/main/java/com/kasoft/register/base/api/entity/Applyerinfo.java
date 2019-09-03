@@ -62,6 +62,12 @@ public class Applyerinfo extends Model<Applyerinfo> {
      */
     @ApiModelProperty(value="关联用户编号")
     private Integer userId;
+
+	/**
+	 * 是否本人
+	 */
+	@ApiModelProperty(value="是否本人")
+    private String isSelf;
         /**
      * 创建时间
      */

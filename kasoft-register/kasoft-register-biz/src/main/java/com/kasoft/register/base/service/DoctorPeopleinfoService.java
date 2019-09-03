@@ -26,4 +26,6 @@ public interface DoctorPeopleinfoService extends IService<DoctorPeopleinfo> {
 	 * @return
 	 */
 	boolean hasUserName(String userName);
+
+	boolean updatePeopeleInfo(DoctorPeopleinfo doctorPeopleinfo);
 }

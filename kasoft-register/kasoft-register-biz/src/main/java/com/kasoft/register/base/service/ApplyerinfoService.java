@@ -11,4 +11,10 @@ import com.kasoft.register.base.api.entity.Applyerinfo;
  */
 public interface ApplyerinfoService extends IService<Applyerinfo> {
 
+//	/**
+//	 * 修改预约人信息
+//	 * @param applyerinfo 预约人信息
+//	 * @return Boolean
+//	 */
+//	Boolean updateApplyerinfo(Applyerinfo applyerinfo);
 }
