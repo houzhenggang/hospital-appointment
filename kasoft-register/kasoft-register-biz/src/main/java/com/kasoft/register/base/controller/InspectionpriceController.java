@@ -83,7 +83,7 @@ public class InspectionpriceController {
 				.eq("a.del_flag", 0)
 				.eq(StrUtil.isNotBlank(hospitalId), "hospital_id", hospitalId)
 				.eq(StrUtil.isNotBlank(inspItemType),"insp_item_type", inspItemType)
-				.eq(StrUtil.isNotBlank(inspItemId),"insp_item_id", inspItemId)
+				.eq(StrUtil.isNotBlank(inspItemId),"a.insp_item_id", inspItemId)
 		), ReturnMsgConstants.QUERY_SUCCESS);
 	}
 
