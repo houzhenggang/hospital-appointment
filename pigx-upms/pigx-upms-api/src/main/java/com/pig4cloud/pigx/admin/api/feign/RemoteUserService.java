@@ -76,6 +76,14 @@ public interface RemoteUserService {
 	R<Boolean> save(@RequestBody UserDTO userDto);
 
 	/**
+	 * 修改用户信息
+	 * @param userDto 用户dto
+	 * @return 是否保存成功
+	 */
+	@PutMapping("/user/update")
+	R<Boolean> update(@RequestBody UserDTO userDto);
+
+	/**
 	 * 获取用户信息
 	 * @param username 用户名
 	 * @return 用户对象

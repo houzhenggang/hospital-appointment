@@ -98,6 +98,11 @@ public class DoctorPeopleinfoServiceImpl extends ServiceImpl<DoctorPeopleinfoMap
 				.set(Applyerinfo::getPhone, doctorPeopleinfo.getPhone())
 				.set(Applyerinfo::getSex, doctorPeopleinfo.getSex())
 		);
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUserId(doctorPeopleinfo.getUserId());
+		userDTO.setPhone(doctorPeopleinfo.getPhone());
+		userDTO.setSex(doctorPeopleinfo.getSex());
+		remoteUserService.update(userDTO);
 		return Boolean.TRUE;
 	}
 }

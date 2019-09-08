@@ -33,10 +33,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 /**
  * @author lengleng
@@ -96,7 +98,7 @@ public class SysUserController {
 	 * 根据用户名查询用户信息
 	 *
 	 * @param username 用户名
-	 * @return
+	 * @return R
 	 */
 	@GetMapping("/details/{username}")
 	@Inner(false)
@@ -169,6 +171,21 @@ public class SysUserController {
 	@PutMapping("/edit")
 	public R updateUserInfo(@Valid @RequestBody UserDTO userDto) {
 		return userService.updateUserInfo(userDto);
+	}
+
+	/**
+	 * 修改用户信息
+	 *
+	 * @param userDto userDto
+	 * @return success/false
+	 */
+	@SysLog("修改用户信息")
+	@PutMapping("/update")
+	public R update(@RequestBody UserDTO userDto) {
+		SysUser sysUser = new SysUser();
+		BeanUtils.copyProperties(userDto, sysUser);
+		sysUser.setUpdateTime(LocalDateTime.now());
+		return R.ok(userService.updateById(sysUser));
 	}
 
 	/**
