@@ -83,6 +83,8 @@ public class KrbConstants {
 	 */
 	public static final String ED_INSPECTION_RESOURCE_DICT = "ed_inspection_resource:dict";
 
+	public static final String ED_INSPECTION_PRICE_DICT = "ed_inspection_price:dict";
+
 	/**
 	 * 检查资源信息缓存
 	 */

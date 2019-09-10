@@ -6,13 +6,14 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.api.entity.Inspectionprice;
 import com.kasoft.register.base.service.InspectionpriceService;
+import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
-import com.pig4cloud.pigx.common.security.annotation.Inner;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +44,16 @@ public class InspectionpriceController {
         return R.ok(inspectionpriceService.page(page, Wrappers.query(inspectionprice).orderByDesc("create_time")));
     }
 
+	/**
+	 * 查询价格字典
+	 * @return R
+	 */
+	@ApiOperation(value = "查询价格字典", notes = "查询价格字典")
+	@GetMapping("/dict" )
+	@Cacheable(value = KrbConstants.ED_HOSPITAL_DETAILS_DICT, unless = "#result == null ")
+	public R getPriceDict() {
+		return R.ok(inspectionpriceService.list());
+	}
 
     /**
      * 通过id查询检查价格
