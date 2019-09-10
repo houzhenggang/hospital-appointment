@@ -50,7 +50,7 @@ public class InspectionpriceController {
 	 */
 	@ApiOperation(value = "查询价格字典", notes = "查询价格字典")
 	@GetMapping("/dict" )
-	@Cacheable(value = KrbConstants.ED_HOSPITAL_DETAILS_DICT, unless = "#result == null ")
+	@Cacheable(value = KrbConstants.ED_INSPECTION_PRICE_DICT, unless = "#result == null ")
 	public R getPriceDict() {
 		return R.ok(inspectionpriceService.list());
 	}
