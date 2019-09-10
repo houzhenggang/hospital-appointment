@@ -13,6 +13,7 @@ import com.pig4cloud.pigx.common.log.annotation.SysLog;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -107,6 +108,7 @@ public class InspectionpriceController {
     @SysLog("新增检查价格")
     @PostMapping
     @PreAuthorize("@pms.hasPermission('base_inspectionprice_add')")
+	@CacheEvict(value = {KrbConstants.ED_INSPECTION_PRICE_DICT}, allEntries = true)
     public R save(@RequestBody Inspectionprice inspectionprice) {
 		int count = inspectionpriceService.count(new QueryWrapper<Inspectionprice>()
 				.eq("hospital_id", inspectionprice.getHospitalId())
@@ -126,6 +128,7 @@ public class InspectionpriceController {
     @SysLog("修改检查价格")
     @PutMapping
     @PreAuthorize("@pms.hasPermission('base_inspectionprice_edit')")
+	@CacheEvict(value = {KrbConstants.ED_INSPECTION_PRICE_DICT}, allEntries = true)
     public R updateById(@RequestBody Inspectionprice inspectionprice) {
         return R.ok(inspectionpriceService.updateById(inspectionprice));
     }
@@ -139,6 +142,7 @@ public class InspectionpriceController {
     @SysLog("通过id删除检查价格")
     @DeleteMapping("/{inspPriceId}")
     @PreAuthorize("@pms.hasPermission('base_inspectionprice_del')")
+	@CacheEvict(value = {KrbConstants.ED_INSPECTION_PRICE_DICT}, allEntries = true)
     public R removeById(@PathVariable String inspPriceId) {
         return R.ok(inspectionpriceService.removeById(inspPriceId));
     }
