@@ -9,7 +9,6 @@ import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
-import com.pig4cloud.pigx.common.security.annotation.Inner;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -66,7 +65,7 @@ public class DoctorInspectionitemController {
 	@ApiOperation(value = "根据检查类别查询检查项目", notes = "根据检查类别查询检查项目")
 	@GetMapping("/item/{inspType}")
 	@Cacheable(value = KrbConstants.ED_INSPECTION_ITEM_DETAIL,  key = "#inspType", unless = "#result == null")
-	public R getCity(@PathVariable("inspType" ) String inspType) {
+	public R getInspectionitemByType(@PathVariable("inspType" ) String inspType) {
 		DoctorInspectionitem doctorInspectionitem = new DoctorInspectionitem();
 		doctorInspectionitem.setInspItemType(inspType);
 		return R.ok(doctorInspectionitemService.list(Wrappers.query(doctorInspectionitem)),"查询成功!");
