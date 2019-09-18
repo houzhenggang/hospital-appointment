@@ -47,11 +47,11 @@ public class DoctorInspectionitem extends Model<DoctorInspectionitem> {
      * 检查项目说明（比如检查前3小时不能进食）
      */
     @ApiModelProperty(value="检查项目说明（比如检查前3小时不能进食）")
-	@TableField(strategy = FieldStrategy.IGNORED)
+	@TableField(strategy = FieldStrategy.NOT_NULL)
     private String inspItemExp;
 
 	@ApiModelProperty(value="检查项目禁忌")
-	@TableField(strategy = FieldStrategy.IGNORED)
+	@TableField(strategy = FieldStrategy.NOT_NULL)
 	private String inspItemTaboo;
 
 	@ApiModelProperty(value="是否热门")

@@ -9,6 +9,7 @@ import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
 import com.pig4cloud.pigx.common.core.util.R;
 import com.pig4cloud.pigx.common.log.annotation.SysLog;
+import com.pig4cloud.pigx.common.security.annotation.Inner;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -116,10 +117,11 @@ public class DoctorInspectionitemController {
      * @param doctorInspectionitem 检查项目
      * @return R
      */
+    @Inner(false)
     @ApiOperation(value = "修改检查项目", notes = "修改检查项目")
     @SysLog("修改检查项目")
     @PutMapping
-    @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_edit')")
+//    @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_edit')")
 	@CacheEvict(value = {KrbConstants.ED_INSPECTION_ITEM_DETAIL, KrbConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
 	public R updateById(@RequestBody DoctorInspectionitem doctorInspectionitem) {
         return R.ok(doctorInspectionitemService.updateById(doctorInspectionitem));
