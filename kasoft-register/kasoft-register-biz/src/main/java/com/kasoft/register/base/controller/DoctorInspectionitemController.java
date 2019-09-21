@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.kasoft.register.base.api.entity.DoctorInspectionitem;
+import com.kasoft.register.base.api.entity.DoctorInspectresource;
 import com.kasoft.register.base.service.DoctorInspectionitemService;
+import com.kasoft.register.base.service.DoctorInspectresourceService;
 import com.kasoft.register.base.utils.KrbConstants;
 import com.pig4cloud.pigx.common.core.constant.ReturnMsgConstants;
 import com.pig4cloud.pigx.common.core.util.R;
@@ -19,6 +21,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 
 /**
@@ -34,6 +37,8 @@ import javax.validation.Valid;
 public class DoctorInspectionitemController {
 
     private final DoctorInspectionitemService doctorInspectionitemService;
+
+    private final DoctorInspectresourceService doctorInspectresourceService;
 
     /**
      * 分页查询
@@ -121,9 +126,15 @@ public class DoctorInspectionitemController {
     @ApiOperation(value = "修改检查项目", notes = "修改检查项目")
     @SysLog("修改检查项目")
     @PutMapping
-//    @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_edit')")
+    @PreAuthorize("@pms.hasPermission('base_doctorinspectionitem_edit')")
 	@CacheEvict(value = {KrbConstants.ED_INSPECTION_ITEM_DETAIL, KrbConstants.ED_INSPECTION_ITEM_DICT}, allEntries = true)
 	public R updateById(@RequestBody DoctorInspectionitem doctorInspectionitem) {
+		int count = doctorInspectresourceService.count(Wrappers.<DoctorInspectresource>lambdaQuery()
+			.eq(DoctorInspectresource::getInspItemId, doctorInspectionitem.getInspItemId())
+		);
+		if (count > 0){
+			return R.failed("该检查项目已经生成过检查资源，不允许修改!");
+		}
         return R.ok(doctorInspectionitemService.updateById(doctorInspectionitem));
     }
 
