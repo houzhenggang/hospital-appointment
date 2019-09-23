@@ -60,7 +60,7 @@ public class DoctorInspectionitemController {
 	@GetMapping("/dict")
 	@Cacheable(value = KrbConstants.ED_INSPECTION_ITEM_DICT, unless = "#result == null")
 	public R getInspectionitemDict() {
-		return R.ok(doctorInspectionitemService.list(new QueryWrapper<DoctorInspectionitem>().orderByDesc("createTime")));
+		return R.ok(doctorInspectionitemService.list(new QueryWrapper<DoctorInspectionitem>().orderByDesc("create_time")));
 	}
 
 	/**
